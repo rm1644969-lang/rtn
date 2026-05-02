@@ -1622,11 +1622,11 @@ function renderAdminPlansList(){
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
         <div><label class="flbl">Plan Name</label><input class="fi" id="pa-name-${i}" value="${esc(plan.name)}" placeholder="Plan Name" style="font-size:13px" onchange="_adminPlans[${i}].name=this.value"></div>
-        <div><label class="flbl">Price (৳)</label><input class="fi" id="pa-price-${i}" type="number" value="${plan.price}" min="0" style="font-size:13px" onchange="_adminPlans[${i}].price=parseInt(this.value)||0;_adminPlans[${i}].durationDays=getPlanDaysAdmin(this.value);document.getElementById('pa-duration-${i}').value=_adminPlans[${i}].durationDays"></div>
+        <div><label class="flbl">Price (৳)</label><input class="fi" id="pa-price-${i}" type="number" value="${plan.price}" min="0" style="font-size:13px" onchange="_adminPlans[${i}].price=parseInt(this.value)||0"></div>
         <div><label class="flbl">Daily Bonus (৳)</label><input class="fi" id="pa-bonus-${i}" type="number" value="${plan.dailyBonus}" min="0" style="font-size:13px" onchange="_adminPlans[${i}].dailyBonus=parseInt(this.value)||0"></div>
         <div><label class="flbl">Commission (৳)</label><input class="fi" id="pa-comm-${i}" type="number" value="${plan.commission||0}" min="0" style="font-size:13px" onchange="_adminPlans[${i}].commission=parseInt(this.value)||0"></div>
         <div><label class="flbl">Extra Tasks</label><input class="fi" id="pa-tasks-${i}" type="number" value="${plan.extraTasks||0}" min="0" style="font-size:13px" onchange="_adminPlans[${i}].extraTasks=parseInt(this.value)||0"></div>
-        <div><label class="flbl">Duration (Days)</label><input class="fi" id="pa-duration-${i}" type="number" value="${getPlanDaysAdmin(plan.price)}" readonly style="font-size:13px;background:var(--grayl);font-weight:800;color:var(--g)"></div>
+        <div><label class="flbl">Duration (Days)</label><input class="fi" id="pa-duration-${i}" type="number" value="${plan.durationDays||getPlanDaysAdmin(plan.price)}" min="1" style="font-size:13px;font-weight:800;color:var(--g)" onchange="_adminPlans[${i}].durationDays=parseInt(this.value)||1"></div>
       </div>
     </div>`).join('');
 }
@@ -1637,7 +1637,7 @@ async function saveAllPlans(){
     ...p,
     name:document.getElementById(`pa-name-${i}`)?.value||p.name,
     price:parseInt(document.getElementById(`pa-price-${i}`)?.value)||p.price,
-    durationDays:getPlanDaysAdmin(parseInt(document.getElementById(`pa-price-${i}`)?.value)||p.price),
+    durationDays:parseInt(document.getElementById(`pa-duration-${i}`)?.value)||p.durationDays||getPlanDaysAdmin(parseInt(document.getElementById(`pa-price-${i}`)?.value)||p.price),
     dailyBonus:parseInt(document.getElementById(`pa-bonus-${i}`)?.value)||p.dailyBonus,
     commission:parseInt(document.getElementById(`pa-comm-${i}`)?.value)||p.commission||0,
     extraTasks:parseInt(document.getElementById(`pa-tasks-${i}`)?.value)||p.extraTasks||0,
