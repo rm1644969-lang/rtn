@@ -2368,7 +2368,7 @@ async function renderPlans(){
     const listEl=document.getElementById('plans-list');
     listEl.innerHTML=activePlans.map(plan=>{
       const owned=myPlan&&myPlan.planId===plan.id&&myPlan.expiry>Date.now();
-      const dur=getPlanDays(plan.price);
+      const dur=getPlanDuration(plan);
       return`<div class="plan-card ${owned?'owned':''}" id="plan-card-${plan.id}">
         <div class="plan-card-header">
           <div>
@@ -2408,13 +2408,18 @@ function getPlanDays(price){
   return 5;
 }
 
+function getPlanDuration(plan){
+  const days=parseInt(plan&&plan.durationDays);
+  return days>0?days:getPlanDays(plan&&plan.price);
+}
+
 async function buyPlan(planId){
   const uid=myUID();if(!uid)return;
   const [user,plans,cfg]=await Promise.all([fbGet(`users/${uid}`),getPlans(),getCfg()]);
   if(!user.isActive){snack('❌ '+ (_lang==='en'?'Activate your account first':'আগে একাউন্ট Activate করুন'));return;}
   const plan=plans.find(p=>p.id===planId);
   if(!plan){snack('Plan পাওয়া যায়নি');return;}
-  const dur=getPlanDays(plan.price);
+  const dur=getPlanDuration(plan);
   if((user.balance||0)<plan.price){snack(_lang==='en'?`Insufficient balance! Need ${fmtN(plan.price)}`:`Balance কম! ${fmtN(plan.price)} লাগবে`);go('deposit');return;}
   if(!confirm((_lang==='en'?`Buy ${plan.name} plan for ${dur} days?\nDaily bonus: ${fmtN(plan.dailyBonus)} | Total: ${fmtN(plan.dailyBonus*dur)}\nCost: `:` ${plan.name} Plan কিনবেন ${dur} দিনের জন্য?\nদৈনিক বোনাস: ${fmtN(plan.dailyBonus)} | মোট: ${fmtN(plan.dailyBonus*dur)}\nখরচ: `)+fmtN(plan.price))){return;}
   ldr(true);
