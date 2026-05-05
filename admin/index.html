@@ -116,6 +116,14 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#eef5f0}
 /* SECTION HEADER */
 .sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
 .sec-lnk{font-size:12px;color:var(--g);cursor:pointer;font-weight:700}
+
+/* ── FINAL ADD-ON: Theme, animation, notice controls ── */
+.theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.color-input{height:46px;padding:5px;border:1.5px solid var(--border);border-radius:11px;background:#fff;width:100%}
+.addon-box{background:linear-gradient(135deg,#f8fafc,#eef5f0);border:1.5px solid var(--border);border-radius:14px;padding:14px;margin-bottom:14px}
+.addon-title{font-size:15px;font-weight:900;color:var(--g);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.anim-on .card,.anim-on .adm-menu,.anim-on .adm-card{animation:fadeUp .28s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
@@ -187,7 +195,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#eef5f0}
     <div class="adm-menu" onclick="go('proofs')"><div class="adm-menu-ico">📸</div><div class="adm-menu-txt"><div class="adm-menu-ttl">Task Proofs <span id="p-cnt" class="badge-cnt" style="display:none;vertical-align:middle"></span></div><div class="adm-menu-sub">Task screenshot review করুন</div></div><div style="color:var(--text2)">›</div></div>
     <div class="adm-menu" onclick="go('tasks')"><div class="adm-menu-ico">📋</div><div class="adm-menu-txt"><div class="adm-menu-ttl">Tasks</div><div class="adm-menu-sub">Task যোগ, edit ও manage করুন</div></div><div style="color:var(--text2)">›</div></div>
     <div class="adm-menu" onclick="go('live-chat')"><div class="adm-menu-ico">💬</div><div class="adm-menu-txt"><div class="adm-menu-ttl">Live Chat <span id="chat-cnt" class="badge-cnt" style="display:none;vertical-align:middle"></span></div><div class="adm-menu-sub">Users এর messages দেখুন ও reply করুন</div></div><div style="color:var(--text2)">›</div></div>
-    <div class="adm-menu" onclick="go('plans-admin')"><div class="adm-menu-ico">📦</div><div class="adm-menu-txt"><div class="adm-menu-ttl">Plans Management</div><div class="adm-menu-sub">১০টি Plan তৈরি, price, commission, bonus নির্ধারণ</div></div><div style="color:var(--text2)">›</div></div>
+    <div class="adm-menu" onclick="go('plans-admin')"><div class="adm-menu-ico">📦</div><div class="adm-menu-txt"><div class="adm-menu-ttl">Plans Management</div><div class="adm-menu-sub">১০টি Plan তৈরি, price, daily bonus নির্ধারণ</div></div><div style="color:var(--text2)">›</div></div>
     <div class="adm-menu" onclick="go('settings')"><div class="adm-menu-ico">⚙️</div><div class="adm-menu-txt"><div class="adm-menu-ttl">Settings</div><div class="adm-menu-sub">Site name, Payment, VIP, Generation, SEO</div></div><div style="color:var(--text2)">›</div></div>
   </div>
 </div>
@@ -297,7 +305,7 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#eef5f0}
 <div id="s-plans-admin" class="screen">
   <div class="hdr"><span class="hdr-back" onclick="go('admin-dash')">←</span><h2>📦 Plans Management</h2></div>
   <div class="content" style="padding-bottom:40px">
-    <div class="notice ng" style="margin-bottom:14px"><strong>💡 Plans নিয়ম</strong>User deposit করে plan কিনতে পারবে। Plan কিনলে commission user এর balance এ যাবে। Admin plan গুলো এখান থেকে control করতে পারবেন।</div>
+    <div class="notice ng" style="margin-bottom:14px"><strong>💡 Plans নিয়ম</strong>User deposit করে plan কিনতে পারবে। Plan কিনলে কোনো instant commission/bonus যাবে না — শুধু daily claim করলে টাকা পাবে। Admin plan গুলো এখান থেকে control করতে পারবেন।</div>
     <div id="admin-plans-list"></div>
     <button class="btn btn-g" onclick="saveAllPlans()" style="margin-top:8px">💾 সব Plans Save করুন</button>
   </div>
@@ -315,6 +323,45 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#eef5f0}
       <div class="fg" style="margin-bottom:10px"><label class="flbl" style="color:rgba(255,255,255,.8)">Site Logo (Emoji)</label><input class="fi" id="s-sitelogo" placeholder="যেমন: 💰" style="font-size:22px"></div>
       <div class="fg" style="margin-bottom:0"><label class="flbl" style="color:rgba(255,255,255,.8)">Logo Image URL (ঐচ্ছিক — Emoji এর বদলে ছবি)</label><input class="fi" id="s-sitelogourl" placeholder="https://example.com/logo.png" type="url"></div>
       <div class="fg" style="margin-bottom:0"><label class="flbl" style="color:rgba(255,255,255,.8)">Tagline</label><input class="fi" id="s-tagline" placeholder="যেমন: Task করো · Refer করো · টাকা কামাও"></div>
+    </div>
+
+
+    <!-- FINAL ADD-ON: THEME / UI CONTROL -->
+    <div class="divider"></div>
+    <div class="addon-box">
+      <div class="addon-title">🎨 Theme / UI / Animation Control</div>
+      <div class="theme-grid">
+        <div><label class="flbl">Primary Color</label><input class="color-input" id="s-theme-primary" type="color" value="#14693f"></div>
+        <div><label class="flbl">Secondary Color</label><input class="color-input" id="s-theme-secondary" type="color" value="#1e8f57"></div>
+      </div>
+      <div class="fg"><label class="flbl">Theme Mode</label><select class="fsel" id="s-theme-mode"><option value="green">Green Default</option><option value="dark">Dark Default</option><option value="custom">Custom Color</option></select></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px;background:var(--gl);border-radius:12px;margin-bottom:10px">
+        <div><div style="font-size:14px;font-weight:800">UI Animation</div><div style="font-size:12px;color:var(--text2)">Card/button smooth animation</div></div>
+        <div onclick="toggleSet('animationEnabled')" id="tog-anim" style="width:52px;height:28px;border-radius:20px;cursor:pointer;display:flex;align-items:center;padding:3px;transition:.3s;background:#ccc"><div style="width:22px;height:22px;border-radius:50%;background:#fff;transition:.3s" id="knob-anim"></div></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px;background:var(--goldl);border-radius:12px">
+        <div><div style="font-size:14px;font-weight:800">VIP Badge Animation</div><div style="font-size:12px;color:var(--text2)">User VIP badge glow/pulse</div></div>
+        <div onclick="toggleSet('vipAnimationEnabled')" id="tog-vipa" style="width:52px;height:28px;border-radius:20px;cursor:pointer;display:flex;align-items:center;padding:3px;transition:.3s;background:#ccc"><div style="width:22px;height:22px;border-radius:50%;background:#fff;transition:.3s" id="knob-vipa"></div></div>
+      </div>
+    </div>
+
+    <!-- FINAL ADD-ON: NOTIFICATION CONTROL -->
+    <div class="addon-box">
+      <div class="addon-title">🔔 Notification / Notice Control</div>
+      <div class="fg"><label class="flbl">Notice Title</label><input class="fi" id="s-notice-title" placeholder="যেমন: নতুন আপডেট"></div>
+      <div class="fg"><label class="flbl">Notice Body</label><textarea class="ftxt" id="s-notice-body" placeholder="User দের জন্য message লিখুন..."></textarea></div>
+      <div class="fg"><label class="flbl">Notice Type</label><select class="fsel" id="s-notice-type"><option value="info">Info</option><option value="success">Success</option><option value="warning">Warning</option><option value="danger">Danger</option></select></div>
+      <button class="btn btn-gold" onclick="sendGlobalNotice()">📢 User Notice পাঠান</button>
+    </div>
+
+    <!-- FINAL ADD-ON: MAINTENANCE CONTROL -->
+    <div class="addon-box">
+      <div class="addon-title">🛠️ Maintenance Mode</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:14px;background:var(--redl);border-radius:12px;margin-bottom:12px">
+        <div><div style="font-size:14px;font-weight:800">Maintenance Mode</div><div style="font-size:12px;color:var(--text2)">On করলে user app temporary বন্ধ দেখাবে</div></div>
+        <div onclick="toggleSet('maintenanceMode')" id="tog-maint" style="width:52px;height:28px;border-radius:20px;cursor:pointer;display:flex;align-items:center;padding:3px;transition:.3s;background:#ccc"><div style="width:22px;height:22px;border-radius:50%;background:#fff;transition:.3s" id="knob-maint"></div></div>
+      </div>
+      <div class="fg" style="margin-bottom:0"><label class="flbl">Maintenance Message</label><input class="fi" id="s-maint-text" placeholder="সার্ভার আপডেট চলছে, কিছুক্ষণ পর চেষ্টা করুন"></div>
     </div>
 
     <!-- SEO -->
@@ -360,9 +407,10 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#eef5f0}
     <div class="divider"></div>
 
     <!-- VIP LEVELS -->
-    <div style="font-size:15px;font-weight:800;margin:12px 0;color:var(--g)">⭐ VIP Level Settings (VIP 0 → VIP 4)</div>
-    <div class="notice ng">কত Refer করলে কোন VIP হবে ও কত Bonus পাবে — সব এখান থেকে control করুন।</div>
+    <div style="font-size:15px;font-weight:800;margin:12px 0;color:var(--g)">⭐ VIP Level Settings (VIP 0 → VIP 12)</div>
+    <div class="notice ng">কত Refer করলে VIP 0 থেকে VIP 12 পর্যন্ত কোন level হবে এবং কত Profit/Bonus পাবে — সব এখান থেকে control করুন।</div>
     <div id="s-vips"></div>
+    <button class="btn btn-out" onclick="forceSaveVip12Defaults()">⭐ VIP 0-12 Default তৈরি/Update করুন</button>
 
     <div class="divider"></div>
 
@@ -470,11 +518,27 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#eef5f0}
       <label class="flbl">Target Users</label>
       <select class="fsel" id="bb-target">
         <option value="all">🌐 All Active Users</option>
-        <option value="0">VIP 0 only</option>
+                        <option value="0">VIP 0 only</option>
         <option value="1">VIP 1 only</option>
         <option value="2">VIP 2 only</option>
         <option value="3">VIP 3 only</option>
         <option value="4">VIP 4 only</option>
+        <option value="5">VIP 5 only</option>
+        <option value="6">VIP 6 only</option>
+        <option value="7">VIP 7 only</option>
+        <option value="8">VIP 8 only</option>
+        <option value="9">VIP 9 only</option>
+        <option value="10">VIP 10 only</option>
+        <option value="11">VIP 11 only</option>
+        <option value="12">VIP 12 only</option>
+        <option value="5">VIP 5 only</option>
+        <option value="6">VIP 6 only</option>
+        <option value="7">VIP 7 only</option>
+        <option value="8">VIP 8 only</option>
+        <option value="9">VIP 9 only</option>
+        <option value="10">VIP 10 only</option>
+        <option value="11">VIP 11 only</option>
+        <option value="12">VIP 12 only</option>
       </select>
     </div>
     <div class="fg"><label class="flbl">Bonus Amount (৳) per user</label><input class="fi" id="bb-amt" type="number" placeholder="যেমন: 100"></div>
@@ -551,13 +615,22 @@ const DEF={
   activationAmount:1000,minWithdraw:100,maxWithdraw:25000,
   minDeposit:100,maxDeposit:10000,
   adminPassword:'admin123',appsLink:'',
+  themePrimary:'#14693f',themeSecondary:'#1e8f57',themeMode:'green',animationEnabled:true,vipAnimationEnabled:true,maintenanceMode:false,maintenanceText:'সার্ভার আপডেট চলছে, কিছুক্ষণ পর চেষ্টা করুন',
   referGens:[300,250,200,250,100,100,100,100],
   vipLevels:[
     {level:0,name:'VIP 0',minRefers:0,bonus:0},
     {level:1,name:'VIP 1',minRefers:5,bonus:100},
-    {level:2,name:'VIP 2',minRefers:10,bonus:300},
-    {level:3,name:'VIP 3',minRefers:20,bonus:600},
-    {level:4,name:'VIP 4',minRefers:50,bonus:1200}
+    {level:2,name:'VIP 2',minRefers:10,bonus:200},
+    {level:3,name:'VIP 3',minRefers:20,bonus:350},
+    {level:4,name:'VIP 4',minRefers:35,bonus:500},
+    {level:5,name:'VIP 5',minRefers:50,bonus:750},
+    {level:6,name:'VIP 6',minRefers:75,bonus:1000},
+    {level:7,name:'VIP 7',minRefers:100,bonus:1500},
+    {level:8,name:'VIP 8',minRefers:150,bonus:2200},
+    {level:9,name:'VIP 9',minRefers:200,bonus:3000},
+    {level:10,name:'VIP 10',minRefers:300,bonus:4500},
+    {level:11,name:'VIP 11',minRefers:500,bonus:7000},
+    {level:12,name:'VIP 12',minRefers:800,bonus:10000}
   ]
 };
 const PLAT_ICO={Facebook:'📘',YouTube:'📺',Instagram:'📸',TikTok:'🎵',Other:'🌐'};
@@ -567,7 +640,15 @@ const HICO={deposit:'⬇️',activation:'🔑',withdraw:'⬆️',task_earning:'�
 let _cfg=null;
 async function getCfg(){
   if(!_cfg){_cfg=await fbGet('config/settings');if(!_cfg){await fbSet('config/settings',DEF);_cfg=DEF;}}
-  return{...DEF,..._cfg,referGens:_cfg.referGens||DEF.referGens,vipLevels:_cfg.vipLevels||DEF.vipLevels};
+  const merged={...DEF,..._cfg};
+  // Force VIP 0-12 even if old Firebase settings still have only VIP 0-4
+  merged.referGens=Array.from({length:8},(_,i)=>((_cfg.referGens&&_cfg.referGens[i]!=null)?_cfg.referGens[i]:DEF.referGens[i]));
+  merged.vipLevels=Array.from({length:13},(_,i)=>{
+    const oldVip=(_cfg.vipLevels||[]).find(v=>Number(v.level)===i)||(_cfg.vipLevels||[])[i]||{};
+    const defVip=DEF.vipLevels[i];
+    return {level:i,name:oldVip.name||defVip.name,minRefers:Number(oldVip.minRefers ?? defVip.minRefers)||0,bonus:Number(oldVip.bonus ?? defVip.bonus)||0};
+  });
+  return merged;
 }
 async function reloadCfg(){_cfg=null;return getCfg();}
 
@@ -1061,6 +1142,13 @@ async function renderSettings(){
   document.getElementById('s-minwd').value=cfg.minWithdraw;
   document.getElementById('s-maxwd').value=cfg.maxWithdraw||25000;
   document.getElementById('s-appslink').value=cfg.appsLink||'';
+  document.getElementById('s-theme-primary').value=cfg.themePrimary||'#14693f';
+  document.getElementById('s-theme-secondary').value=cfg.themeSecondary||'#1e8f57';
+  document.getElementById('s-theme-mode').value=cfg.themeMode||'green';
+  document.getElementById('s-maint-text').value=cfg.maintenanceText||'সার্ভার আপডেট চলছে, কিছুক্ষণ পর চেষ্টা করুন';
+  document.getElementById('s-notice-title').value='';
+  document.getElementById('s-notice-body').value='';
+  document.getElementById('s-notice-type').value='info';
   document.getElementById('s-admpw').value='';
   document.getElementById('s-subpw').value='';
   document.getElementById('s-fb-link').value=cfg.fbLink||'';
@@ -1076,7 +1164,10 @@ async function renderSettings(){
     tgVisible:cfg.tgVisible!==false,
     liveChatEnabled:cfg.liveChatEnabled!==false,
     tgSupportVisible:cfg.tgSupportVisible!==false,
-    monthlyRewardEnabled:cfg.monthlyRewardEnabled===true
+    monthlyRewardEnabled:cfg.monthlyRewardEnabled===true,
+    animationEnabled:cfg.animationEnabled!==false,
+    vipAnimationEnabled:cfg.vipAnimationEnabled!==false,
+    maintenanceMode:cfg.maintenanceMode===true
   };
   updateAllToggles();
   // Wingo toggle
@@ -1090,7 +1181,7 @@ async function renderSettings(){
       <input class="fi" id="sg-${i}" type="number" value="${v}" min="0" placeholder="0">
     </div>`).join('');
   // VIP fields
-  const VICO=['🏅','⭐','🌟','💫','💎'];
+  const VICO=['🏅','⭐','🌟','💫','💎','👑','🔥','🚀','🏆','💰','✨','🌙','☀️'];
   const vf=document.getElementById('s-vips');
   vf.innerHTML=cfg.vipLevels.map((v,i)=>`
     <div class="vip-set-card">
@@ -1114,7 +1205,7 @@ function toggleSet(key){
   updateAllToggles();
 }
 function updateAllToggles(){
-  const map={fbVisible:'fb',tgVisible:'tg',liveChatEnabled:'chat',tgSupportVisible:'tgs',monthlyRewardEnabled:'mr'};
+  const map={fbVisible:'fb',tgVisible:'tg',liveChatEnabled:'chat',tgSupportVisible:'tgs',monthlyRewardEnabled:'mr',animationEnabled:'anim',vipAnimationEnabled:'vipa',maintenanceMode:'maint'};
   for(const[key,suf] of Object.entries(map)){
     const tog=document.getElementById(`tog-${suf}`);
     const knob=document.getElementById(`knob-${suf}`);
@@ -1125,6 +1216,29 @@ function updateAllToggles(){
   }
 }
 
+
+async function sendGlobalNotice(){
+  const title=(document.getElementById('s-notice-title')?.value||'').trim();
+  const body=(document.getElementById('s-notice-body')?.value||'').trim();
+  const type=document.getElementById('s-notice-type')?.value||'info';
+  if(!title||!body){snack('Notice title/body দিন');return;}
+  ldr(true);
+  try{
+    await fbPush('notices',{title,body,type,isActive:true,createdAt:Date.now()});
+    await fbPush('notifications',{type:'admin_notice',title,body,global:true,createdAt:Date.now()});
+    document.getElementById('s-notice-title').value='';
+    document.getElementById('s-notice-body').value='';
+    snack('✅ Notice পাঠানো হয়েছে');
+  }catch(e){snack('Error: '+e.message);}finally{ldr(false);}
+}
+
+async function forceSaveVip12Defaults(){
+  const cfg=getCfg();
+  const vipLevels=Array.from({length:13},(_,i)=>cfg.vipLevels[i]||DEF.vipLevels[i]);
+  await fbSet('settings/vipLevels',vipLevels);
+  await loadAll();
+  snack('✅ VIP 0-12 settings updated!');
+}
 
 async function saveSettings(){
   const cur=await getCfg();
@@ -1150,6 +1264,10 @@ async function saveSettings(){
     minWithdraw:parseInt(document.getElementById('s-minwd').value)||cur.minWithdraw,
     maxWithdraw:parseInt(document.getElementById('s-maxwd').value)||25000,
     appsLink:document.getElementById('s-appslink').value.trim()||'',
+    themePrimary:document.getElementById('s-theme-primary').value||'#14693f',
+    themeSecondary:document.getElementById('s-theme-secondary').value||'#1e8f57',
+    themeMode:document.getElementById('s-theme-mode').value||'green',
+    maintenanceText:document.getElementById('s-maint-text').value.trim()||'সার্ভার আপডেট চলছে, কিছুক্ষণ পর চেষ্টা করুন',
     adminPassword:newPw||cur.adminPassword,
     referGens,vipLevels,monthlyRewards,
     wingoEnabled:_wingoOn,
@@ -1577,16 +1695,16 @@ async function renderWingoAdminResults(){return;}// removed per request
 
 // ─── PLANS ADMIN ──────────────────────────────────
 const DEF_PLANS_ADMIN=[
-  {id:'p1',name:'Starter',price:100,durationDays:5,dailyBonus:5,extraTasks:1,commission:50,active:true},
-  {id:'p2',name:'Basic',price:200,durationDays:8,dailyBonus:12,extraTasks:2,commission:100,active:true},
-  {id:'p3',name:'Bronze',price:300,durationDays:12,dailyBonus:20,extraTasks:3,commission:150,active:true},
-  {id:'p4',name:'Silver',price:400,durationDays:15,dailyBonus:30,extraTasks:4,commission:200,active:true},
-  {id:'p5',name:'Gold',price:500,durationDays:19,dailyBonus:45,extraTasks:5,commission:250,active:true},
-  {id:'p6',name:'Platinum',price:600,durationDays:22,dailyBonus:60,extraTasks:6,commission:300,active:true},
-  {id:'p7',name:'Diamond',price:700,durationDays:28,dailyBonus:80,extraTasks:7,commission:350,active:true},
-  {id:'p8',name:'Elite',price:800,durationDays:30,dailyBonus:100,extraTasks:8,commission:400,active:true},
-  {id:'p9',name:'Supreme',price:900,durationDays:30,dailyBonus:130,extraTasks:9,commission:450,active:true},
-  {id:'p10',name:'Ultimate',price:1000,durationDays:30,dailyBonus:170,extraTasks:10,commission:500,active:true}
+  {id:'p1',name:'Starter',price:100,durationDays:5,dailyBonus:5,extraTasks:1,commission:0,active:true},
+  {id:'p2',name:'Basic',price:200,durationDays:8,dailyBonus:12,extraTasks:2,commission:0,active:true},
+  {id:'p3',name:'Bronze',price:300,durationDays:12,dailyBonus:20,extraTasks:3,commission:0,active:true},
+  {id:'p4',name:'Silver',price:400,durationDays:15,dailyBonus:30,extraTasks:4,commission:0,active:true},
+  {id:'p5',name:'Gold',price:500,durationDays:19,dailyBonus:45,extraTasks:5,commission:0,active:true},
+  {id:'p6',name:'Platinum',price:600,durationDays:22,dailyBonus:60,extraTasks:6,commission:0,active:true},
+  {id:'p7',name:'Diamond',price:700,durationDays:28,dailyBonus:80,extraTasks:7,commission:0,active:true},
+  {id:'p8',name:'Elite',price:800,durationDays:30,dailyBonus:100,extraTasks:8,commission:0,active:true},
+  {id:'p9',name:'Supreme',price:900,durationDays:30,dailyBonus:130,extraTasks:9,commission:0,active:true},
+  {id:'p10',name:'Ultimate',price:1000,durationDays:30,dailyBonus:170,extraTasks:10,commission:0,active:true}
 ];
 
 let _adminPlans=[];
@@ -1624,7 +1742,7 @@ function renderAdminPlansList(){
         <div><label class="flbl">Plan Name</label><input class="fi" id="pa-name-${i}" value="${esc(plan.name)}" placeholder="Plan Name" style="font-size:13px" onchange="_adminPlans[${i}].name=this.value"></div>
         <div><label class="flbl">Price (৳)</label><input class="fi" id="pa-price-${i}" type="number" value="${plan.price}" min="0" style="font-size:13px" onchange="_adminPlans[${i}].price=parseInt(this.value)||0"></div>
         <div><label class="flbl">Daily Bonus (৳)</label><input class="fi" id="pa-bonus-${i}" type="number" value="${plan.dailyBonus}" min="0" style="font-size:13px" onchange="_adminPlans[${i}].dailyBonus=parseInt(this.value)||0"></div>
-        <div><label class="flbl">Commission (৳)</label><input class="fi" id="pa-comm-${i}" type="number" value="${plan.commission||0}" min="0" style="font-size:13px" onchange="_adminPlans[${i}].commission=parseInt(this.value)||0"></div>
+        <div><label class="flbl">Instant Commission</label><input class="fi" id="pa-comm-${i}" type="number" value="0" min="0" disabled style="font-size:13px;background:var(--grayl);color:var(--text2)" title="Plan কিনলে instant commission বন্ধ"></div>
         <div><label class="flbl">Extra Tasks</label><input class="fi" id="pa-tasks-${i}" type="number" value="${plan.extraTasks||0}" min="0" style="font-size:13px" onchange="_adminPlans[${i}].extraTasks=parseInt(this.value)||0"></div>
         <div><label class="flbl">Duration (Days)</label><input class="fi" id="pa-duration-${i}" type="number" value="${plan.durationDays||getPlanDaysAdmin(plan.price)}" min="1" style="font-size:13px;font-weight:800;color:var(--g)" onchange="_adminPlans[${i}].durationDays=parseInt(this.value)||1"></div>
       </div>
@@ -1639,7 +1757,7 @@ async function saveAllPlans(){
     price:parseInt(document.getElementById(`pa-price-${i}`)?.value)||p.price,
     durationDays:parseInt(document.getElementById(`pa-duration-${i}`)?.value)||p.durationDays||getPlanDaysAdmin(parseInt(document.getElementById(`pa-price-${i}`)?.value)||p.price),
     dailyBonus:parseInt(document.getElementById(`pa-bonus-${i}`)?.value)||p.dailyBonus,
-    commission:parseInt(document.getElementById(`pa-comm-${i}`)?.value)||p.commission||0,
+    commission:0,
     extraTasks:parseInt(document.getElementById(`pa-tasks-${i}`)?.value)||p.extraTasks||0,
     active:document.getElementById(`pa-active-${i}`)?.checked!==false
   }));
@@ -1654,6 +1772,9 @@ async function boot(){
   ldr(true);
   try{
     const cfg=await getCfg();
+    document.body.classList.toggle('anim-on',cfg.animationEnabled!==false);
+    document.documentElement.style.setProperty('--g',cfg.themePrimary||'#14693f');
+    document.documentElement.style.setProperty('--gm',cfg.themeSecondary||'#1e8f57');
     document.getElementById('adm-site-sub').textContent=cfg.siteName||'EarnifyBD';
     const existing=await fbGet('config/settings');
     if(!existing)await fbSet('config/settings',DEF);
@@ -1674,5 +1795,51 @@ async function boot(){
 firebase.database().ref('.info/connected').on('value',s=>{if(s.val()===false)snack('⚠️ Internet নেই...');});
 boot();
 </script>
+
+
+<!-- FINAL FULL ADMIN ADD-ON: loader/popup controls, user suspend, status notification -->
+<style>
+.extra-admin-box{background:#fff;border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:var(--shadow)}
+.suspend-box{background:var(--redl);border:1px solid #fca5a5;border-radius:14px;padding:14px;margin:12px 0}
+</style>
+<script>
+(function(){
+function byId(id){return document.getElementById(id)}
+function addFullControls(){
+ const themeBox=document.querySelector('.addon-box'); if(themeBox&&!byId('s-loader-style')){
+   themeBox.insertAdjacentHTML('beforeend',`<div class="divider"></div><div class="fg"><label class="flbl">Splash / Loader Design</label><select class="fsel" id="s-loader-style"><option value="modern">Modern Light</option><option value="minimal">Minimal</option><option value="premium">Premium Dark</option></select></div><div class="fg"><label class="flbl">Plan Badge Text</label><input class="fi" id="s-plan-badge" placeholder="যেমন: Daily Income Plan"></div><div class="fg"><label class="flbl">Popup Style</label><select class="fsel" id="s-popup-style"><option value="center">Center Popup</option><option value="toast">Toast Style</option></select></div>`);
+ }
+}
+setTimeout(addFullControls,500);
+const oldRenderSettings=window.renderSettings;
+window.renderSettings=async function(){ await oldRenderSettings(); addFullControls(); const cfg=await getCfg(); if(byId('s-loader-style'))byId('s-loader-style').value=cfg.loaderStyle||'modern'; if(byId('s-plan-badge'))byId('s-plan-badge').value=cfg.planBadgeText||'Daily Income Plan'; if(byId('s-popup-style'))byId('s-popup-style').value=cfg.popupStyle||'center'; };
+const oldSaveSettings=window.saveSettings;
+window.saveSettings=async function(){
+ await oldSaveSettings();
+ const patch={loaderStyle:byId('s-loader-style')?.value||'modern',planBadgeText:byId('s-plan-badge')?.value||'Daily Income Plan',popupStyle:byId('s-popup-style')?.value||'center'};
+ await fbUpd('config/settings',patch); snack('✅ Extra UI controls saved');
+};
+const oldOpenUser=window.openUser;
+window.openUser=async function(uid){ await oldOpenUser(uid); addSuspendControls(uid); };
+window.addSuspendControls=async function(uid){
+ const cont=byId('s-user-detail')?.querySelector('.content'); if(!cont||byId('suspend-box'))return; const u=await fbGet(`users/${uid}`)||{};
+ const box=document.createElement('div'); box.id='suspend-box'; box.className='suspend-box'; box.innerHTML=`<div style="font-weight:900;margin-bottom:10px;color:var(--red)">🚫 Ban / Suspend Control</div><div class="fg"><label class="flbl">Suspend/Ban Reason</label><input class="fi" id="sus-reason" value="${esc(u.suspendReason||'')}" placeholder="Reason লিখুন"></div><div class="btn-row"><button class="btn btn-red btn-sm" style="flex:1" onclick="suspendUser('${uid}')">🚫 Suspend</button><button class="btn btn-g btn-sm" style="flex:1" onclick="unsuspendUser('${uid}')">✅ Unsuspend</button></div><div style="font-size:12px;color:var(--text2)">Current: ${u.suspended?'Suspended':'Normal'} ${u.suspendReason?'— '+esc(u.suspendReason):''}</div>`;
+ cont.insertBefore(box,cont.children[1]||null);
+};
+window.suspendUser=async function(uid){const reason=byId('sus-reason')?.value.trim()||'Admin suspended this account'; await fbUpd(`users/${uid}`,{suspended:true,suspendReason:reason,isActive:false}); await fbPush('notifications',{userId:uid,type:'danger',title:'🚫 Account Suspended',body:reason,createdAt:Date.now()}); snack('🚫 User suspended'); byId('suspend-box')?.remove(); openUser(uid);};
+window.unsuspendUser=async function(uid){await fbUpd(`users/${uid}`,{suspended:false,suspendReason:''}); await fbPush('notifications',{userId:uid,type:'success',title:'✅ Account Unsuspended',body:'আপনার account আবার চালু করা হয়েছে।',createdAt:Date.now()}); snack('✅ User unsuspended'); byId('suspend-box')?.remove(); openUser(uid);};
+const oldApproveDeposit=window.approveDeposit;
+window.approveDeposit=async function(id){const txn=await fbGet(`txns/${id}`); await oldApproveDeposit(id); if(txn){await fbPush('notifications',{userId:txn.userId,type:'deposit',title:txn.type==='activation'?'✅ Account Activated':'✅ Deposit Approved',body:`${fmtN(txn.amount)} approved হয়েছে।`,createdAt:Date.now()});}};
+const oldApproveWd=window.approveWd;
+window.approveWd=async function(id){const txn=await fbGet(`txns/${id}`); await oldApproveWd(id); if(txn){await fbPush('notifications',{userId:txn.userId,type:'withdraw',title:'⬆️ Withdraw Approved',body:`${fmtN(txn.amount)} sent/approved হয়েছে।`,createdAt:Date.now()});}};
+const oldRejectTxn=window.rejectTxn;
+window.rejectTxn=async function(id,type){const txn=await fbGet(`txns/${id}`); let reason=prompt('Reject reason লিখুন (optional):','')||''; await oldRejectTxn(id,type); if(txn){await fbUpd(`txns/${id}`,{adminNote:reason}); await fbPush('notifications',{userId:txn.userId,type:'danger',title:type==='wd'?'❌ Withdraw Rejected':'❌ Deposit Rejected',body:reason||'Admin request reject করেছেন।',createdAt:Date.now()});}};
+const oldApproveProof=window.approveProof;
+window.approveProof=async function(id){const sub=await fbGet(`subs/${id}`); await oldApproveProof(id); if(sub){await fbPush('notifications',{userId:sub.userId,type:'success',title:'✅ Task Approved',body:'Task reward balance এ যোগ হয়েছে।',createdAt:Date.now()});}};
+const oldRejectProof=window.rejectProof;
+window.rejectProof=async function(id){const sub=await fbGet(`subs/${id}`); let reason=prompt('Task reject reason লিখুন (optional):','')||''; await oldRejectProof(id); if(sub){await fbPush('notifications',{userId:sub.userId,type:'danger',title:'❌ Task Rejected',body:reason||'Task proof reject হয়েছে।',createdAt:Date.now()});}};
+})();
+</script>
+
 </body>
 </html>
