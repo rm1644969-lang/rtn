@@ -445,6 +445,15 @@ body.dark .wfilt-btn{background:#252836;border-color:#2e3244;color:#94a3b8}
 body.dark .ref-user-item{border-color:#2e3244}
 .ref-user-item:last-child{border-bottom:none}
 .ref-user-av{width:38px;height:38px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--g);flex-shrink:0}
+
+/* ── FINAL ADD-ON: admin-controlled theme/UI/maintenance ── */
+.anim-on .card,.anim-on .task-box,.anim-on .menu-item,.anim-on .plan-card,.anim-on .notice{animation:fadeUp .28s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.vip-glow{animation:vipPulse 1.8s ease-in-out infinite;box-shadow:0 0 0 0 rgba(232,160,32,.35)}
+@keyframes vipPulse{50%{box-shadow:0 0 0 8px rgba(232,160,32,0);transform:scale(1.03)}}
+.maintenance-screen{position:fixed;inset:0;background:linear-gradient(160deg,var(--g),var(--gm));z-index:10000;color:#fff;display:none;align-items:center;justify-content:center;text-align:center;padding:28px}
+.maintenance-card{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:24px;padding:28px;max-width:380px;backdrop-filter:blur(8px)}
+.maintenance-card .ico{font-size:54px;margin-bottom:10px}
 </style>
 </head>
 <body>
@@ -456,6 +465,7 @@ body.dark .ref-user-item{border-color:#2e3244}
   <div style="font-size:13px;color:var(--g);font-weight:700" id="load-txt">লোড হচ্ছে...</div>
 </div>
 <div class="snack" id="snack"></div>
+<div class="maintenance-screen" id="maintenance-screen"><div class="maintenance-card"><div class="ico">🛠️</div><div style="font-size:24px;font-weight:900;margin-bottom:8px">Maintenance Mode</div><div id="maintenance-text" style="font-size:14px;line-height:1.7;opacity:.9">সার্ভার আপডেট চলছে, কিছুক্ষণ পর চেষ্টা করুন</div></div></div>
 
 <!-- ═══════════════ LOGIN ═══════════════ -->
 <div id="s-login" class="login-wrap" style="display:none;flex-direction:column">
@@ -552,7 +562,7 @@ body.dark .ref-user-item{border-color:#2e3244}
     <div id="home-plan-strip" style="display:none">
       <div class="home-plan-strip">
         <div class="home-plan-ttl">📦 Plans — Extra Income করুন</div>
-        <div class="home-plan-sub">Plan কিনলে Daily Bonus + Extra Task + Commission পাবেন</div>
+        <div class="home-plan-sub">Plan কিনলে শুধু Daily Bonus / Daily Claim পাবেন</div>
         <div class="home-plan-row" id="home-plan-chips"></div>
         <button class="btn btn-ghost" onclick="go('plans')" style="margin-top:10px;margin-bottom:0;font-size:12px">সব Plans দেখুন →</button>
       </div>
@@ -883,9 +893,13 @@ body.dark .ref-user-item{border-color:#2e3244}
     </div>
     <!-- VIP (always visible) -->
     <div class="card">
-      <div class="sec-ttl" style="margin-bottom:12px">⭐ VIP Levels (৫ স্তর)</div>
+      <div class="sec-ttl" style="margin-bottom:12px">⭐ VIP Levels (VIP 0 → VIP 12)</div>
       <div class="vip-scroll" id="ref-vip-bar"></div>
       <div style="font-size:12px;color:var(--text2);padding:6px 0" id="ref-vip-next"></div>
+      <div style="margin-top:10px;border-top:1px solid var(--border);padding-top:10px">
+        <div class="sec-ttl" style="font-size:13px;margin-bottom:8px">📈 VIP 0–12 Profit List</div>
+        <div id="ref-vip-profit-list"></div>
+      </div>
     </div>
   </div>
   <div class="bnav">
@@ -1080,7 +1094,7 @@ const L={
       totalBalance:'মোট Balance',earnMore:'বেশি আয় করুন',
       depositBtn:'⬇️ Deposit',withdrawBtn:'⬆️ Withdraw',
       referEarn:'Refer & Earn',support:'Support',
-      dailyBonus:'Daily Bonus',commission:'Commission',duration:'মেয়াদ',
+      dailyBonus:'Daily Bonus',commission:'Instant Commission Off',duration:'মেয়াদ',
       taskHistory:'Task History',transHistory:'Transaction History',
       noHistory:'কোনো history নেই',checkIn:'☀️ Daily Check-in',
       checkinDone:'☀️ আজকের Check-in Done ✅',
@@ -1098,7 +1112,7 @@ const L={
       totalBalance:'Total Balance',earnMore:'Earn More',
       depositBtn:'⬇️ Deposit',withdrawBtn:'⬆️ Withdraw',
       referEarn:'Refer & Earn',support:'Support',
-      dailyBonus:'Daily Bonus',commission:'Commission',duration:'Duration',
+      dailyBonus:'Daily Bonus',commission:'Instant Commission Off',duration:'Duration',
       taskHistory:'Task History',transHistory:'Transaction History',
       noHistory:'No history yet',checkIn:'☀️ Daily Check-in',
       checkinDone:'☀️ Today\'s Check-in Done ✅',
@@ -1165,12 +1179,16 @@ async function uploadToCloudinary(file){
 
 // ── NOTIFICATION BADGE ─────────────────────────────────
 function startNotifBadge(uid){
-  db.ref('txns').on('value',snap=>{
-    const all=snap.val()||{};
-    const seen=JSON.parse(localStorage.getItem('eb_seen_notifs')||'[]');
-    const unreadTxn=Object.values(all).filter(t=>t.userId===uid&&t.status!=='pending'&&!seen.includes(t.id)).length;
-    updateNotifBadge(unreadTxn);
-  });
+  function calcBadge(){
+    Promise.all([fbGet('txns'),fbGet('notifications')]).then(([tx,nt])=>{
+      const seen=JSON.parse(localStorage.getItem('eb_seen_notifs')||'[]');
+      const unreadTxn=Object.values(tx||{}).filter(t=>t.userId===uid&&t.status!=='pending'&&!seen.includes('txn_'+t.id)).length;
+      const unreadGlobal=Object.values(nt||{}).filter(n=>(n.global||!n.userId||n.userId===uid)&&!seen.includes('nt_'+n.id)).length;
+      updateNotifBadge(unreadTxn+unreadGlobal);
+    });
+  }
+  db.ref('txns').on('value',calcBadge);
+  db.ref('notifications').on('value',calcBadge);
   // Also watch unread admin chat messages
   db.ref(`chats/${uid}`).on('value',snap=>{
     const msgs=snap.val()||{};
@@ -1184,8 +1202,11 @@ function updateNotifBadge(count){
   if(badge){badge.textContent=count>9?'9+':count;badge.classList.toggle('show',count>0);}
 }
 function markNotifsRead(uid){
-  fbGet('txns').then(all=>{
-    const ids=Object.values(all||{}).filter(t=>t.userId===uid&&t.status!=='pending').map(t=>t.id);
+  Promise.all([fbGet('txns'),fbGet('notifications')]).then(([tx,nt])=>{
+    const ids=[
+      ...Object.values(tx||{}).filter(t=>t.userId===uid&&t.status!=='pending').map(t=>'txn_'+t.id),
+      ...Object.values(nt||{}).filter(n=>(n.global||!n.userId||n.userId===uid)).map(n=>'nt_'+n.id)
+    ];
     localStorage.setItem('eb_seen_notifs',JSON.stringify(ids));
     const badge=document.getElementById('notif-badge');
     if(badge){badge.textContent='0';badge.classList.remove('show');}
@@ -1217,13 +1238,22 @@ const DEF={
   activationAmount:1000, minWithdraw:100, maxWithdraw:25000,
   minDeposit:100, maxDeposit:10000,
   adminPassword:'admin123', appsLink:'',
+  themePrimary:'#14693f',themeSecondary:'#1e8f57',themeMode:'green',animationEnabled:true,vipAnimationEnabled:true,maintenanceMode:false,maintenanceText:'সার্ভার আপডেট চলছে, কিছুক্ষণ পর চেষ্টা করুন',
   referGens:[300,250,200,250,100,100,100,100],
   vipLevels:[
     {level:0,name:'VIP 0',minRefers:0,bonus:0},
     {level:1,name:'VIP 1',minRefers:5,bonus:100},
-    {level:2,name:'VIP 2',minRefers:10,bonus:300},
-    {level:3,name:'VIP 3',minRefers:20,bonus:600},
-    {level:4,name:'VIP 4',minRefers:50,bonus:1200}
+    {level:2,name:'VIP 2',minRefers:10,bonus:200},
+    {level:3,name:'VIP 3',minRefers:20,bonus:350},
+    {level:4,name:'VIP 4',minRefers:35,bonus:500},
+    {level:5,name:'VIP 5',minRefers:50,bonus:750},
+    {level:6,name:'VIP 6',minRefers:75,bonus:1000},
+    {level:7,name:'VIP 7',minRefers:100,bonus:1500},
+    {level:8,name:'VIP 8',minRefers:150,bonus:2200},
+    {level:9,name:'VIP 9',minRefers:200,bonus:3000},
+    {level:10,name:'VIP 10',minRefers:300,bonus:4500},
+    {level:11,name:'VIP 11',minRefers:500,bonus:7000},
+    {level:12,name:'VIP 12',minRefers:800,bonus:10000}
   ]
 };
 const PLAT_CFG={
@@ -1240,7 +1270,15 @@ const HICLS={task_earning:'hi-task',refer_bonus:'hi-ref',vip_bonus:'hi-vip',chec
 let _cfg=null;
 async function getCfg(){
   if(!_cfg){_cfg=await fbGet('config/settings');if(!_cfg){await fbSet('config/settings',DEF);_cfg=DEF;}}
-  return{...DEF,..._cfg,referGens:_cfg.referGens||DEF.referGens,vipLevels:_cfg.vipLevels||DEF.vipLevels};
+  const merged={...DEF,..._cfg};
+  // Force VIP 0-12 even if old Firebase settings still have only VIP 0-4
+  merged.referGens=Array.from({length:8},(_,i)=>((_cfg.referGens&&_cfg.referGens[i]!=null)?_cfg.referGens[i]:DEF.referGens[i]));
+  merged.vipLevels=Array.from({length:13},(_,i)=>{
+    const oldVip=(_cfg.vipLevels||[]).find(v=>Number(v.level)===i)||(_cfg.vipLevels||[])[i]||{};
+    const defVip=DEF.vipLevels[i];
+    return {level:i,name:oldVip.name||defVip.name,minRefers:Number(oldVip.minRefers ?? defVip.minRefers)||0,bonus:Number(oldVip.bonus ?? defVip.bonus)||0};
+  });
+  return merged;
 }
 
 // ────────────────────────────────────────────────
@@ -1291,6 +1329,20 @@ function applySiteBranding(cfg){
   document.getElementById('login-site-name').textContent=n;
   ['h-logo','t-logo','w-logo','r-logo','pl-logo'].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=lu?`<img src="${lu}" style="height:22px;object-fit:contain">`:l;});
   ['h-sitename'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=n;});
+}
+
+function applyAdminUIControls(cfg){
+  document.documentElement.style.setProperty('--g',cfg.themePrimary||'#14693f');
+  document.documentElement.style.setProperty('--gm',cfg.themeSecondary||'#1e8f57');
+  if(cfg.themeMode==='dark') document.body.classList.add('dark');
+  else if(cfg.themeMode==='green'||cfg.themeMode==='custom') document.body.classList.remove('dark');
+  document.body.classList.toggle('anim-on',cfg.animationEnabled!==false);
+  const ms=document.getElementById('maintenance-screen');
+  if(ms){
+    document.getElementById('maintenance-text').textContent=cfg.maintenanceText||'সার্ভার আপডেট চলছে, কিছুক্ষণ পর চেষ্টা করুন';
+    ms.style.display=cfg.maintenanceMode?'flex':'none';
+  }
+  document.querySelectorAll('.badge.bgold').forEach(el=>el.classList.toggle('vip-glow',cfg.vipAnimationEnabled!==false));
 }
 
 // ────────────────────────────────────────────────
@@ -1408,6 +1460,7 @@ function doLogout(){clrSess();showLogin();}
 async function renderHome(){
   const uid=myUID();if(!uid)return;
   const cfg=await getCfg();
+  applyAdminUIControls(cfg);
   applySiteBranding(cfg);
   startNotifBadge(uid);
   renderSocialBar(cfg);
@@ -1457,6 +1510,7 @@ async function renderHome(){
     const cv=vls.filter(v=>dr>=v.minRefers).pop()||vls[0];
     const nv=vls.find(v=>v.level>cv.level)||null;
     document.getElementById('h-vip-badge').textContent=cv.name;
+    document.getElementById('h-vip-badge').classList.toggle('vip-glow',cfg.vipAnimationEnabled!==false);
     if(nv){
       const pct=cv.minRefers===nv.minRefers?0:Math.min(100,Math.round(((dr-cv.minRefers)/(nv.minRefers-cv.minRefers))*100));
       document.getElementById('h-vip-prog').style.width=pct+'%';
@@ -1783,17 +1837,25 @@ async function renderRefer(){
   const vls=cfg.vipLevels;
   const cv=vls.filter(v=>dr>=v.minRefers).pop()||vls[0];
   const nv=vls.find(v=>v.level>cv.level)||null;
-  const VICO=['🏅','⭐','🌟','💫','💎'];
+  const VICO=['🏅','⭐','🌟','💫','💎','👑','🔥','🚀','🏆','💰','✨','🌙','☀️'];
   document.getElementById('ref-vip-bar').innerHTML=vls.map(v=>{
     const done=dr>=v.minRefers,cur=v.level===cv.level;
     return `<div class="vip-card ${cur?'cur':''} ${done&&!cur?'done':''}">
       <div class="vip-card-ico">${VICO[v.level]||'⭐'}</div>
       <div class="vip-card-name">${v.name}</div>
       <div class="vip-card-ref">${v.minRefers}+ Refer</div>
-      <div class="vip-card-bonus">${v.bonus>0?'+'+fmtN(v.bonus):'—'}</div>
+      <div class="vip-card-bonus">${v.bonus>0?'Profit: '+fmtN(v.bonus):'Profit: —'}</div>
     </div>`;
   }).join('');
-  document.getElementById('ref-vip-next').textContent=nv?`🎯 ${nv.name} পেতে আরো ${nv.minRefers-dr}টি Refer করুন — Bonus: ${fmtN(nv.bonus)}`:'🎉 সর্বোচ্চ VIP অর্জন করেছেন!';
+  document.getElementById('ref-vip-next').textContent=nv?`🎯 ${nv.name} পেতে আরো ${nv.minRefers-dr}টি Refer করুন — Profit/Bonus: ${fmtN(nv.bonus)}`:'🎉 সর্বোচ্চ VIP অর্জন করেছেন!';
+  const vpl=document.getElementById('ref-vip-profit-list');
+  if(vpl){
+    vpl.innerHTML=vls.map(v=>`
+      <div class="gen-line">
+        <div style="display:flex;align-items:center;gap:8px"><span class="badge ${dr>=v.minRefers?'bgold':'bgray'}">${v.name}</span><span>${v.minRefers}+ Refer</span></div>
+        <b style="color:var(--gold)">${v.bonus>0?fmtN(v.bonus):'৳0'}</b>
+      </div>`).join('');
+  }
 }
 
 function copyRefCode(){copyText(document.getElementById('ref-code').textContent);}
@@ -1810,7 +1872,7 @@ async function renderProfile(){
   // Avatar initials
   const av=document.getElementById('p-av');
   if(av){const words=user.name.trim().split(' ');const init=words.length>=2?words[0][0]+words[words.length-1][0]:words[0].slice(0,2);av.textContent=init.toUpperCase();}
-  const vl=cfg.vipLevels.filter(v=>v.level<=(user.vipLevel||0)).pop()||cfg.vipLevels[0];
+  const vl=cfg.vipLevels.filter(v=>(user.directRefers||0)>=v.minRefers).pop()||cfg.vipLevels[0];
   document.getElementById('p-badges').innerHTML=`<span class="badge bgold">${vl.name}</span> <span class="badge ${user.isActive?'bg':'bred'}">${user.isActive?'✅ Active':'⚠️ Not Active'}</span>`;
 }
 async function renderEditProfile(){
@@ -1861,8 +1923,11 @@ async function submitAccountClose(){
 async function renderNotifications(){
   const uid=myUID();if(!uid)return;
   markNotifsRead(uid);
-  const txns=Object.values(await fbGet('txns')||{}).filter(t=>t.userId===uid&&t.status!=='pending').sort((a,b)=>b.createdAt-a.createdAt).slice(0,30);
-  document.getElementById('notif-list').innerHTML=txns.length?txns.map(t=>`<div class="hist-item"><div class="hist-ico ${t.status==='approved'?'hi-dep':'hi-wd'}">${t.status==='approved'?'✅':'❌'}</div><div class="hist-info"><div class="hist-ttl">${TLBL[t.type]||t.type} — ${t.status==='approved'?'Approved ✅':'Rejected ❌'}</div><div class="hist-dt">${fmtD(t.createdAt)}</div></div><div class="hist-amt ${t.status==='approved'?'plus':'minus'}">${fmtN(t.amount)}</div></div>`).join(''):'<div style="text-align:center;padding:48px;color:var(--text2);background:var(--grayl);border-radius:14px;margin-top:12px">কোনো notification নেই</div>';
+  const [txRaw,ntRaw]=await Promise.all([fbGet('txns'),fbGet('notifications')]);
+  const txns=Object.values(txRaw||{}).filter(t=>t.userId===uid&&t.status!=='pending').map(t=>({kind:'txn',createdAt:t.createdAt,html:`<div class="hist-item"><div class="hist-ico ${t.status==='approved'?'hi-dep':'hi-wd'}">${t.status==='approved'?'✅':'❌'}</div><div class="hist-info"><div class="hist-ttl">${TLBL[t.type]||t.type} — ${t.status==='approved'?'Approved ✅':'Rejected ❌'}</div><div class="hist-dt">${fmtD(t.createdAt)}</div></div><div class="hist-amt ${t.status==='approved'?'plus':'minus'}">${fmtN(t.amount)}</div></div>`}));
+  const nts=Object.values(ntRaw||{}).filter(n=>(n.global||!n.userId||n.userId===uid)).map(n=>({kind:'nt',createdAt:n.createdAt||0,html:`<div class="notice ${n.type==='success'?'ng':n.type==='danger'?'nred':n.type==='info'?'nblue':''}"><strong>${esc(n.title||'Notice')}</strong>${esc(n.body||n.msg||'')}</div>`}));
+  const arr=[...nts,...txns].sort((a,b)=>b.createdAt-a.createdAt).slice(0,40);
+  document.getElementById('notif-list').innerHTML=arr.length?arr.map(x=>x.html).join(''):'<div style="text-align:center;padding:48px;color:var(--text2);background:var(--grayl);border-radius:14px;margin-top:12px">কোনো notification নেই</div>';
 }
 
 // ────────────────────────────────────────────────
@@ -2312,16 +2377,16 @@ async function loadWingoPeriodHistory(){
 // PLANS SYSTEM
 // ────────────────────────────────────────────────
 const DEF_PLANS=[
-  {id:'p1',name:'Starter',price:100,durationDays:5,dailyBonus:5,extraTasks:1,commission:50,active:true},
-  {id:'p2',name:'Basic',price:200,durationDays:8,dailyBonus:12,extraTasks:2,commission:100,active:true},
-  {id:'p3',name:'Bronze',price:300,durationDays:12,dailyBonus:20,extraTasks:3,commission:150,active:true},
-  {id:'p4',name:'Silver',price:400,durationDays:15,dailyBonus:30,extraTasks:4,commission:200,active:true},
-  {id:'p5',name:'Gold',price:500,durationDays:19,dailyBonus:45,extraTasks:5,commission:250,active:true},
-  {id:'p6',name:'Platinum',price:600,durationDays:22,dailyBonus:60,extraTasks:6,commission:300,active:true},
-  {id:'p7',name:'Diamond',price:700,durationDays:28,dailyBonus:80,extraTasks:7,commission:350,active:true},
-  {id:'p8',name:'Elite',price:800,durationDays:30,dailyBonus:100,extraTasks:8,commission:400,active:true},
-  {id:'p9',name:'Supreme',price:900,durationDays:30,dailyBonus:130,extraTasks:9,commission:450,active:true},
-  {id:'p10',name:'Ultimate',price:1000,durationDays:30,dailyBonus:170,extraTasks:10,commission:500,active:true}
+  {id:'p1',name:'Starter',price:100,durationDays:5,dailyBonus:5,extraTasks:1,commission:0,active:true},
+  {id:'p2',name:'Basic',price:200,durationDays:8,dailyBonus:12,extraTasks:2,commission:0,active:true},
+  {id:'p3',name:'Bronze',price:300,durationDays:12,dailyBonus:20,extraTasks:3,commission:0,active:true},
+  {id:'p4',name:'Silver',price:400,durationDays:15,dailyBonus:30,extraTasks:4,commission:0,active:true},
+  {id:'p5',name:'Gold',price:500,durationDays:19,dailyBonus:45,extraTasks:5,commission:0,active:true},
+  {id:'p6',name:'Platinum',price:600,durationDays:22,dailyBonus:60,extraTasks:6,commission:0,active:true},
+  {id:'p7',name:'Diamond',price:700,durationDays:28,dailyBonus:80,extraTasks:7,commission:0,active:true},
+  {id:'p8',name:'Elite',price:800,durationDays:30,dailyBonus:100,extraTasks:8,commission:0,active:true},
+  {id:'p9',name:'Supreme',price:900,durationDays:30,dailyBonus:130,extraTasks:9,commission:0,active:true},
+  {id:'p10',name:'Ultimate',price:1000,durationDays:30,dailyBonus:170,extraTasks:10,commission:0,active:true}
 ];
 
 async function getPlans(){
@@ -2383,7 +2448,7 @@ async function renderPlans(){
         <div class="plan-features">
           <div class="plan-feat"><div class="plan-feat-val">${fmtN(plan.dailyBonus)}</div><div class="plan-feat-lbl">${isEn?'Daily Bonus':'দৈনিক বোনাস'}</div></div>
           <div class="plan-feat"><div class="plan-feat-val">${plan.extraTasks||0}</div><div class="plan-feat-lbl">${isEn?'Extra Tasks':'Extra Task'}</div></div>
-          <div class="plan-feat"><div class="plan-feat-val">${fmtN(plan.commission||0)}</div><div class="plan-feat-lbl">${isEn?'Commission':'কমিশন'}</div></div>
+          <div class="plan-feat"><div class="plan-feat-val">0</div><div class="plan-feat-lbl">${isEn?'Instant Bonus Off':'Instant Bonus Off'}</div></div>
           <div class="plan-feat"><div class="plan-feat-val">${dur} ${isEn?'Days':'দিন'}</div><div class="plan-feat-lbl">${isEn?'Duration':'মেয়াদ'}</div></div>
         </div>
         <div style="background:var(--gl);border:1.5px solid var(--g2);border-radius:11px;padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between">
@@ -2432,11 +2497,9 @@ async function buyPlan(planId){
       lastPlanClaim:null
     });
     await fbPush('txns',{userId:uid,amount:plan.price,type:'plan_buy',status:'approved',note:`${plan.name} Plan — ${dur} days`,createdAt:Date.now()});
-    // Pay commission to admin (tracked)
-    await fbPush('txns',{userId:uid,amount:plan.commission||0,type:'plan_commission',status:'approved',note:`${plan.name} Plan Commission`,createdAt:Date.now()});
-    // Give commission to user's balance
-    await fbUpd(`users/${uid}`,{balance:newBal+(plan.commission||0)});
-    snack('✅ '+(_lang==='en'?`${plan.name} plan activated for ${dur} days!`:`${plan.name} Plan কেনা হয়েছে! ${dur} দিনের জন্য সক্রিয়।`));
+    // FINAL RULE: No instant bonus/commission after buying a plan.
+    // User will earn only by claiming the plan daily bonus once per day.
+    snack('✅ '+(_lang==='en'?`${plan.name} plan activated for ${dur} days! Daily claim is now available.`:`${plan.name} Plan কেনা হয়েছে! ${dur} দিনের জন্য সক্রিয়। এখন শুধু Daily Bonus claim করলে টাকা পাবেন।`));
     renderPlans();
   }catch(e){snack('Error: '+e.message);}finally{ldr(false);}
 }
@@ -2463,6 +2526,7 @@ async function boot(){
   ldr(true);
   try{
     const cfg=await getCfg();
+    applyAdminUIControls(cfg);
     applySiteBranding(cfg);
     // Set wingo nav visibility globally at boot
     window._wingoEnabled=cfg.wingoEnabled!==false;
@@ -2491,5 +2555,81 @@ async function boot(){
 firebase.database().ref('.info/connected').on('value',s=>{if(s.val()===false)snack('⚠️ Internet connection নেই...');});
 boot();
 </script>
+
+
+<!-- FINAL FULL ADD-ON: popup, maintenance, referral tree, VIP12 progress -->
+<style>
+#global-popup{display:none;position:fixed;inset:0;z-index:99999;align-items:center;justify-content:center;background:rgba(0,0,0,.45);padding:18px}
+#global-popup .gp-card{width:100%;max-width:340px;background:#fff;border-radius:22px;padding:24px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.28);animation:gpPop .28s ease}
+#global-popup .gp-ico{font-size:48px;margin-bottom:8px}#global-popup .gp-title{font-size:20px;font-weight:900;color:var(--text);margin-bottom:8px}#global-popup .gp-body{font-size:14px;line-height:1.7;color:var(--text2);white-space:pre-wrap;margin-bottom:16px}
+#global-popup .gp-btn{background:linear-gradient(135deg,var(--g),var(--gm));border:none;color:#fff;border-radius:12px;padding:11px 26px;font-size:14px;font-weight:800;cursor:pointer}
+@keyframes gpPop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+#maintenance-overlay{display:none;position:fixed;inset:0;z-index:99998;background:linear-gradient(135deg,#0f172a,#14532d);color:#fff;align-items:center;justify-content:center;text-align:center;padding:28px}
+#maintenance-overlay .m-card{max-width:380px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:24px;padding:30px;backdrop-filter:blur(8px)}
+.ref-tree{display:flex;flex-direction:column;gap:10px}.ref-tree-lvl{border:1px solid var(--border);border-radius:13px;padding:12px;background:#fff}.ref-tree-head{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:900;color:var(--g);margin-bottom:8px}.ref-tree-user{font-size:12px;color:var(--text2);padding:5px 0;border-top:1px dashed var(--border)}
+.vip12-track{display:grid;grid-template-columns:repeat(13,1fr);gap:4px;margin-top:10px}.vip12-dot{height:8px;border-radius:10px;background:var(--grayl);border:1px solid var(--border)}.vip12-dot.done{background:linear-gradient(90deg,var(--gold),var(--goldb));border-color:var(--goldb)}
+.plan-badge-new{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--goldb));color:#fff;border-radius:20px;padding:4px 10px;font-size:10px;font-weight:900;box-shadow:0 4px 12px rgba(184,114,10,.25)}
+body.loader-modern #loader{background:radial-gradient(circle at top,var(--gl),#fff 55%)}body.loader-minimal #loader .load-logo{font-size:34px}body.loader-premium #loader{background:linear-gradient(135deg,#0f172a,#14532d);color:#fff}body.loader-premium #loader #load-txt{color:#fff!important}
+</style>
+<div id="global-popup"><div class="gp-card"><div class="gp-ico" id="gp-ico">🔔</div><div class="gp-title" id="gp-title">Notice</div><div class="gp-body" id="gp-body"></div><button class="gp-btn" onclick="hideGlobalPopup()">OK</button></div></div>
+<div id="maintenance-overlay"><div class="m-card"><div style="font-size:58px;margin-bottom:14px">🛠️</div><div style="font-size:24px;font-weight:900;margin-bottom:10px">Maintenance Mode</div><div id="maintenance-msg" style="font-size:14px;line-height:1.7;opacity:.85">সার্ভার আপডেট চলছে</div></div></div>
+<script>
+(function(){
+function byId(id){return document.getElementById(id)}
+window.hideGlobalPopup=function(){const p=byId('global-popup');if(p)p.style.display='none'};
+window.showGlobalPopup=function(title,body,type){
+  const p=byId('global-popup'); if(!p) return snack((title?title+' — ':'')+(body||''));
+  const ico={success:'✅',danger:'❌',warning:'⚠️',info:'🔔',plan:'📦',vip:'⭐',deposit:'⬇️',withdraw:'⬆️'}[type||'info']||'🔔';
+  byId('gp-ico').textContent=ico; byId('gp-title').textContent=title||'Notice'; byId('gp-body').textContent=body||''; p.style.display='flex';
+};
+function applyFullCfg(cfg){
+  if(!cfg)return;
+  document.documentElement.style.setProperty('--g',cfg.themePrimary||'#14693f');
+  document.documentElement.style.setProperty('--gm',cfg.themeSecondary||'#1e8f57');
+  document.body.classList.toggle('dark',cfg.themeMode==='dark');
+  document.body.classList.toggle('anim-on',cfg.animationEnabled!==false);
+  document.body.classList.toggle('loader-modern',(cfg.loaderStyle||'modern')==='modern');
+  document.body.classList.toggle('loader-minimal',cfg.loaderStyle==='minimal');
+  document.body.classList.toggle('loader-premium',cfg.loaderStyle==='premium');
+  const mo=byId('maintenance-overlay'); if(mo){byId('maintenance-msg').textContent=cfg.maintenanceText||'সার্ভার আপডেট চলছে, কিছুক্ষণ পর চেষ্টা করুন'; mo.style.display=cfg.maintenanceMode?'flex':'none';}
+}
+setTimeout(()=>{ if(window.db){ db.ref('config/settings').on('value',s=>applyFullCfg(s.val()||{})); const sess=getSess&&getSess(); if(sess&&sess.uid){ db.ref('users/'+sess.uid).on('value',snap=>{const u=snap.val()||{}; if(u.suspended){showGlobalPopup('🚫 Account Suspended',u.suspendReason||'Admin আপনার account suspend করেছেন।','danger');} }); } } },800);
+const oldRenderNotifications=window.renderNotifications;
+window.renderNotifications=async function(){
+  const uid=myUID(); if(!uid)return; markNotifsRead(uid);
+  const [txRaw,ntRaw]=await Promise.all([fbGet('txns'),fbGet('notifications')]);
+  const txns=Object.values(txRaw||{}).filter(t=>t.userId===uid&&t.status!=='pending').map(t=>({createdAt:t.approvedAt||t.rejectedAt||t.createdAt,html:`<div class="hist-item"><div class="hist-ico ${t.type==='withdraw'?'hi-wd':'hi-dep'}">${t.status==='approved'?'✅':'❌'}</div><div class="hist-info"><div class="hist-ttl">${TLBL[t.type]||t.type} — ${t.status==='approved'?'Approved ✅':'Rejected ❌'}</div><div class="hist-dt">${esc(t.adminNote||t.note||'')} · ${fmtD(t.approvedAt||t.rejectedAt||t.createdAt)}</div></div><div class="hist-amt ${t.status==='approved'?'plus':'minus'}">${fmtN(t.amount)}</div></div>`}));
+  const nts=Object.values(ntRaw||{}).filter(n=>(n.global||!n.userId||n.userId===uid)).map(n=>({createdAt:n.createdAt||0,html:`<div class="notice ${n.type==='success'?'ng':n.type==='danger'?'nred':n.type==='info'?'nblue':''}"><strong>${esc(n.title||'Notice')}</strong>${esc(n.body||n.msg||'')}</div>`}));
+  const arr=[...nts,...txns].sort((a,b)=>b.createdAt-a.createdAt).slice(0,60);
+  byId('notif-list').innerHTML=arr.length?arr.map(x=>x.html).join(''):'<div style="text-align:center;padding:48px;color:var(--text2);background:var(--grayl);border-radius:14px;margin-top:12px">কোনো notification নেই</div>';
+};
+const oldStartNotifBadge=window.startNotifBadge;
+window.startNotifBadge=function(uid){
+  if(oldStartNotifBadge)oldStartNotifBadge(uid);
+  let first=true;
+  db.ref('notifications').on('child_added',snap=>{const n=snap.val()||{}; if(first)return; if(n.global||!n.userId||n.userId===uid)showGlobalPopup(n.title||'Notice',n.body||n.msg||'',n.type||'info');});
+  setTimeout(()=>{first=false},1500);
+};
+const oldBuy=window.buyPlan;
+window.buyPlan=async function(planId){ await oldBuy(planId); const uid=myUID(); if(uid){ await fbPush('notifications',{userId:uid,type:'plan',title:'📦 Plan Activated',body:'Plan কেনা হয়েছে। Instant commission নেই — daily claim করলে bonus পাবেন।',createdAt:Date.now()}); showGlobalPopup('📦 Plan Activated','Daily claim করে bonus নিতে পারবেন।','plan'); }};
+const oldClaim=window.claimPlanBonus;
+window.claimPlanBonus=async function(){ const uid=myUID(); const before=uid?await fbGet(`users/${uid}`):null; await oldClaim(); const after=uid?await fbGet(`users/${uid}`):null; if(after&&before&&after.lastPlanClaim!==before.lastPlanClaim){ await fbPush('notifications',{userId:uid,type:'success',title:'☀️ Daily Bonus Claimed',body:'আপনার daily plan bonus balance এ যোগ হয়েছে।',createdAt:Date.now()}); showGlobalPopup('☀️ Daily Bonus','Balance এ যোগ হয়েছে।','success'); }};
+const oldRenderRefer=window.renderRefer;
+window.renderRefer=async function(){ await oldRenderRefer(); await drawReferralTree(); };
+window.drawReferralTree=async function(){
+  const uid=myUID(); if(!uid)return; const active=byId('ref-active'); if(!active||active.style.display==='none')return;
+  let card=byId('ref-tree-card'); if(!card){card=document.createElement('div');card.className='card';card.id='ref-tree-card';card.innerHTML='<div class="sec-ttl" style="margin-bottom:12px">🌳 Referral Tree — ৮ Generation</div><div id="ref-tree-list"></div>'; active.appendChild(card);}
+  const users=await fbGet('users')||{}; let cur=[uid],html='';
+  for(let g=1;g<=8;g++){let next=[]; Object.values(users).forEach(u=>{if(cur.includes(u.referredBy))next.push(u)}); html+=`<div class="ref-tree-lvl"><div class="ref-tree-head"><span>Generation ${g}</span><span>${next.length} জন</span></div>${next.slice(0,8).map(u=>`<div class="ref-tree-user">👤 ${esc(u.name||'User')} · ${u.isActive?'✅ Active':'⏳ Inactive'} · VIP ${u.vipLevel||0}</div>`).join('')||'<div class="ref-tree-user">কেউ নেই</div>'}${next.length>8?`<div class="ref-tree-user">+${next.length-8} more</div>`:''}</div>`; cur=next.map(u=>u.uid); if(!cur.length&&g>2){} }
+  byId('ref-tree-list').innerHTML=html;
+};
+const oldDrawHome=window.drawHome;
+if(oldDrawHome){window.drawHome=async function(){await oldDrawHome.apply(this,arguments); drawVIP12ProgressHome();};}
+window.drawVIP12ProgressHome=function(){
+ const c=byId('h-vip-lbl'); if(!c||byId('vip12-track-home'))return; const user=window._user||{}; let lv=(user.vipLevel||0); const d=document.createElement('div'); d.id='vip12-track-home'; d.className='vip12-track'; d.innerHTML=Array.from({length:13},(_,i)=>`<span class="vip12-dot ${i<=lv?'done':''}"></span>`).join(''); c.after(d);
+};
+})();
+</script>
+
 </body>
 </html>
