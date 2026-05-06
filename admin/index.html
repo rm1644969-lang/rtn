@@ -652,6 +652,24 @@ async function getCfg(){
 }
 async function reloadCfg(){_cfg=null;return getCfg();}
 
+
+// Remove unwanted old Max Win notice/notification from Firebase when rules allow it.
+function isBlockedNotice(n){
+  const txt=((n&&n.title)||'')+' '+((n&&n.body)||'')+' '+((n&&n.msg)||'');
+  const clean=txt.replace(/\s+/g,' ').trim().toLowerCase();
+  if(!clean)return false;
+  if(clean.includes('max win')||clean.includes('platform name max win')||clean.includes('max win-vip'))return true;
+  if(/^[.\s]+$/.test(txt))return true;
+  return false;
+}
+async function cleanupBlockedNotices(){
+  try{
+    const [notices,notifications]=await Promise.all([fbGet('notices'),fbGet('notifications')]);
+    Object.entries(notices||{}).forEach(([k,n])=>{if(isBlockedNotice(n))fbDel('notices/'+k).catch(()=>{});});
+    Object.entries(notifications||{}).forEach(([k,n])=>{if(isBlockedNotice(n))fbDel('notifications/'+k).catch(()=>{});});
+  }catch(e){console.warn('Notice cleanup skipped:',e&&e.message?e.message:e);}
+}
+
 // ─── SESSION ─────────────────────────────────────────────
 const SK='eb_adm_s2';
 function isAuth(){return localStorage.getItem(SK)==='ok';}
@@ -712,6 +730,7 @@ function doLogout(){clrAuth();showLogin();}
 
 // ─── DASH ────────────────────────────────────────────────
 async function renderDash(){
+  await cleanupBlockedNotices();
   const cfg=await getCfg();
   document.getElementById('adm-hdr-title').textContent=cfg.siteName+' Admin';
   const [users,txns,subs]=await Promise.all([fbGet('users'),fbGet('txns'),fbGet('subs')]);
@@ -1585,6 +1604,24 @@ function loginTab(role){
   document.getElementById('ltab-sub').style.background=role==='sub'?'#fff':'transparent';
   document.getElementById('adm-pw').value='';
   document.getElementById('adm-pw').placeholder=role==='admin'?'Admin password':'Sub-admin password';
+}
+
+
+// Remove unwanted old Max Win notice/notification from Firebase when rules allow it.
+function isBlockedNotice(n){
+  const txt=((n&&n.title)||'')+' '+((n&&n.body)||'')+' '+((n&&n.msg)||'');
+  const clean=txt.replace(/\s+/g,' ').trim().toLowerCase();
+  if(!clean)return false;
+  if(clean.includes('max win')||clean.includes('platform name max win')||clean.includes('max win-vip'))return true;
+  if(/^[.\s]+$/.test(txt))return true;
+  return false;
+}
+async function cleanupBlockedNotices(){
+  try{
+    const [notices,notifications]=await Promise.all([fbGet('notices'),fbGet('notifications')]);
+    Object.entries(notices||{}).forEach(([k,n])=>{if(isBlockedNotice(n))fbDel('notices/'+k).catch(()=>{});});
+    Object.entries(notifications||{}).forEach(([k,n])=>{if(isBlockedNotice(n))fbDel('notifications/'+k).catch(()=>{});});
+  }catch(e){console.warn('Notice cleanup skipped:',e&&e.message?e.message:e);}
 }
 
 // ─── SESSION ─────────────────────────────────────────────
