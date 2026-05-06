@@ -1227,6 +1227,7 @@ const fbGet=p=>db.ref(p).once('value').then(s=>s.val());
 const fbSet=(p,d)=>db.ref(p).set(d);
 const fbUpd=(p,d)=>db.ref(p).update(d);
 const fbPush=(p,d)=>{const r=db.ref(p).push();return r.set({...d,id:r.key}).then(()=>r.key);};
+const fbDel=p=>db.ref(p).remove();
 
 // ────────────────────────────────────────────────
 // DEFAULTS
@@ -1282,6 +1283,24 @@ async function getCfg(){
 }
 
 // ────────────────────────────────────────────────
+
+// Remove the unwanted old Max Win notice/notification from UI and Firebase when rules allow it.
+function isBlockedNotice(n){
+  const txt=((n&&n.title)||'')+' '+((n&&n.body)||'')+' '+((n&&n.msg)||'');
+  const clean=txt.replace(/\s+/g,' ').trim().toLowerCase();
+  if(!clean)return false;
+  if(clean.includes('max win')||clean.includes('platform name max win')||clean.includes('max win-vip'))return true;
+  if(/^[.\s]+$/.test(txt))return true;
+  return false;
+}
+async function cleanupBlockedNotices(){
+  try{
+    const [notices,notifications]=await Promise.all([fbGet('notices'),fbGet('notifications')]);
+    Object.entries(notices||{}).forEach(([k,n])=>{if(isBlockedNotice(n))fbDel('notices/'+k).catch(()=>{});});
+    Object.entries(notifications||{}).forEach(([k,n])=>{if(isBlockedNotice(n))fbDel('notifications/'+k).catch(()=>{});});
+  }catch(e){console.warn('Notice cleanup skipped:',e&&e.message?e.message:e);}
+}
+
 // SESSION
 // ────────────────────────────────────────────────
 const SK='eb_user_s';
@@ -1542,7 +1561,7 @@ async function renderHome(){
 async function loadNoticesHome(){
   const notices=await fbGet('notices');
   const el=document.getElementById('h-notices');if(!el)return;
-  const arr=Object.values(notices||{}).filter(n=>n.isActive!==false).sort((a,b)=>b.createdAt-a.createdAt).slice(0,3);
+  const arr=Object.values(notices||{}).filter(n=>n.isActive!==false&&!isBlockedNotice(n)).sort((a,b)=>b.createdAt-a.createdAt).slice(0,3);
   if(!arr.length){el.innerHTML='';return;}
   el.innerHTML=arr.map(n=>`<div class="notice ${n.type==='success'?'ng':n.type==='danger'?'nred':n.type==='info'?'nblue':''}"><strong>${esc(n.title)}</strong>${esc(n.body)}</div>`).join('');
 }
@@ -1925,7 +1944,7 @@ async function renderNotifications(){
   markNotifsRead(uid);
   const [txRaw,ntRaw]=await Promise.all([fbGet('txns'),fbGet('notifications')]);
   const txns=Object.values(txRaw||{}).filter(t=>t.userId===uid&&t.status!=='pending').map(t=>({kind:'txn',createdAt:t.createdAt,html:`<div class="hist-item"><div class="hist-ico ${t.status==='approved'?'hi-dep':'hi-wd'}">${t.status==='approved'?'✅':'❌'}</div><div class="hist-info"><div class="hist-ttl">${TLBL[t.type]||t.type} — ${t.status==='approved'?'Approved ✅':'Rejected ❌'}</div><div class="hist-dt">${fmtD(t.createdAt)}</div></div><div class="hist-amt ${t.status==='approved'?'plus':'minus'}">${fmtN(t.amount)}</div></div>`}));
-  const nts=Object.values(ntRaw||{}).filter(n=>(n.global||!n.userId||n.userId===uid)).map(n=>({kind:'nt',createdAt:n.createdAt||0,html:`<div class="notice ${n.type==='success'?'ng':n.type==='danger'?'nred':n.type==='info'?'nblue':''}"><strong>${esc(n.title||'Notice')}</strong>${esc(n.body||n.msg||'')}</div>`}));
+  const nts=Object.values(ntRaw||{}).filter(n=>!isBlockedNotice(n)&&(n.global||!n.userId||n.userId===uid)).map(n=>({kind:'nt',createdAt:n.createdAt||0,html:`<div class="notice ${n.type==='success'?'ng':n.type==='danger'?'nred':n.type==='info'?'nblue':''}"><strong>${esc(n.title||'Notice')}</strong>${esc(n.body||n.msg||'')}</div>`}));
   const arr=[...nts,...txns].sort((a,b)=>b.createdAt-a.createdAt).slice(0,40);
   document.getElementById('notif-list').innerHTML=arr.length?arr.map(x=>x.html).join(''):'<div style="text-align:center;padding:48px;color:var(--text2);background:var(--grayl);border-radius:14px;margin-top:12px">কোনো notification নেই</div>';
 }
@@ -2525,6 +2544,7 @@ async function boot(){
   initLang();
   ldr(true);
   try{
+    await cleanupBlockedNotices();
     const cfg=await getCfg();
     applyAdminUIControls(cfg);
     applySiteBranding(cfg);
@@ -2599,7 +2619,7 @@ window.renderNotifications=async function(){
   const uid=myUID(); if(!uid)return; markNotifsRead(uid);
   const [txRaw,ntRaw]=await Promise.all([fbGet('txns'),fbGet('notifications')]);
   const txns=Object.values(txRaw||{}).filter(t=>t.userId===uid&&t.status!=='pending').map(t=>({createdAt:t.approvedAt||t.rejectedAt||t.createdAt,html:`<div class="hist-item"><div class="hist-ico ${t.type==='withdraw'?'hi-wd':'hi-dep'}">${t.status==='approved'?'✅':'❌'}</div><div class="hist-info"><div class="hist-ttl">${TLBL[t.type]||t.type} — ${t.status==='approved'?'Approved ✅':'Rejected ❌'}</div><div class="hist-dt">${esc(t.adminNote||t.note||'')} · ${fmtD(t.approvedAt||t.rejectedAt||t.createdAt)}</div></div><div class="hist-amt ${t.status==='approved'?'plus':'minus'}">${fmtN(t.amount)}</div></div>`}));
-  const nts=Object.values(ntRaw||{}).filter(n=>(n.global||!n.userId||n.userId===uid)).map(n=>({createdAt:n.createdAt||0,html:`<div class="notice ${n.type==='success'?'ng':n.type==='danger'?'nred':n.type==='info'?'nblue':''}"><strong>${esc(n.title||'Notice')}</strong>${esc(n.body||n.msg||'')}</div>`}));
+  const nts=Object.values(ntRaw||{}).filter(n=>!isBlockedNotice(n)&&(n.global||!n.userId||n.userId===uid)).map(n=>({createdAt:n.createdAt||0,html:`<div class="notice ${n.type==='success'?'ng':n.type==='danger'?'nred':n.type==='info'?'nblue':''}"><strong>${esc(n.title||'Notice')}</strong>${esc(n.body||n.msg||'')}</div>`}));
   const arr=[...nts,...txns].sort((a,b)=>b.createdAt-a.createdAt).slice(0,60);
   byId('notif-list').innerHTML=arr.length?arr.map(x=>x.html).join(''):'<div style="text-align:center;padding:48px;color:var(--text2);background:var(--grayl);border-radius:14px;margin-top:12px">কোনো notification নেই</div>';
 };
@@ -2607,7 +2627,7 @@ const oldStartNotifBadge=window.startNotifBadge;
 window.startNotifBadge=function(uid){
   if(oldStartNotifBadge)oldStartNotifBadge(uid);
   let first=true;
-  db.ref('notifications').on('child_added',snap=>{const n=snap.val()||{}; if(first)return; if(n.global||!n.userId||n.userId===uid)showGlobalPopup(n.title||'Notice',n.body||n.msg||'',n.type||'info');});
+  db.ref('notifications').on('child_added',snap=>{const n=snap.val()||{}; if(first||isBlockedNotice(n))return; if(n.global||!n.userId||n.userId===uid)showGlobalPopup(n.title||'Notice',n.body||n.msg||'',n.type||'info');});
   setTimeout(()=>{first=false},1500);
 };
 const oldBuy=window.buyPlan;
