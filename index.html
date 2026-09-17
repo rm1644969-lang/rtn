@@ -503,6 +503,255 @@ body.dark .games-launcher{background:#252836;border-color:#2e3244}.dark .games-l
 <style id="lm-candle-badge">
 .lm-chart-meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:-2px 0 7px}.lm-meta-chip{font-size:9px;font-weight:800;padding:5px 8px;border-radius:8px;background:#1a202a;border:1px solid #303847;color:#aab4c2}.lm-meta-chip strong{color:#fff}.lm-running-chip{color:#4ade80;border-color:rgba(34,197,94,.25);background:rgba(34,197,94,.07)}
 </style>
+
+<style id="lm-mobile-premium-v2">
+/* Premium mobile Live Market layout inspired by modern trading apps */
+#s-live-market{background:#0b0f17!important;color:#edf2f7;overflow:hidden}
+#s-live-market .live-market-hdr{height:58px;padding:0 12px;background:rgba(10,14,22,.96);border-bottom:1px solid #202736;backdrop-filter:blur(12px)}
+#s-live-market .lm-title{font-size:16px;letter-spacing:.1px}
+#s-live-market .lm-subtitle{font-size:9px}
+#s-live-market .lm-live-pill{padding:5px 8px;font-size:9px}
+#s-live-market .live-market-content{padding:8px 0 88px;max-width:none;width:100%;display:flex;flex-direction:column;gap:0;overflow:auto}
+#s-live-market .lm-balance-row{padding:0 12px 8px;margin:0;min-height:42px}
+#s-live-market .lm-label{font-size:9px;color:#738095}
+#s-live-market .lm-balance{font-size:19px;line-height:1.1}
+#s-live-market .lm-asset b{font-size:12px}
+#s-live-market .lm-asset span{font-size:9px}
+#s-live-market .lm-chart-card{background:transparent;border:0;border-radius:0;box-shadow:none;padding:0;margin:0}
+#s-live-market .lm-chart-head{padding:0 12px 7px;margin:0;align-items:center}
+#s-live-market .lm-symbol{font-size:12px;color:#f6f8fb}
+#s-live-market .lm-price{font-size:21px;margin-top:1px;letter-spacing:.4px}
+#s-live-market .lm-market-state{padding:5px 8px;border-radius:999px;font-size:8px}
+#s-live-market .lm-chart-meta{display:flex;gap:6px;padding:0 12px 7px;overflow:auto;scrollbar-width:none}
+#s-live-market .lm-chart-meta::-webkit-scrollbar{display:none}
+#s-live-market .lm-meta-chip{flex:0 0 auto;padding:5px 8px;border-radius:7px;background:#151c28;border:1px solid #253043;color:#728096;font-size:8px;letter-spacing:.25px}
+#s-live-market .lm-meta-chip strong{color:#dfe7f2;font-size:9px}
+#s-live-market .lm-running-chip{border-color:#305b47;background:#11241b}
+#s-live-market .lm-running-chip strong{color:#4ade80}
+#s-live-market .lm-chart-tools{justify-content:flex-start;padding:0 12px 6px;margin:0;gap:5px}
+#s-live-market .lm-chart-tools button{width:32px;height:30px;border-radius:8px;background:#151c28;border-color:#2c394d}
+#s-live-market .lm-chart-tools span{margin-left:2px;font-size:8px}
+#s-live-market .lm-chart-wrap{height:clamp(360px,52vh,520px);min-height:340px;border:0;border-radius:0;background:#0d121b;touch-action:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.02),inset 0 -1px 0 rgba(255,255,255,.03)}
+#s-live-market .lm-chart-wrap canvas{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+#s-live-market .lm-chart-wrap canvas.dragging{cursor:grabbing}
+#s-live-market .lm-chart-wrap:before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.015),transparent 18%,transparent 82%,rgba(0,0,0,.08))}
+#s-live-market .lm-price-line{height:0;border-top:1px dashed rgba(59,130,246,.75);z-index:5}
+#s-live-market .lm-price-line span{top:-11px;background:#2196f3;color:#fff;border-radius:7px;padding:4px 7px;font-size:10px;box-shadow:0 4px 10px rgba(33,150,243,.25)}
+#s-live-market .lm-chart-footer{padding:7px 12px 9px;margin:0;font-size:8px;background:#0d121b;border-bottom:1px solid #1c2533}
+#s-live-market .lm-trade-card{background:linear-gradient(180deg,#151c27,#121823);border:0;border-top:1px solid #273247;border-radius:20px 20px 0 0;box-shadow:0 -10px 28px rgba(0,0,0,.28);padding:12px 12px 10px;margin:0;position:relative;z-index:10}
+#s-live-market .lm-trade-head{margin:0 0 8px}
+#s-live-market .lm-trade-head b{font-size:13px}
+#s-live-market .lm-trade-head span{font-size:9px}
+#s-live-market .lm-countdown{font-size:18px}
+#s-live-market .lm-entry-row,#s-live-market .lm-payout-row{padding:7px 0;font-size:10px}
+#s-live-market .lm-entry-row b{font-size:13px}
+#s-live-market .lm-amount-title{margin:8px 0 6px;font-size:9px}
+#s-live-market .lm-amounts{gap:6px;overflow:auto;scrollbar-width:none}
+#s-live-market .lm-amounts::-webkit-scrollbar{display:none}
+#s-live-market .lm-amt{padding:8px 12px;border-radius:10px;background:#1a2230}
+#s-live-market .lm-custom{background:#101722;border-color:#2d3b50;padding:9px 11px;margin:3px 0 6px}
+#s-live-market .lm-trade-buttons{gap:8px;margin-top:5px}
+#s-live-market .lm-trade-btn{min-height:58px;border-radius:14px;padding:9px 12px;box-shadow:0 5px 15px rgba(0,0,0,.18)}
+#s-live-market .lm-trade-btn span{font-size:22px}
+#s-live-market .lm-trade-btn b{font-size:15px}
+#s-live-market .lm-trade-btn small{font-size:8px}
+#s-live-market .lm-up{background:linear-gradient(135deg,#0ca45a,#16c784)}
+#s-live-market .lm-down{background:linear-gradient(135deg,#dc433c,#f0524a)}
+#s-live-market .lm-history-card{background:#101721;border:1px solid #212c3d;border-radius:16px;box-shadow:none;padding:12px;margin:10px 12px 0}
+#s-live-market .lm-history-title{font-size:12px}
+#s-live-market .lm-note{padding:10px 12px 6px;font-size:8px}
+#s-live-market .lm-active-trade{border-radius:10px;font-size:10px;padding:8px}
+@media (max-width:380px){
+  #s-live-market .lm-chart-wrap{height:48vh;min-height:320px}
+  #s-live-market .lm-trade-btn{min-height:54px}
+}
+</style>
+
+
+<style id="final-mobile-premium-ui">
+/* FINAL MOBILE PREMIUM OVERRIDES — preserves existing IDs/JS */
+@media (max-width:600px){
+  html,body{background:#071019;overscroll-behavior-y:none}
+  body{font-family:Inter,'Segoe UI',Tahoma,sans-serif}
+  .app{max-width:430px;width:100%;background:transparent;min-height:100svh}
+  .content{padding:14px 14px 96px}
+  .hdr,.live-market-hdr{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+
+  /* HOME */
+  #s-home{background:linear-gradient(180deg,#f5faf7 0%,#eff7f3 52%,#eef6f2 100%)}
+  #s-home .content{padding-top:12px}
+  #s-home .bal-card{
+    border:none;border-radius:22px;background:linear-gradient(135deg,rgba(20,105,63,.98),rgba(16,185,129,.92));
+    box-shadow:0 14px 30px rgba(7,70,42,.22);backdrop-filter:blur(12px);padding:20px;margin-bottom:12px
+  }
+  #s-home .home-wingo-card,#s-home .one-minute-card{border:none;box-shadow:0 12px 28px rgba(15,23,42,.10);border-radius:20px}
+  #s-home .home-wingo-card{background:linear-gradient(135deg,rgba(234,255,242,.96),rgba(245,255,250,.9))}
+  #s-home .one-minute-card{background:linear-gradient(135deg,#0c5f3a,#16a66a)}
+  #s-home .sec-hdr{margin-top:4px}
+
+  /* LIVE MARKET — immersive, no nested card feel */
+  #s-live-market.live-market-wrap{background:
+    radial-gradient(circle at 50% -10%,rgba(25,140,93,.18),transparent 34%),
+    linear-gradient(180deg,#0a1017 0%,#080e14 100%)}
+  #s-live-market .live-market-content{padding:10px 8px 105px;max-width:none}
+  #s-live-market .lm-balance-row{padding:2px 5px 6px;margin-bottom:4px}
+  #s-live-market .lm-chart-card,
+  #s-live-market .lm-trade-card,
+  #s-live-market .lm-history-card{
+    background:transparent;border:0;box-shadow:none;border-radius:0;padding:0;margin:0 0 10px
+  }
+  #s-live-market .lm-chart-head{padding:5px 4px 8px;margin:0}
+  #s-live-market .lm-chart-meta{display:flex;gap:5px;overflow:auto;padding:0 2px 7px;scrollbar-width:none}
+  #s-live-market .lm-chart-meta::-webkit-scrollbar{display:none}
+  #s-live-market .lm-meta-chip{
+    flex:0 0 auto;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.045);
+    border-radius:999px;padding:5px 8px;font-size:8px;color:#8592a4;white-space:nowrap
+  }
+  #s-live-market .lm-meta-chip strong{color:#e9eef6;font-size:9px;margin-left:2px}
+  #s-live-market .lm-chart-tools{justify-content:flex-end;margin:0 2px 6px;gap:4px}
+  #s-live-market .lm-chart-tools button{width:32px;height:30px;border-radius:9px;background:rgba(255,255,255,.055);border-color:rgba(255,255,255,.09)}
+  #s-live-market .lm-chart-tools span{font-size:8px}
+  #s-live-market .lm-chart-wrap{
+    height:52svh;min-height:320px;max-height:470px;border:0;border-radius:14px;
+    background:linear-gradient(180deg,#0c121b,#080d13);box-shadow:inset 0 0 0 1px rgba(255,255,255,.045)
+  }
+  #s-live-market .lm-chart-wrap canvas{touch-action:none}
+  #s-live-market .lm-chart-footer{padding:7px 3px;font-size:8px}
+  #s-live-market .lm-price-line span{font-size:9px;border-radius:7px}
+  #s-live-market .lm-trade-card{padding:8px 4px 0}
+  #s-live-market .lm-trade-head{padding:10px 0 8px;border-bottom:1px solid rgba(255,255,255,.07)}
+  #s-live-market .lm-entry-row,#s-live-market .lm-payout-row{border-color:rgba(255,255,255,.07);padding:10px 0}
+  #s-live-market .lm-amounts{gap:6px;padding-bottom:4px}
+  #s-live-market .lm-amt{border-radius:999px;background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.09);padding:8px 13px}
+  #s-live-market .lm-custom{background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.09);border-radius:12px}
+  #s-live-market .lm-payout-row{margin-top:2px}
+  #s-live-market .lm-trade-buttons{gap:8px;margin-top:8px}
+  #s-live-market .lm-trade-btn{min-height:64px;border-radius:15px;border:0;box-shadow:0 10px 22px rgba(0,0,0,.16)}
+  #s-live-market .lm-trade-btn b{font-size:17px}
+  #s-live-market .lm-history-card{padding:8px 4px 0}
+  #s-live-market .lm-history-title{padding:5px 0 6px}
+
+  /* WINGO — full-width immersive surface, no nested box */
+  #s-wingo.wingo-wrap{background:
+    radial-gradient(circle at 90% 0%,rgba(22,163,74,.10),transparent 28%),
+    linear-gradient(180deg,#07100d 0%,#09110e 100%)!important;color:#f8fafc!important}
+  #s-wingo .wingo-hdr{padding:13px 14px;background:rgba(10,18,15,.78)!important;border-bottom:1px solid rgba(255,255,255,.07)!important;backdrop-filter:blur(12px)}
+  #s-wingo .wg-modebar,
+  #s-wingo .wingo-bet-section,
+  #s-wingo .wingo-locked,
+  #s-wingo .wingo-hist-section{margin-left:0!important;margin-right:0!important;background:transparent!important;border:0!important;box-shadow:none!important;border-radius:0!important}
+  #s-wingo .wg-modebar{padding:10px 14px 2px;margin-top:0}
+  #s-wingo .wg-mode-select{background:rgba(255,255,255,.06);color:#f8fafc;border-color:rgba(255,255,255,.12)}
+  #s-wingo .wingo-bs-row{gap:8px}
+  #s-wingo .wingo-bs-btn{
+    min-height:88px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    border:1px solid rgba(255,255,255,.12)!important;border-radius:18px!important;font-size:20px;
+    box-shadow:none!important;transform:none
+  }
+  #s-wingo .wingo-bs-btn.big{background:linear-gradient(145deg,#8f2c24,#d84435)!important}
+  #s-wingo .wingo-bs-btn.small{background:linear-gradient(145deg,#144a78,#2f8ad5)!important}
+  #s-wingo .wingo-bs-btn.selected{box-shadow:0 0 0 2px #fff,0 10px 28px rgba(255,255,255,.12)!important;transform:translateY(-1px)}
+  #s-wingo .wingo-amt-row{gap:6px;overflow:auto;flex-wrap:nowrap;padding-bottom:3px;scrollbar-width:none}
+  #s-wingo .wingo-amt-row::-webkit-scrollbar{display:none}
+  #s-wingo .wingo-amt-chip{background:rgba(255,255,255,.055)!important;color:#dbe5df!important;border-color:rgba(255,255,255,.10)!important;border-radius:999px;padding:8px 14px;flex:0 0 auto}
+  #s-wingo .wingo-amt-chip.active{background:#16a34a!important;color:#fff!important;border-color:#16a34a!important}
+  #s-wingo .wingo-custom-inp{background:rgba(255,255,255,.045)!important;border-color:rgba(255,255,255,.10)!important;color:#fff!important;border-radius:12px}
+  #s-wingo .wingo-place-btn{min-height:52px;border-radius:14px;background:linear-gradient(135deg,#16a34a,#10b981)!important}
+  #s-wingo .wingo-hist-item{background:rgba(255,255,255,.045)!important;border-color:rgba(255,255,255,.07)!important}
+
+  /* GAMES */
+  #s-games{background:linear-gradient(180deg,#f6faf8,#eef6f2)}
+  #s-games .content{padding-top:12px}
+  #s-games .game-hero{border:none;border-radius:22px;box-shadow:0 13px 30px rgba(15,23,42,.13)}
+  #s-games .game-card{border:0;border-radius:18px;background:rgba(255,255,255,.82);box-shadow:0 8px 20px rgba(15,23,42,.08)}
+
+  /* PLANS stay visible and become cleaner on mobile */
+  #s-plans .plan-card{border:0;border-radius:18px;box-shadow:0 9px 22px rgba(15,23,42,.08)}
+
+  /* bottom nav */
+  .bnav{height:72px;align-items:stretch;background:rgba(255,255,255,.92);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px)}
+  body.dark .bnav{background:rgba(20,24,33,.92)}
+  .navi{padding:8px 4px 10px}
+}
+@media (max-width:360px){
+  #s-live-market .lm-chart-wrap{height:48svh;min-height:290px}
+  #s-wingo .wingo-bs-btn{min-height:80px;font-size:18px}
+}
+</style>
+
+<style id="final-all-in-one-ui">
+/* Final all-in-one mobile polish — no nested box overload */
+@media(max-width:600px){
+  #s-home .content{padding-bottom:92px}
+  #s-home .bal-amt{font-size:32px;line-height:1.05}
+  #s-home .bal-sub{font-size:11px}
+  #s-home .home-wingo-card,#s-home .one-minute-card{border-radius:18px}
+
+  #s-live-market .live-market-hdr{height:54px;padding:0 10px}
+  #s-live-market .lm-title{font-size:15px}
+  #s-live-market .lm-subtitle{font-size:9px}
+  #s-live-market .live-market-content{padding:7px 6px 92px}
+  #s-live-market .lm-balance-row{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end;padding:2px 3px 5px}
+  #s-live-market .lm-mini-balance .lm-label{font-size:8px;letter-spacing:.55px}
+  #s-live-market .lm-mini-balance .lm-balance,#s-live-market .lm-bet-value{font-size:18px;line-height:1.05}
+  #s-live-market .lm-asset b{font-size:11px}
+  #s-live-market .lm-asset span{font-size:8px}
+  #s-live-market .lm-chart-head{padding:4px 2px 5px}
+  #s-live-market .lm-symbol{font-size:11px}
+  #s-live-market .lm-price{font-size:19px}
+  #s-live-market .lm-market-state{font-size:8px;padding:5px 7px}
+  #s-live-market .lm-chart-meta{gap:4px;padding:0 1px 5px}
+  #s-live-market .lm-meta-chip{font-size:7px;padding:4px 7px}
+  #s-live-market .lm-meta-chip strong{font-size:8px}
+  #s-live-market .lm-chart-tools{margin:0 0 4px;position:absolute;right:10px;top:70px;z-index:3}
+  #s-live-market .lm-chart-card{position:relative}
+  #s-live-market .lm-chart-tools button{width:28px;height:26px;font-size:15px;backdrop-filter:blur(8px)}
+  #s-live-market .lm-chart-tools span{display:none}
+  #s-live-market .lm-chart-wrap{height:55svh;min-height:330px;max-height:none;border-radius:12px;}
+  #s-live-market .lm-chart-footer{padding:5px 2px;font-size:7px}
+  #s-live-market .lm-trade-card{padding:6px 2px 0}
+  #s-live-market .lm-trade-head{padding:7px 0 6px}
+  #s-live-market .lm-trade-head b{font-size:12px}
+  #s-live-market .lm-trade-head span{font-size:8px}
+  #s-live-market .lm-countdown{font-size:17px}
+  #s-live-market .lm-entry-row,#s-live-market .lm-payout-row{padding:7px 0;font-size:9px}
+  #s-live-market .lm-entry-row b,#s-live-market .lm-payout-row b{font-size:12px}
+  #s-live-market .lm-amount-title{font-size:8px;margin:6px 0 5px}
+  #s-live-market .lm-amt{padding:7px 11px;font-size:10px}
+  #s-live-market .lm-custom{padding:8px 10px;font-size:10px}
+  #s-live-market .lm-trade-buttons{gap:7px;margin-top:6px}
+  #s-live-market .lm-trade-btn{min-height:60px;border-radius:14px}
+  #s-live-market .lm-trade-btn span{font-size:20px}
+  #s-live-market .lm-trade-btn b{font-size:16px}
+  #s-live-market .lm-trade-btn small{font-size:7px}
+
+  #s-wingo .wingo-hdr{padding:10px 13px}
+  #s-wingo .wg-modebar{margin:8px 10px 0;padding:9px 11px}
+  #s-wingo .wingo-bal-card{margin:10px 10px;padding:14px;border-radius:16px}
+  #s-wingo .wingo-period-num{font-size:18px!important}
+  #s-wingo .wingo-bet-section{margin:0 10px 10px;padding:13px;border-radius:16px}
+  #s-wingo .wingo-bs-btn{padding:14px 8px;font-size:17px;border-radius:13px}
+  #s-wingo .wingo-place-btn{padding:13px;font-size:15px}
+  #s-wingo .wingo-hist-section{margin:0 10px 92px}
+
+  .games-launcher{border-radius:17px}
+  .games-launcher-head{padding:12px 13px}
+  .games-launcher-icon{width:42px;height:42px;border-radius:13px;font-size:21px}
+  .games-launcher-main b{font-size:14px}.games-launcher-main small{font-size:9px}
+}
+/* Better high-DPI candle rendering and no text blocking the plot. */
+#s-live-market .lm-price-line{display:none!important}
+#s-live-market #lm-chart{image-rendering:auto}
+.lm-meta-chip,.lm-bet-value,.lm-balance,.lm-price,.lm-countdown,.wingo-period-num,.game-period-num{font-variant-numeric:tabular-nums}
+</style>
+
+<style id="final-plan-glass-ui">
+@media(max-width:600px){
+  #s-plans .content{padding-left:12px;padding-right:12px}
+  #s-plans .plan-card{border:1px solid rgba(20,105,63,.14);background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(242,249,245,.96));box-shadow:0 10px 28px rgba(15,23,42,.07);border-radius:18px}
+  #s-plans .plan-price{font-size:21px}.plan-features{gap:6px}.plan-feat{padding:9px 6px}
+}
+</style>
 </head>
 <body>
 <div class="app" id="theapp">
@@ -759,10 +1008,10 @@ body.dark .games-launcher{background:#252836;border-color:#2e3244}.dark .games-l
 <div class="lm-live-pill">LIVE</div>
 </div>
 <div class="live-market-content">
-<div class="lm-balance-row"><div><div class="lm-label">Available Balance</div><div class="lm-balance" id="lm-bal">৳ 0</div></div><div class="lm-asset"><b>GBP/NZD</b><span>1 Minute</span></div></div>
+<div class="lm-balance-row lm-balance-compact"><div class="lm-mini-balance"><div class="lm-label">TOTAL BALANCE</div><div class="lm-balance" id="lm-bal">৳ 0</div></div><div class="lm-mini-balance lm-bet-stat"><div class="lm-label">BET</div><div class="lm-bet-value" id="lm-bet-balance">৳ 1.00</div></div><div class="lm-asset"><b>GBP/NZD</b><span>1 Minute</span></div></div>
 <div class="lm-chart-card">
 <div class="lm-chart-head"><div><div class="lm-symbol">GBP/NZD</div><div class="lm-price" id="lm-price">1.91211</div></div><div class="lm-market-state" id="lm-market-state">MARKET OPEN</div></div>
-<div class="lm-chart-meta"><span class="lm-meta-chip">CURRENT CANDLE <strong id="lm-current-candle-period">—</strong></span><span class="lm-meta-chip lm-running-chip">RUNNING <strong id="lm-running-candle-time">00s</strong></span><span class="lm-meta-chip">NEXT <strong id="lm-next-candle-period">—</strong></span></div><div class="lm-chart-tools"><button onclick="lmZoomOut()" title="Zoom out" type="button">−</button><button onclick="lmZoomIn()" title="Zoom in" type="button">+</button><button onclick="lmResetView()" title="Reset chart" type="button">↺</button><span id="lm-zoom-label">30 candles</span></div><div class="lm-chart-wrap" id="lm-chart-wrap"><canvas height="430" id="lm-chart" width="900"></canvas><div class="lm-price-line" id="lm-price-line"><span id="lm-price-line-label">1.91211</span></div></div>
+<div class="lm-chart-meta"><span class="lm-meta-chip">CURRENT CANDLE <strong id="lm-current-candle-period">—</strong></span><span class="lm-meta-chip lm-running-chip">RUNNING <strong id="lm-running-candle-time">00s</strong></span><span class="lm-meta-chip">NEXT <strong id="lm-next-candle-period">—</strong></span></div><div class="lm-chart-tools"><button onclick="lmZoomOut()" title="Zoom out" type="button">−</button><button onclick="lmZoomIn()" title="Zoom in" type="button">+</button><button onclick="lmResetView()" title="Reset chart" type="button">↺</button><button onclick="lmFullscreen()" title="Fullscreen chart" type="button">⛶</button><span id="lm-zoom-label">30 candles</span></div><div class="lm-chart-wrap" id="lm-chart-wrap"><canvas height="430" id="lm-chart" width="900"></canvas><div class="lm-price-line" id="lm-price-line" aria-hidden="true"></div></div>
 <div class="lm-chart-footer"><span>1m candles • BD Time • <b id="lm-data-source">SIMULATED</b></span><span id="lm-candle-time">00:00</span><span id="lm-bd-clock">BD</span></div>
 </div>
 <div class="lm-trade-card">
@@ -1561,6 +1810,9 @@ function doLogout(){clrSess();showLogin();}
 // ────────────────────────────────────────────────
 async function renderHome(){
   const uid=myUID();if(!uid)return;
+  // Fast balance hydrate: paint the current Firebase balance immediately,
+  // then load the rest of the home configuration.
+  try{const quickUser=await fbGet(`users/${uid}`);const quickBal=document.getElementById('h-bal');if(quickBal&&quickUser)quickBal.textContent=fmtN(Number(quickUser.balance)||0);}catch(e){}
   const cfg=await getCfg();
   applyAdminUIControls(cfg);
   applySiteBranding(cfg);
@@ -1591,17 +1843,39 @@ async function renderHome(){
   loadHomePlansStrip();
   // Load admin notices
   loadNoticesHome();
-  onDB(`users/${uid}`,u=>{
+  // Hydrate Home immediately so an already-updated admin balance is visible
+  // before/without waiting for a navigation refresh, then keep it realtime.
+  const applyHomeUser=(u)=>{
     if(!u)return;
-    const actBal=u.isActive?cfg.activationAmount:0;
-    const totalBal=u.balance||0;
-    document.getElementById('h-bal').textContent=fmtN(totalBal);
+    const totalBal=Number(u.balance)||0;
+    const balEl=document.getElementById('h-bal');
+    if(balEl){
+      balEl.textContent=fmtN(totalBal);
+      balEl.style.visibility='visible';
+      balEl.style.opacity='1';
+    }
+    onHomeUserMeta(u);
+  };
+  const onHomeUserMeta=(u)=>{
+    if(!u)return;
+    const actBal=Number(u.isActive?cfg.activationAmount:0)||0;
+    const totalBal=Number(u.balance)||0;
     const balSub=document.getElementById('h-bal-sub');
     if(balSub){
       if(u.isActive&&actBal>0) balSub.textContent=`(Activation ${fmtN(actBal)} + Earnings ${fmtN(Math.max(0,totalBal-actBal))})`;
       else balSub.textContent='যেকোনো সময় Withdraw করতে পারবেন';
+      balSub.style.visibility='visible';
+      balSub.style.opacity='1';
     }
-    document.getElementById('h-refs').textContent=u.directRefers||0;
+    const refs=document.getElementById('h-refs');
+    if(refs) refs.textContent=Number(u.directRefers)||0;
+  };
+  const initialHomeUser=await fbGet(`users/${uid}`);
+  applyHomeUser(initialHomeUser);
+  onDB(`users/${uid}`,u=>{
+    if(!u)return;
+    applyHomeUser(u);
+    if(!u)return;
     // Activation banner
     const ab=document.getElementById('act-banner');
     ab.style.display=u.isActive?'none':'block';
@@ -2072,6 +2346,7 @@ function subscribeMarketFeed(){
 // ─── LIVE MARKET — 1 MINUTE CANDLE GAME ─────────────────
 async function renderLiveMarket(){
   const uid=myUID();if(!uid)return;
+  lmBindChart();
   const user=await fbGet(`users/${uid}`);if(!user)return;
   const bal=document.getElementById('lm-bal');if(bal)bal.textContent=fmtN(user.balance||0);
   _lmSide=null;_lmAmt=1;_lmEntry=_lmPrice;_lmActiveTradeCount=0;
@@ -2081,26 +2356,86 @@ async function renderLiveMarket(){
   _lmTradeMarker=null;_lmTradeMarkers=[];lmResetView();lmSeed();subscribeMarketFeed();applyLiveFeedPayload(window._lastMarketFeed||{});lmTickPrice();updateLiveMarketUI();loadLiveMarketHistory(uid);startLiveMarketTimer(uid);
 }
 function startLiveMarketTimer(uid){if(_lmTimer)clearInterval(_lmTimer);updateLiveMarketUI();_lmTimer=setInterval(async()=>{const prev=_lmRound;updateLiveMarketUI();const info=liveMarketPeriodInfo();if(prev!==null&&info.period!==prev)await settleLiveMarketTrades(prev,uid);},1000);_offs.push(()=>{clearInterval(_lmTimer);_lmTimer=null;});}
-function setLiveAmt(amt,el){_lmAmt=Number(amt)||1;document.querySelectorAll('.lm-amt').forEach(b=>b.classList.remove('active'));el.classList.add('active');const i=document.getElementById('lm-custom-amt');if(i)i.value='';updateLivePayout();}
-function customLiveAmt(el){_lmAmt=Math.max(1,parseInt(el.value)||1);document.querySelectorAll('.lm-amt').forEach(b=>b.classList.remove('active'));updateLivePayout();}
+function setLiveAmt(amt,el){_lmAmt=Number(amt)||1;document.querySelectorAll('.lm-amt').forEach(b=>b.classList.remove('active'));el.classList.add('active');const i=document.getElementById('lm-custom-amt');if(i)i.value='';const b=document.getElementById('lm-bet-balance');if(b)b.textContent='৳ '+_lmAmt.toFixed(2);updateLivePayout();}
+function customLiveAmt(el){_lmAmt=Math.max(1,parseInt(el.value)||1);document.querySelectorAll('.lm-amt').forEach(b=>b.classList.remove('active'));const b=document.getElementById('lm-bet-balance');if(b)b.textContent='৳ '+_lmAmt.toFixed(2);updateLivePayout();}
 function updateLivePayout(){const v=Math.round(_lmAmt*1.90*100)/100;const e=document.getElementById('lm-payout');if(e)e.textContent='৳'+v.toFixed(2);}
+// Robust balance writer: prefers RTDB transaction, then falls back to a verified
+// read -> exact write -> read-back path. Some hosting/rules setups can report a
+// transaction as not committed even though a normal write is permitted.
+function parseMoney(v){
+  if(typeof v==='number'&&Number.isFinite(v))return v;
+  if(v==null)return 0;
+  const n=Number(String(v).replace(/[^0-9.+-]/g,''));
+  return Number.isFinite(n)?n:0;
+}
+async function atomicBalanceDelta(uid,delta,minAfter=0,maxRetries=4){
+  const ref=db.ref(`users/${uid}/balance`);
+  const step=Math.max(120,Number(FB_TIMEOUT)||7000);
+  for(let i=0;i<maxRetries;i++){
+    try{
+      const tx=await ref.transaction(v=>{
+        const base=parseMoney(v);
+        const next=base+Number(delta);
+        if(!Number.isFinite(next)||next<minAfter)return;
+        return Number(next.toFixed(2));
+      });
+      if(tx&&tx.committed)return parseMoney(tx.snapshot&&tx.snapshot.val());
+    }catch(e){
+      const msg=String(e&&e.message||e);
+      if(!/disconnected|network|timeout|permission|permission_denied|aborted|transaction/i.test(msg))throw e;
+    }
+    // Fallback: read the authoritative balance, write the new value, then verify.
+    try{
+      const curRaw=await withTimeout(ref.once('value').then(x=>x.val()),step,'Balance read');
+      const cur=parseMoney(curRaw), next=cur+Number(delta);
+      if(!Number.isFinite(next)||next<minAfter)return null;
+      const exact=Number(next.toFixed(2));
+      await withTimeout(ref.set(exact),step,'Balance write');
+      const back=parseMoney(await withTimeout(ref.once('value').then(x=>x.val()),step,'Balance verify'));
+      if(Math.abs(back-exact)<0.005)return back;
+    }catch(e){
+      if(i===maxRetries-1)break;
+    }
+    await new Promise(r=>setTimeout(r,180*(i+1)));
+  }
+  return null;
+}
+
 async function placeLiveTrade(side){
   if(side!=='up'&&side!=='down')return;
   const uid=myUID();if(!uid)return;const info=liveMarketPeriodInfo();
-  // New trades are accepted until the last 30 seconds of the current 1-minute candle.
   if(info.remaining<=30){snack('শেষ 30 সেকেন্ডে নতুন trade বন্ধ — পরের candle এ trade করুন');return;}
-  const user=await fbGet(`users/${uid}`);if(!user||!user.isActive){snack('একাউন্ট Activate করুন');return;}if(_lmAmt<1){snack('সর্বনিম্ন ১ টাকা');return;}if(Number(user.balance||0)<_lmAmt){snack('Balance কম! Deposit করুন');return;}
-  // Multiple trades are allowed in the same candle. Every trade gets its own key/marker.
+  const user=await fbGet(`users/${uid}`);if(!user||!user.isActive){snack('একাউন্ট Activate করুন');return;}
+  const amt=Math.max(1,Number(_lmAmt)||1);
+  if(Number(user.balance||0)<amt){snack('Balance কম! Deposit করুন');return;}
   const tradeId=`${uid}_${info.period}_${Date.now()}_${Math.random().toString(36).slice(2,7)}`;
-  _lmSide=side;_lmEntry=_lmPrice;
-  const marker={id:tradeId,period:info.period,side,entry:Number(_lmEntry.toFixed(5)),amount:_lmAmt,createdAt:Date.now()};
-  _lmTradeMarkers.push(marker);_lmTradeMarkers=_lmTradeMarkers.slice(-30);
-  await fbSet(`liveMarketBets/${tradeId}`,{uid,period:info.period,side,amount:_lmAmt,entry:marker.entry,settled:false,won:null,payout:0,createdAt:marker.createdAt});
-  await fbUpd(`users/${uid}`,{balance:Number(user.balance||0)-_lmAmt});
-  const newBal=Number(user.balance||0)-_lmAmt;const bal=document.getElementById('lm-bal');if(bal)bal.textContent=fmtN(newBal);
-  _lmActiveTradeCount++;
-  const active=document.getElementById('lm-active-trade');if(active){active.style.display='block';active.innerHTML=`✅ ${_lmActiveTradeCount} active trade(s) • Latest ${side.toUpperCase()} • ৳${_lmAmt.toFixed(2)} • Entry ${marker.entry.toFixed(5)} • ${liveMarketPeriodLabel(info.period)} • <b id="lm-trade-left">${info.remaining}s</b>`;}
-  liveMarketTone('bet');drawLiveMarketChart();snack(`✅ ${side.toUpperCase()} trade placed at ${marker.entry.toFixed(5)}`);
+  const marker={id:tradeId,period:info.period,side,entry:Number(_lmPrice.toFixed(5)),amount:amt,createdAt:Date.now()};
+  ldr(true);
+  let deducted=false;
+  try{
+    const newBal=await atomicBalanceDelta(uid,-amt,0,5);
+    if(newBal===null){
+      const latest=await fbGet(`users/${uid}/balance`).catch(()=>null);
+      if(latest!=null&&parseMoney(latest)>=amt){
+        snack('Balance update হয়নি — নেটওয়ার্ক সংযোগ পরীক্ষা করে আবার চেষ্টা করুন');
+      }else{
+        snack('Balance কম! Deposit করুন');
+      }
+      return;
+    }
+    deducted=true;
+    await fbSet(`liveMarketBets/${tradeId}`,{uid,period:info.period,side,amount:amt,entry:marker.entry,settled:false,won:null,payout:0,createdAt:marker.createdAt});
+    _lmSide=side;_lmEntry=marker.entry;_lmTradeMarkers.push(marker);_lmTradeMarkers=_lmTradeMarkers.slice(-30);
+    const bal=document.getElementById('lm-bal');if(bal)bal.textContent=fmtN(newBal);
+    _lmActiveTradeCount++;
+    const active=document.getElementById('lm-active-trade');if(active){active.style.display='block';active.innerHTML=`✅ ${_lmActiveTradeCount} active trade(s) • Latest ${side.toUpperCase()} • ৳${amt.toFixed(2)} • Entry ${marker.entry.toFixed(5)} • ${liveMarketPeriodLabel(info.period)} • <b id="lm-trade-left">${info.remaining}s</b>`;}
+    liveMarketTone('bet');drawLiveMarketChart();snack(`✅ ${side.toUpperCase()} trade placed at ${marker.entry.toFixed(5)}`);
+  }catch(e){
+    if(deducted){try{await atomicBalanceDelta(uid,amt,0,3);}catch(_){} }
+    try{await fbDel(`liveMarketBets/${tradeId}`);}catch(_){}
+    const latest=await fbGet(`users/${uid}/balance`).catch(()=>null);
+    snack(latest!=null?'Trade save হয়নি — balance নিরাপদ রাখা হয়েছে':('Error: '+e.message));
+  }finally{ldr(false);}
 }
 let _lmPopupPeriod=null;
 async function settleLiveMarketTrades(period,uid){
@@ -2202,36 +2537,111 @@ function lmTickPrice(){
   last.c=_lmPrice;last.h=Math.max(Number(last.h),_lmPrice);last.l=Math.min(Number(last.l),_lmPrice);
   return info;
 }
+let _lmPointers=new Map(),_lmPinchStart=null,_lmPinchZoom=1;
+function lmResizeCanvas(){
+  const c=document.getElementById('lm-chart');
+  if(!c)return null;
+  const r=c.getBoundingClientRect(),dpr=Math.min(2,window.devicePixelRatio||1);
+  const w=Math.max(1,Math.round(r.width*dpr)),h=Math.max(1,Math.round(r.height*dpr));
+  if(c.width!==w||c.height!==h){c.width=w;c.height=h;}
+  return {c,dpr,w,h};
+}
 function drawLiveMarketChart(){
-  const canvas=document.getElementById('lm-chart');if(!canvas)return;const ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);ctx.fillStyle='#0d1219';ctx.fillRect(0,0,w,h);
+  const sz=lmResizeCanvas();if(!sz)return;const {c,w,h}=sz,ctx=c.getContext('2d');ctx.clearRect(0,0,w,h);ctx.fillStyle='#0d121b';ctx.fillRect(0,0,w,h);
   const all=_lmCandles.slice();if(!all.length)return;
   const visible=Math.max(8,Math.min(30,Math.round(30/_lmZoom)));
   const maxStart=Math.max(0,all.length-visible);const start=Math.max(0,Math.min(maxStart,maxStart-_lmPan));const candles=all.slice(start,start+visible);
   let min=Math.min(...candles.map(x=>x.l)),max=Math.max(...candles.map(x=>x.h));const pad=(max-min)*.16||.001;min-=pad;max+=pad;
-  const y=v=>h-22-((v-min)/(max-min))*(h-44),step=w/(candles.length+2),body=Math.max(7,step*.48);
-  ctx.strokeStyle='rgba(148,163,184,.08)';ctx.lineWidth=1;for(let i=1;i<5;i++){const gy=22+(h-44)*i/5;ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(w,gy);ctx.stroke();}
-  candles.forEach((c,i)=>{const x=step*(i+1),up=c.c>=c.o;ctx.strokeStyle=up?'#22c55e':'#ef5350';ctx.fillStyle=up?'#22c55e':'#ef5350';ctx.beginPath();ctx.moveTo(x,y(c.h));ctx.lineTo(x,y(c.l));ctx.stroke();const top=y(Math.max(c.o,c.c)),bot=y(Math.min(c.o,c.c));ctx.fillRect(x-body/2,top,body,Math.max(2,bot-top));});
-  const markers=_lmTradeMarkers.slice();markers.forEach(m=>{const mi=candles.findIndex(c=>Number(c._period)===Number(m.period));if(mi>=0){const c=candles[mi],x=step*(mi+1),yy=y(m.entry);ctx.save();ctx.strokeStyle=m.side==='up'?'#22c55e':'#ef5350';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#f59e0b';ctx.beginPath();ctx.arc(x,yy,6,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.font='900 10px Arial';ctx.textAlign='center';ctx.fillText(m.side==='up'?'UP':'DOWN',x,Math.max(14,yy-10));if(m.settled&&Number.isFinite(Number(m.pnl))){ctx.font='800 8px Arial';ctx.fillStyle=m.won?'#4ade80':'#fb7185';ctx.fillText((m.won?'+':'')+Number(m.pnl).toFixed(2),x,Math.min(h-8,yy+18));}ctx.restore();}});
-  const py=y(_lmPrice);ctx.strokeStyle='rgba(245,158,11,.7)';ctx.setLineDash([7,6]);ctx.beginPath();ctx.moveTo(0,py);ctx.lineTo(w,py);ctx.stroke();ctx.setLineDash([]);
+  const y=v=>h-24-((v-min)/(max-min))*(h-48),step=w/(candles.length+2),body=Math.max(Math.round(4*sz.dpr),step*.46);
+  ctx.strokeStyle='rgba(148,163,184,.085)';ctx.lineWidth=Math.max(1,sz.dpr);for(let i=1;i<6;i++){const gy=24+(h-48)*i/6;ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(w,gy);ctx.stroke();}
+  for(let i=0;i<7;i++){const gx=step*(i+1)*(candles.length/7);ctx.strokeStyle='rgba(148,163,184,.055)';ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,h);ctx.stroke();}
+  candles.forEach((c,i)=>{const x=step*(i+1),up=c.c>=c.o;ctx.strokeStyle=up?'#18b86a':'#f0554d';ctx.fillStyle=up?'#18b86a':'#f0554d';ctx.lineWidth=Math.max(1,Math.round(sz.dpr));ctx.beginPath();ctx.moveTo(x,y(c.h));ctx.lineTo(x,y(c.l));ctx.stroke();const top=y(Math.max(c.o,c.c)),bot=y(Math.min(c.o,c.c));ctx.fillRect(Math.round(x-body/2),Math.round(top),Math.max(2,Math.round(body)),Math.max(2,Math.round(bot-top)));});
+  const markers=_lmTradeMarkers.slice();markers.forEach(m=>{const mi=candles.findIndex(c=>Number(c._period)===Number(m.period));if(mi>=0){const x=step*(mi+1),yy=y(m.entry);ctx.save();ctx.strokeStyle=m.side==='up'?'#22c55e':'#ef5350';ctx.setLineDash([5*sz.dpr,5*sz.dpr]);ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#f59e0b';ctx.beginPath();ctx.arc(x,yy,Math.max(4,5*sz.dpr),0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.font=`900 ${Math.max(9,10*sz.dpr)}px Arial`;ctx.textAlign='center';ctx.fillText(m.side==='up'?'UP':'DOWN',x,Math.max(14*sz.dpr,yy-11*sz.dpr));if(m.settled&&Number.isFinite(Number(m.pnl))){ctx.font=`800 ${Math.max(8,9*sz.dpr)}px Arial`;ctx.fillStyle=m.won?'#4ade80':'#fb7185';ctx.fillText((m.won?'+':'')+Number(m.pnl).toFixed(2),x,Math.min(h-8*sz.dpr,yy+18*sz.dpr));}ctx.restore();}});
+  const py=y(_lmPrice);ctx.strokeStyle='rgba(59,130,246,.82)';ctx.setLineDash([8*sz.dpr,6*sz.dpr]);ctx.beginPath();ctx.moveTo(0,py);ctx.lineTo(w,py);ctx.stroke();ctx.setLineDash([]);
   const line=document.getElementById('lm-price-line');if(line){line.style.top=(py/h*100)+'%';const lab=document.getElementById('lm-price-line-label');if(lab)lab.textContent=_lmPrice.toFixed(5);}
   const zl=document.getElementById('lm-zoom-label');if(zl)zl.textContent=visible+' candles';
-  lmBindChart();
 }
 function lmBindChart(){
-  if(_lmChartBound)return;const c=document.getElementById('lm-chart');if(!c)return;_lmChartBound=true;
-  c.addEventListener('wheel',e=>{e.preventDefault();e.deltaY<0?lmZoomIn():lmZoomOut();},{passive:false});
-  c.addEventListener('pointerdown',e=>{_lmDrag={x:e.clientX,pan:_lmPan};c.setPointerCapture(e.pointerId);});
-  c.addEventListener('pointermove',e=>{if(!_lmDrag)return;const visible=Math.max(8,Math.min(30,Math.round(30/_lmZoom)));const maxStart=Math.max(0,_lmCandles.length-visible);_lmPan=Math.max(0,Math.min(maxStart,_lmDrag.pan-(e.clientX-_lmDrag.x)/18));drawLiveMarketChart();});
-  c.addEventListener('pointerup',()=>{_lmDrag=null;});c.addEventListener('pointercancel',()=>{_lmDrag=null;});
+  if(_lmChartBound)return;
+  const c=document.getElementById('lm-chart');
+  if(!c)return;
+  _lmChartBound=true;
+  c.style.touchAction='none';
+  let active=new Map(), pinchStart=0, pinchZoom=1, dragStartX=0, dragStartPan=0;
+  const dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+  const visibleCount=()=>Math.max(8,Math.min(30,Math.round(30/_lmZoom)));
+  const maxPan=()=>Math.max(0,_lmCandles.length-visibleCount());
+  const stepPx=()=>Math.max(10,c.clientWidth/(visibleCount()+2));
+
+  c.addEventListener('wheel',e=>{
+    e.preventDefault();
+    if(e.deltaY<0)lmZoomIn();else lmZoomOut();
+  },{passive:false});
+
+  c.addEventListener('pointerdown',e=>{
+    try{c.setPointerCapture(e.pointerId);}catch(_){}
+    active.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(active.size===1){dragStartX=e.clientX;dragStartPan=_lmPan;}
+    else if(active.size===2){
+      const pts=[...active.values()];
+      pinchStart=Math.max(20,dist(pts[0],pts[1]));
+      pinchZoom=_lmZoom;
+    }
+    c.classList.add('dragging');
+    e.preventDefault();
+  },{passive:false});
+
+  c.addEventListener('pointermove',e=>{
+    if(!active.has(e.pointerId))return;
+    active.set(e.pointerId,{x:e.clientX,y:e.clientY});
+    if(active.size===2){
+      const pts=[...active.values()];
+      const d=Math.max(20,dist(pts[0],pts[1]));
+      _lmZoom=Math.max(1,Math.min(3,pinchZoom*(d/pinchStart)));
+      _lmPan=Math.min(maxPan(),Math.max(0,_lmPan));
+      drawLiveMarketChart();
+    }else if(active.size===1){
+      const dx=e.clientX-dragStartX;
+      _lmPan=Math.max(0,Math.min(maxPan(),dragStartPan-dx/stepPx()));
+      drawLiveMarketChart();
+    }
+    e.preventDefault();
+  },{passive:false});
+
+  const stop=e=>{
+    active.delete(e.pointerId);
+    if(active.size<2)pinchStart=0;
+    if(active.size===0){dragStartX=0;dragStartPan=_lmPan;c.classList.remove('dragging');}
+    e.preventDefault();
+  };
+  c.addEventListener('pointerup',stop,{passive:false});
+  c.addEventListener('pointercancel',stop,{passive:false});
+  c.addEventListener('pointerleave',e=>{if(active.size===1){}},{passive:true});
+  c.addEventListener('lostpointercapture',()=>{active.clear();pinchStart=0;c.classList.remove('dragging');});
+
+  if(window.ResizeObserver){new ResizeObserver(()=>drawLiveMarketChart()).observe(c);}
+  else window.addEventListener('resize',drawLiveMarketChart,{passive:true});
 }
-function lmZoomIn(){_lmZoom=Math.min(3,_lmZoom+.25);drawLiveMarketChart();}
-function lmZoomOut(){_lmZoom=Math.max(1,_lmZoom-.25);drawLiveMarketChart();}
+function lmZoomIn(){
+  const before=_lmZoom;
+  _lmZoom=Math.min(3,Math.round((_lmZoom+.25)*100)/100);
+  if(_lmZoom!==before){const oldV=Math.max(8,Math.min(30,Math.round(30/before)));const newV=Math.max(8,Math.min(30,Math.round(30/_lmZoom)));_lmPan=Math.min(Math.max(0,_lmCandles.length-newV),Math.max(0,_lmPan+(oldV-newV)/2));}
+  drawLiveMarketChart();
+}
+function lmZoomOut(){
+  const before=_lmZoom;
+  _lmZoom=Math.max(1,Math.round((_lmZoom-.25)*100)/100);
+  if(_lmZoom!==before){const oldV=Math.max(8,Math.min(30,Math.round(30/before)));const newV=Math.max(8,Math.min(30,Math.round(30/_lmZoom)));_lmPan=Math.min(Math.max(0,_lmCandles.length-newV),Math.max(0,_lmPan-(newV-oldV)/2));}
+  drawLiveMarketChart();
+}
 function lmResetView(){_lmZoom=1;_lmPan=0;drawLiveMarketChart();}
+function lmFullscreen(){const el=document.getElementById('lm-chart-wrap');if(!el)return;if(document.fullscreenElement)document.exitFullscreen?.();else el.requestFullscreen?.();}
+
 function updateLiveMarketUI(){
   refreshLiveMarketQuote();
   const info=lmTickPrice(),mm=String(Math.floor(info.remaining/60)).padStart(2,'0'),ss=String(info.remaining%60).padStart(2,'0');
   const p=document.getElementById('lm-price'),e=document.getElementById('lm-entry'),c=document.getElementById('lm-countdown'),cp=document.getElementById('lm-candle-time'),per= document.getElementById('home-1m-period'), curC=document.getElementById('lm-current-candle-period'), runC=document.getElementById('lm-running-candle-time'), nextC=document.getElementById('lm-next-candle-period');
-  if(p)p.textContent=_lmPrice.toFixed(5);if(e&&!document.getElementById('lm-active-trade')?.style.display.includes('block'))e.textContent=_lmEntry.toFixed(5);if(c)c.textContent=mm+':'+ss;if(cp)cp.textContent=mm+':'+ss;if(per)per.textContent=liveMarketPeriodLabel(info.period);if(curC)curC.textContent=String(info.period);if(runC)runC.textContent=String(info.sec).padStart(2,'0')+'s';if(nextC)nextC.textContent=String(info.period+1);const bc=document.getElementById('lm-bd-clock');if(bc)bc.textContent=bdTimeLabel(Date.now());const tl=document.getElementById('lm-trade-left');if(tl)tl.textContent=info.remaining+'s';
+  if(p)p.textContent=_lmPrice.toFixed(5);const betBadge=document.getElementById('lm-bet-balance');if(betBadge)betBadge.textContent='৳ '+Number(_lmAmt||1).toFixed(2);if(e&&!document.getElementById('lm-active-trade')?.style.display.includes('block'))e.textContent=_lmEntry.toFixed(5);if(c)c.textContent=mm+':'+ss;if(cp)cp.textContent=mm+':'+ss;if(per)per.textContent=liveMarketPeriodLabel(info.period);if(curC)curC.textContent=String(info.period);if(runC)runC.textContent=String(info.sec).padStart(2,'0')+'s';if(nextC)nextC.textContent=String(info.period+1);const bc=document.getElementById('lm-bd-clock');if(bc)bc.textContent=bdTimeLabel(Date.now());const tl=document.getElementById('lm-trade-left');if(tl)tl.textContent=info.remaining+'s';
   const state=document.getElementById('lm-market-state');if(state)state.textContent=info.remaining<=30?'TRADING PAUSED':'MARKET OPEN';const src=document.getElementById('lm-data-source');if(src)src.textContent=window._lmApiLive?'LIVE API':'SIMULATED';
   drawLiveMarketChart();
 }
@@ -2247,7 +2657,15 @@ function toggleHomeGames(){
   const open=list.style.display!=='block';list.style.display=open?'block':'none';box.classList.toggle('open',open);
   const h=box.querySelector('.games-launcher-head');if(h)h.setAttribute('aria-expanded',String(open));
 }
-function openLiveMarket(){go('live-market');setTimeout(()=>{try{subscribeMarketFeed();applyLiveFeedPayload(window._lastMarketFeed||{});drawLiveMarketChart();updateLiveMarketUI(true);}catch(e){}},0);}
+function openLiveMarket(){
+  go('live-market');
+  requestAnimationFrame(()=>{try{
+    lmBindChart();
+    if(!window._lmFeedOff)subscribeMarketFeed();
+    applyLiveFeedPayload(window._lastMarketFeed||{});
+    lmSeed();drawLiveMarketChart();updateLiveMarketUI();
+  }catch(e){console.warn('Live Market init',e)}});
+}
 function changeWingoMode(mode){
   if(!WINGO_MODES[mode])mode='30s';_wgMode=mode;_wgSide=null;_wgAmt=1;_wgCurrentPeriod=null;_wgLastResult=null;
   const sel=document.getElementById('wg-mode');if(sel)sel.value=mode;
@@ -2322,8 +2740,39 @@ function setAmt(amt,el){_wgAmt=amt;document.querySelectorAll('.wingo-amt-chip').
 function customAmt(el){_wgAmt=parseInt(el.value)||1;document.querySelectorAll('.wingo-amt-chip').forEach(c=>c.classList.remove('active'));updateWinPreview();}
 function updateWinPreview(){const win=(Math.floor(Number(_wgAmt)*WINGO_PAYOUT*100)/100).toFixed(2);const el=document.getElementById('wg-win-preview');if(el)el.textContent='৳ '+win;}
 async function placeBet(){
-  if(!_wgSide){snack('Big বা Small বেছে নিন');return;}const uid=myUID();if(!uid)return;const x=wgPeriodInfo(_wgMode);const{period,phase}=x;if(phase!=='betting'){snack('Bet করার সময় শেষ! পরের পিরিয়ড wait করুন');return;}const user=await fbGet(`users/${uid}`);if(!user||!user.isActive){snack('একাউন্ট Activate করুন');return;}if((user.balance||0)<_wgAmt){snack('Balance কম! Deposit করুন');return;}if(_wgAmt<1){snack('সর্বনিম্ন ১ টাকা bet করুন');return;}
-  const root=wgRoot(),key=`${uid}_${period}`,path=`${root}/${key}`;if(await fbGet(path)){snack('এই পিরিয়ডে আগেই bet করেছেন');return;}ldr(true);try{await fbSet(path,{uid,period,mode:_wgMode,side:_wgSide,amount:_wgAmt,settled:false,won:null,payout:0,createdAt:Date.now()});await fbUpd(`users/${uid}`,{balance:(user.balance||0)-_wgAmt});document.getElementById('wg-bal').textContent=fmtN((user.balance||0)-_wgAmt);document.getElementById('wg-place-btn').disabled=true;document.getElementById('wg-btn-big').classList.add('disabled-bet');document.getElementById('wg-btn-small').classList.add('disabled-bet');const mb=document.getElementById('wg-my-bet');mb.style.display='block';mb.textContent=`✅ Bet করা হয়েছে — ${_wgSide==='big'?'BIG 🔴':'SMALL 🔵'} — ${fmtN(_wgAmt)} — ${WINGO_MODES[_wgMode].label} — পিরিয়ড #${period}`;snack(`✅ ${_wgSide.toUpperCase()} তে ${fmtN(_wgAmt)} Bet করা হয়েছে!`);}catch(e){snack('Error: '+e.message);}finally{ldr(false);}
+  if(!_wgSide){snack('Big বা Small বেছে নিন');return;}
+  const uid=myUID();if(!uid)return;
+  const x=wgPeriodInfo(_wgMode),period=x.period;
+  if(x.phase!=='betting'){snack('Bet করার সময় শেষ! পরের পিরিয়ড wait করুন');return;}
+  const user=await fbGet(`users/${uid}`);
+  if(!user||!user.isActive){snack('একাউন্ট Activate করুন');return;}
+  const amt=Math.max(1,Number(_wgAmt)||1);
+  if(Number(user.balance||0)<amt){snack('Balance কম! Deposit করুন');return;}
+  const root=wgRoot(),key=`${uid}_${period}`,path=`${root}/${key}`;
+  if(await fbGet(path)){snack('এই পিরিয়ডে আগেই bet করেছেন');return;}
+  ldr(true);
+  try{
+    // Atomic balance deduction with retry: avoids false "balance changed" failures.
+    const newBal=await atomicBalanceDelta(uid,-amt,0,5);
+    if(newBal===null){
+      const latest=await fbGet(`users/${uid}/balance`).catch(()=>null);
+      snack(latest!=null&&parseMoney(latest)>=amt?'Balance update হয়নি — নেটওয়ার্ক সংযোগ পরীক্ষা করে আবার চেষ্টা করুন':'Balance কম! Deposit করুন');
+      return;
+    }
+    let savedBet=false;
+    await fbSet(path,{uid,period,mode:_wgMode,side:_wgSide,amount:amt,settled:false,won:null,payout:0,createdAt:Date.now()});
+    savedBet=true;
+    const wbal=document.getElementById('wg-bal');if(wbal)wbal.textContent=fmtN(newBal);
+    document.getElementById('wg-place-btn').disabled=true;
+    document.getElementById('wg-btn-big').classList.add('disabled-bet');
+    document.getElementById('wg-btn-small').classList.add('disabled-bet');
+    const mb=document.getElementById('wg-my-bet');mb.style.display='block';mb.textContent=`✅ Bet করা হয়েছে — ${_wgSide==='big'?'BIG 🔴':'SMALL 🔵'} — ${fmtN(amt)} — ${WINGO_MODES[_wgMode].label} — পিরিয়ড #${period}`;
+    snack(`✅ ${_wgSide.toUpperCase()} তে ${fmtN(amt)} Bet করা হয়েছে!`);
+  }catch(e){
+    try{await fbDel(path);}catch(_){}
+    try{await atomicBalanceDelta(uid,amt,0,3);}catch(_){}
+    snack('Bet save হয়নি — balance নিরাপদ রাখা হয়েছে');
+  }finally{ldr(false);}
 }
 async function loadWingoBetHistory(uid){
   const bets=await fbGet(wgRoot(_wgMode)),el=document.getElementById('wg-hist-list');if(!el)return;
@@ -2468,14 +2917,14 @@ function showWinPopup(amount,betAmount=amount/WINGO_PAYOUT){
   document.getElementById('popup-sub').innerHTML=`Bet <b>৳${Number(betAmount).toFixed(2)}</b> → <b>৳${Number(amount).toFixed(2)}</b> Balance এ যোগ হয়েছে`;
   inner.style.background='linear-gradient(145deg,#047857,#10b981)';inner.style.color='#fff';inner.classList.remove('wingo-loss-anim');inner.classList.add('wingo-win-glow','wingo-win-anim','wingo-popup-celebrate');
   let cr=inner.querySelector('.wingo-credit');if(!cr){cr=document.createElement('div');cr.className='wingo-credit';inner.appendChild(cr)}cr.textContent='💰 Balance updated instantly';
-  popup.style.display='flex';wingoTone('win');clearTimeout(window._wgPopTimer);window._wgPopTimer=setTimeout(()=>popup.style.display='none',4200);
+  popup.style.display='flex';wingoTone('win');clearTimeout(window._wgPopTimer);window._wgPopTimer=null;
 }
 function showLossPopup(amount){
   const popup=document.getElementById('wingo-popup'),inner=document.getElementById('wingo-popup-inner');if(!popup||!inner)return;
   document.getElementById('popup-ico').textContent='😔';document.getElementById('popup-title').textContent='এইবার হয়নি';
   document.getElementById('popup-sub').innerHTML=`Bet <b>৳${Number(amount).toFixed(2)}</b> — এই পিরিয়ডে loss হয়েছে`;
   inner.style.background='linear-gradient(145deg,#991b1b,#ef4444)';inner.style.color='#fff';inner.classList.remove('wingo-win-glow','wingo-win-anim','wingo-popup-celebrate');inner.classList.add('wingo-loss-anim');
-  const cr=inner.querySelector('.wingo-credit');if(cr)cr.remove();popup.style.display='flex';wingoTone('loss');clearTimeout(window._wgPopTimer);window._wgPopTimer=setTimeout(()=>popup.style.display='none',3500);
+  const cr=inner.querySelector('.wingo-credit');if(cr)cr.remove();popup.style.display='flex';wingoTone('loss');clearTimeout(window._wgPopTimer);window._wgPopTimer=null;
 }
 
 // ─── UPDATED WINGO PERIOD HISTORY WITH PROFIT/LOSS ──────
@@ -2506,8 +2955,8 @@ const DEF_PLANS=[
 
 async function getPlans(){
   const plans=await fbGet('config/plans');
-  if(!plans||!plans.length) return DEF_PLANS;
-  return plans;
+  if(Array.isArray(plans)&&plans.length) return plans;
+  return DEF_PLANS;
 }
 
 let _planSelDur={};
@@ -2671,6 +3120,43 @@ async function boot(){
 firebase.database().ref('.info/connected').on('value',s=>{if(s.val()===false)snack('⚠️ Internet connection নেই...');});
 boot();
 </script>
+<style id="live-market-mobile-final-v4">
+/* FINAL LIVE MARKET MOBILE UX — compact top bar, larger chart, touch zoom/pan */
+#s-live-market .lm-balance-compact{display:grid;grid-template-columns:1fr .72fr auto;align-items:center;gap:8px;padding:3px 4px 5px;margin:0}
+#s-live-market .lm-mini-balance{min-width:0}
+#s-live-market .lm-mini-balance .lm-label{font-size:7px;letter-spacing:.55px;opacity:.72}
+#s-live-market .lm-mini-balance .lm-balance{font-size:15px;font-weight:950;line-height:1.05;margin-top:2px}
+#s-live-market .lm-bet-stat{padding-left:9px;border-left:1px solid rgba(255,255,255,.08)}
+#s-live-market .lm-bet-value{font:900 13px monospace;color:#fbbf24;line-height:1.05;margin-top:3px;white-space:nowrap}
+#s-live-market .lm-asset{text-align:right;line-height:1.05}
+#s-live-market .lm-asset b{font-size:10px}
+#s-live-market .lm-asset span{font-size:7px;color:#657489}
+#s-live-market .lm-chart-card{position:relative}
+#s-live-market .lm-chart-head{padding:2px 4px 6px}
+#s-live-market .lm-symbol{font-size:11px}
+#s-live-market .lm-price{font-size:18px}
+#s-live-market .lm-market-state{font-size:7px;padding:4px 7px}
+#s-live-market .lm-chart-meta{gap:4px;padding:0 2px 5px}
+#s-live-market .lm-meta-chip{font-size:7px;padding:4px 7px}
+#s-live-market .lm-meta-chip strong{font-size:8px}
+#s-live-market .lm-chart-tools{position:absolute;right:3px;top:47px;z-index:8;display:flex;gap:3px;margin:0;padding:0;opacity:.92}
+#s-live-market .lm-chart-tools button{width:28px;height:26px;border-radius:7px;font-size:15px;background:rgba(16,23,33,.76);border-color:rgba(255,255,255,.09);backdrop-filter:blur(8px)}
+#s-live-market .lm-chart-tools span{display:none}
+#s-live-market .lm-chart-wrap{height:56svh;min-height:340px;max-height:560px;border-radius:10px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.035)}
+#s-live-market .lm-price-line span{display:none!important}
+#s-live-market .lm-chart-footer{padding:5px 3px 7px;font-size:7px}
+#s-live-market .lm-trade-card{padding:6px 4px 0}
+#s-live-market .lm-trade-head{padding:7px 0 6px}
+#s-live-market .lm-entry-row,#s-live-market .lm-payout-row{padding:7px 0;font-size:9px}
+#s-live-market .lm-entry-row b{font-size:12px}
+#s-live-market .lm-amount-title{font-size:8px;margin:6px 0 5px}
+#s-live-market .lm-amt{padding:7px 10px;font-size:10px}
+#s-live-market .lm-custom{padding:8px 10px;font-size:11px}
+#s-live-market .lm-payout-row b{font-size:12px}
+#s-live-market .lm-trade-buttons{gap:7px;margin-top:7px}
+#s-live-market .lm-trade-btn{min-height:62px;border-radius:13px}
+@media (max-width:390px){#s-live-market .lm-chart-wrap{height:54svh;min-height:315px}#s-live-market .lm-chart-tools{top:46px}}
+</style>
 <!-- FINAL FULL ADD-ON: popup, maintenance, referral tree, VIP12 progress -->
 <style>
 #global-popup{display:none;position:fixed;inset:0;z-index:99999;align-items:center;justify-content:center;background:rgba(0,0,0,.45);padding:18px}
