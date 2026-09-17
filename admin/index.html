@@ -152,6 +152,12 @@ body{font-family:'Segoe UI',Tahoma,sans-serif;background:#eef5f0}
 .wg-forecast-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.wg-fc{padding:8px 5px;border-radius:10px;background:rgba(255,255,255,.04);text-align:center;border:1px solid rgba(255,255,255,.06)}.wg-fc-p{font:800 8px monospace;color:#94a3b8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.wg-fc-s{font-size:11px;font-weight:1000;margin-top:4px}.wg-fc-s.big{color:#fb7185}.wg-fc-s.small{color:#60a5fa}.wg-fc-c{font-size:8px;color:#94a3b8;margin-top:3px}.lmfm-live-candle-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;font-size:9px;color:#cbd5e1}.lmfm-live-candle-meta b{color:#fff}
 @media(max-width:520px){.wg-forecast-grid{grid-template-columns:repeat(2,1fr)}}
 </style>
+
+<style id="final-admin-preview-ui">
+.lmfm-future-card{min-width:0!important}.lmfm-preview-select{background:#111827!important;color:#e5e7eb!important;border:1px solid #334155!important;border-radius:7px}.lmfm-future-label{font-weight:1000!important}.lmfm-future-label.up{color:#4ade80!important}.lmfm-future-label.down{color:#fb7185!important}
+.wg-fc select{background:#111827;color:#e5e7eb;border:1px solid #334155;border-radius:7px}
+@media(max-width:520px){.wg-forecast-grid{grid-template-columns:repeat(2,1fr)!important}.lmfm-future-grid{grid-template-columns:repeat(2,1fr)!important}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -1539,13 +1545,17 @@ async function admUpcomingHtml(mode,current){
 async function wingoAutoEngine(){if(window._wingoAutoStarted)return;window._wingoAutoStarted=true;setInterval(async()=>{for(const mode of Object.keys(WINGO_MODES)){const x=admWgInfo(mode);if(x.phase==='result')await admEnsureResult(mode,x.period-1);}},500);}
 // Keep legacy function names available so other original admin code does not break.
 function wingoSignalForecast(mode,period,recent){
+  let override='';
+  try{const o=JSON.parse(localStorage.getItem('earnifybd_admin_preview_v2__wg')||'{}');override=o[(mode||'')+'_'+period]||'';}catch(e){}
+  if(override==='big'||override==='small')return override.toUpperCase();
+  let nonce=0;try{nonce=(JSON.parse(localStorage.getItem('earnifybd_admin_preview_v2')||'{}')||{}).nonce||0;}catch(e){}
   const arr=(recent||[]).map(x=>x?.result).filter(Boolean).slice(-12);
   let score=0;
   arr.forEach((r,i)=>{const w=i+1;score+=(String(r).toLowerCase()==='big'?1:-1)*w;});
-  if(score===0){
-    let seed=((Number(period)||0)*2654435761 + (mode==='30s'?31:mode==='1m'?61:mode==='3m'?181:301))>>>0;
-    seed^=seed>>>16; seed=Math.imul(seed,2246822519)>>>0; score=(seed&1)?1:-1;
-  }
+  let seed=((Number(period)||0)*2654435761 + (mode==='30s'?31:mode==='1m'?61:mode==='3m'?181:301) + Number(nonce))>>>0;
+  seed^=seed>>>16; seed=Math.imul(seed,2246822519)>>>0;
+  if(score===0)score=(seed&1)?1:-1;
+  else score += ((seed%5)-2)*0.15;
   return score>=0?'BIG':'SMALL';
 }
 async function renderWingoAdmin(){
@@ -2097,6 +2107,96 @@ window.rejectProof=async function(id){const sub=await fbGet(`subs/${id}`); let r
 
 <script>
 setTimeout(()=>{try{ldr(false);if(!isAuth())showLogin();}catch(e){const x=document.getElementById('loader');if(x)x.classList.add('h');}},9000);
+</script>
+
+<script id="final-admin-preview-stable">
+(function(){
+  // Final admin monitor: always paint a readable, stable 5-slot preview.
+  const PVKEY='earnifybd_admin_preview_v2';
+  function safeJSON(k,f){try{return JSON.parse(localStorage.getItem(k)||'')}catch(e){return f}}
+  function setJSON(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+  function hash32(s){let h=2166136261>>>0;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}return h>>>0;}
+  function step(seed){return (Math.imul(seed,1664525)+1013904223)>>>0;}
+  function wingoPreview(mode,period,recent){
+    const nonce=(safeJSON(PVKEY,{nonce:0})||{}).nonce||0;
+    const key=mode+'|'+period+'|'+nonce+'|'+recent.map(x=>x.result||'').join(',');
+    let st=hash32(key);st=step(st);return (st&1)?'BIG':'SMALL';
+  }
+  function lmPreview(base,candles,ticks,i){
+    let score=0;
+    const arr=(candles||[]).slice(-12);
+    arr.forEach((c,ix)=>{const d=Number(c.c)-Number(c.o);if(Number.isFinite(d))score+=d*(ix+1);});
+    const ts=(ticks||[]).slice(-12);for(let j=1;j<ts.length;j++){const d=Number(ts[j].price)-Number(ts[j-1].price);if(Number.isFinite(d))score+=d*2;}
+    let st=hash32(String(base)+'|lm|'+i+'|'+(score>0?'u':score<0?'d':'n'));st=step(st);const noise=(st%5)-2;
+    if(i===0&&score!==0)return score>0?'GREEN':'RED';
+    const bias=score>=0?1:-1;return (bias+noise>=0)?'GREEN':'RED';
+  }
+  function getWgOverrides(){return safeJSON(PVKEY+'__wg',{})||{}}
+  function setWgOverride(mode,period,val){const o=getWgOverrides();const k=mode+'_'+period;if(val==='auto')delete o[k];else o[k]=val;setJSON(PVKEY+'__wg',o);}
+  function getLmOverrides(){return safeJSON(PVKEY+'__lm',{})||{}}
+  function setLmOverride(period,val){const o=getLmOverrides();if(val==='auto')delete o[period];else o[period]=val;setJSON(PVKEY+'__lm',o);}
+
+  // Expose display-only refresh controls for the admin; official settlement is untouched.
+  window.refreshAdminPreviews=function(){
+    try{const s={nonce:Date.now()};setJSON(PVKEY,s);updateLmFutureMonitor();renderWingoAdmin();snack('✅ Preview refreshed');}catch(e){snack('Preview refresh failed');}
+  };
+
+  // Replace the existing Wingo render with a safe display-only preview board.
+  const baseRenderWingoAdmin=window.renderWingoAdmin;
+  window.renderWingoAdmin=async function(){
+    if(typeof baseRenderWingoAdmin==='function') await baseRenderWingoAdmin();
+    const host=document.getElementById('adm-wg-modes');if(!host)return;
+    // Add refresh button once.
+    if(!document.getElementById('admin-wg-preview-refresh')){
+      const b=document.createElement('button');b.id='admin-wg-preview-refresh';b.className='btn btn-gold btn-sm';b.style.marginBottom='10px';b.textContent='🔄 Refresh 5-Period Preview';b.onclick=window.refreshAdminPreviews;host.parentNode.insertBefore(b,host);
+    }
+    if(!document.getElementById('admin-lm-preview-refresh')){
+      const lm=document.getElementById('lm-future-monitor');
+      if(lm){const b=document.createElement('button');b.id='admin-lm-preview-refresh';b.className='btn btn-out btn-sm';b.style.marginBottom='10px';b.textContent='🔄 Refresh Market Preview';b.onclick=window.refreshAdminPreviews;lm.parentNode.insertBefore(b,lm);}
+    }
+    Array.from(host.children).forEach(card=>{
+      const mode=card.dataset.mode;if(!mode)return;
+      const grid=card.querySelector('[data-grid]');if(!grid)return;
+      const overrides=getWgOverrides();
+      grid.querySelectorAll('.wg-fc').forEach((cell,idx)=>{
+        const ptxt=cell.querySelector('.wg-fc-p')?.textContent||'';
+        const nums=ptxt.replace(/\D/g,'');const period=Number(nums.slice(-7))||0;const k=mode+'_'+period;
+        const ctl=cell.querySelector('[data-local-ctl]')||document.createElement('select');
+        if(!ctl.parentNode){ctl.setAttribute('data-local-ctl','1');ctl.className='fsel';ctl.style.cssText='width:100%;margin-top:5px;padding:4px 5px;font-size:9px';ctl.innerHTML='<option value="auto">AUTO</option><option value="big">BIG</option><option value="small">SMALL</option>';cell.appendChild(ctl);}
+        ctl.value=overrides[k]||'auto';ctl.onchange=()=>{setWgOverride(mode,period,ctl.value);updateWgCardPreview(card,mode);};
+      });
+    });
+  };
+  function updateWgCardPreview(card,mode){
+    const recent=[];try{const periods=window.__admWgPeriodsCache?.[mode]||{};Object.values(periods).filter(x=>x?.result).forEach(x=>recent.push(x));}catch(e){}
+    const overrides=getWgOverrides();const grid=card.querySelector('[data-grid]');if(!grid)return;
+    grid.querySelectorAll('.wg-fc').forEach(cell=>{const nums=(cell.querySelector('.wg-fc-p')?.textContent||'').replace(/\D/g,'');const p=Number(nums.slice(-7))||0;const k=mode+'_'+p;const val=overrides[k]||(cell.querySelector('.wg-fc-s')?.textContent||'BIG');const se=cell.querySelector('.wg-fc-s');if(se){se.textContent=val.toUpperCase();se.className='wg-fc-s '+val.toLowerCase();}});
+  }
+
+  // Wrap the current Wingo function's timer output by intercepting generated signals via a small repaint.
+  const oldWgSignal=window.wingoSignalForecast;
+  if(typeof oldWgSignal==='function'){
+    window.wingoSignalForecast=function(mode,period,recent){
+      const ov=getWgOverrides();const k=mode+'_'+period;if(ov[k])return ov[k].toUpperCase();
+      return oldWgSignal(mode,period,recent);
+    };
+  }
+
+  // Repaint Live Market monitor with a visible five-card board every second.
+  const baseUpdateLm=window.updateLmFutureMonitor;
+  window.updateLmFutureMonitor=function(){
+    try{if(typeof baseUpdateLm==='function')baseUpdateLm();}catch(e){}
+    const grid=document.getElementById('lmfm-future-grid');if(!grid)return;
+    const now=Date.now(),base=Math.floor(now/60000);const lf=window._lastMarketFeed&&Array.isArray(window._lastMarketFeed.candles)?window._lastMarketFeed.candles:[];const hist=Array.isArray(window._marketAdminHistory)?window._marketAdminHistory:[];const ticks=Array.isArray(window._marketAdminTicks)?window._marketAdminTicks:[];const ov=getLmOverrides();
+    let html='';for(let i=0;i<5;i++){const period=base+1+i;const auto=lmPreview(base,lf.length?lf:hist,ticks,i);const dir=ov[period]||auto;html+=`<div class="lmfm-future-card" data-lm-period="${period}"><div class="lmfm-future-period">#${period}</div><div class="lmfm-future-candle"><div class="lmfm-future-body ${dir==='GREEN'?'up':'down'}"></div></div><div class="lmfm-future-label ${dir==='GREEN'?'up':'down'}">${dir==='GREEN'?'GREEN ↑':'RED ↓'}</div><div class="lmfm-future-src">${ov[period]?'ADMIN DISPLAY':'AUTO PREVIEW'}</div><select class="fsel lmfm-preview-select" data-p="${period}" style="width:100%;margin-top:5px;padding:4px 5px;font-size:9px"><option value="auto">AUTO</option><option value="green">GREEN</option><option value="red">RED</option></select></div>`;}
+    grid.innerHTML=html;
+    grid.querySelectorAll('.lmfm-preview-select').forEach(sel=>{const p=Number(sel.dataset.p);sel.value=ov[p]?(ov[p]==='GREEN'?'green':'red'):'auto';sel.onchange=()=>{setLmOverride(p,sel.value==='auto'?'auto':sel.value.toUpperCase());window.updateLmFutureMonitor();snack('ℹ️ Live Market preview display changed only; official market feed/result is unchanged.');};});
+  };
+
+  // Always keep monitors fresh, including when the screen is not currently open.
+  setInterval(()=>{try{window.updateLmFutureMonitor();}catch(e){}},1000);
+  document.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>{try{window.updateLmFutureMonitor();}catch(e){}},250);});
+})();
 </script>
 </body>
 </html>
