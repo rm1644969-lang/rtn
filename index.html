@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
 <title id="site-title">EarnifyBD</title>
-<meta id="site-desc" name="description" content="Task করো, Refer করো, টাকা কামাও">
+<meta content="Task করো, Refer করো, টাকা কামাও" id="site-desc" name="description"/>
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.11.0/firebase-database-compat.js"></script>
 <style>
@@ -299,6 +300,12 @@ body.dark #user-chat-inp{background:#1e2132;border-color:#3a3f55;color:#e2e8f0}
 body.dark .ref-user-item{border-color:#2e3244}
 body.dark .ref-user-av{background:#1e2132;color:var(--g)}
 
+/* ── LIVE MARKET GAME ── */
+.live-market-wrap{background:#0e1118;min-height:100vh;color:#eef2f7}
+.live-market-hdr{height:62px;background:#11151d;border-bottom:1px solid #252b36;display:flex;align-items:center;padding:0 14px;gap:10px;position:sticky;top:0;z-index:50}
+.live-market-hdr .hdr-back{color:#fff;font-size:25px;padding:4px 7px}.lm-title{font-size:17px;font-weight:900;letter-spacing:.2px}.lm-subtitle{font-size:10px;color:#8792a2;margin-top:2px}.lm-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#22c55e;box-shadow:0 0 9px #22c55e}.lm-live-pill{font-size:10px;font-weight:900;color:#35d58a;border:1px solid rgba(53,213,138,.35);background:rgba(34,197,94,.09);padding:6px 9px;border-radius:20px}
+.live-market-content{padding:12px 14px 105px;max-width:700px;margin:0 auto}.lm-balance-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.lm-label{font-size:10px;color:#7d8797;text-transform:uppercase;letter-spacing:.7px}.lm-balance{font-size:22px;font-weight:900;margin-top:2px}.lm-asset{text-align:right}.lm-asset b{display:block;font-size:13px}.lm-asset span{font-size:10px;color:#7d8797}
+.lm-chart-card,.lm-trade-card,.lm-history-card{background:#151a23;border:1px solid #262d39;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.22)}.lm-chart-card{padding:12px;margin-bottom:10px}.lm-chart-tools{display:flex;align-items:center;justify-content:flex-end;gap:5px;margin:-2px 0 7px}.lm-chart-tools button{width:30px;height:28px;border:1px solid #303847;background:#1a202a;color:#e8edf4;border-radius:7px;font-size:17px;font-weight:900;cursor:pointer}.lm-chart-tools button:active{transform:scale(.95)}.lm-chart-tools span{font:700 9px monospace;color:#697485;margin-left:4px}.lm-chart-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.lm-symbol{font-size:13px;font-weight:900}.lm-price{font:900 21px monospace;margin-top:3px}.lm-market-state{font-size:9px;font-weight:900;color:#35d58a;padding:6px 8px;border-radius:8px;background:rgba(34,197,94,.09)}.lm-chart-wrap{height:285px;position:relative;overflow:hidden;border-radius:10px;background:linear-gradient(180deg,#10151d,#0c1016);border:1px solid #202631}.lm-chart-wrap canvas{display:block;width:100%;height:100%}.lm-price-line{position:absolute;right:0;left:0;height:1px;border-top:1px dashed rgba(245,158,11,.65);pointer-events:none}.lm-price-line span{position:absolute;right:0;top:-10px;background:#f59e0b;color:#10131a;font:800 10px monospace;padding:4px 6px;border-radius:5px}.lm-chart-footer{display:flex;justify-content:space-between;color:#687384;font-size:9px;margin-top:8px}.lm-trade-card{padding:14px;margin-bottom:10px}.lm-trade-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}.lm-trade-head b{display:block;font-size:14px}.lm-trade-head span{display:block;color:#6e7888;font-size:10px;margin-top:3px}.lm-countdown{font:900 18px monospace;color:#f59e0b}.lm-entry-row,.lm-payout-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-top:1px solid #242b35;font-size:11px;color:#8993a2}.lm-entry-row b{font:900 14px monospace;color:#e9eef5}.lm-payout-row b{color:#35d58a}.lm-amount-title{font-size:10px;color:#7d8797;margin:10px 0 7px}.lm-amounts{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px}.lm-amt{border:1px solid #303847;background:#1c222d;color:#dbe2eb;border-radius:9px;padding:8px 13px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}.lm-amt.active{background:#173b2c;border-color:#22c55e;color:#4ade80}.lm-custom{width:100%;background:#10151d;border:1px solid #303847;color:#fff;border-radius:10px;padding:10px 12px;outline:none;font-size:12px;margin:3px 0 7px}.lm-custom:focus{border-color:#22c55e}.lm-trade-buttons{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:4px}.lm-trade-btn{border:1px solid transparent;border-radius:12px;padding:12px 10px;display:flex;align-items:center;justify-content:center;gap:9px;color:#fff;cursor:pointer;transition:.16s;text-align:left}.lm-trade-btn span{font-size:24px}.lm-trade-btn b{display:block;font-size:16px}.lm-trade-btn small{display:block;font-size:9px;opacity:.75;margin-top:2px}.lm-up{background:linear-gradient(135deg,#15945a,#10b981)}.lm-down{background:linear-gradient(135deg,#dc4a43,#ef4444)}.lm-trade-btn.selected{transform:translateY(-1px);box-shadow:0 0 0 2px #fff,0 7px 20px rgba(255,255,255,.08)}.lm-trade-btn.disabled{opacity:.4;pointer-events:none}.lm-place{width:100%;border:0;border-radius:11px;padding:12px;margin-top:10px;background:#2a303b;color:#7f8998;font-size:13px;font-weight:900;cursor:pointer}.lm-place.ready{background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;box-shadow:0 5px 18px rgba(245,158,11,.22)}.lm-place:disabled{opacity:.75}.lm-active-trade{margin-top:9px;border:1px solid rgba(245,158,11,.28);background:rgba(245,158,11,.07);color:#fbbf24;padding:10px;border-radius:10px;font-size:11px;text-align:center;line-height:1.5}.lm-history-card{padding:14px;margin-bottom:10px}.lm-history-title{font-size:13px;font-weight:900;margin-bottom:8px}.lm-history-row{display:flex;align-items:center;gap:8px;padding:9px 0;border-top:1px solid #242b35}.lm-history-main{flex:1;min-width:0}.lm-history-period{font:700 10px monospace;color:#d8dee8}.lm-history-meta{font-size:9px;color:#697485;margin-top:2px}.lm-history-side{font-size:10px;font-weight:900;padding:4px 8px;border-radius:12px}.lm-history-side.up{background:rgba(34,197,94,.12);color:#4ade80}.lm-history-side.down{background:rgba(239,68,68,.12);color:#fb7185}.lm-history-pnl{font-size:12px;font-weight:900;min-width:58px;text-align:right}.lm-history-pnl.win{color:#4ade80}.lm-history-pnl.loss{color:#fb7185}.lm-note{color:#626d7d;font-size:9px;line-height:1.55;text-align:center;padding:0 10px}.lm-flash-win{animation:lmWinFlash .8s ease}.lm-flash-loss{animation:lmLossFlash .55s ease 2}@keyframes lmWinFlash{50%{box-shadow:0 0 0 3px rgba(34,197,94,.28),0 0 28px rgba(34,197,94,.25)}}@keyframes lmLossFlash{50%{transform:scale(.99);opacity:.55}}
 /* ── WINGO GAME ── */
 .wingo-wrap{background:linear-gradient(160deg,#0f0c29,#302b63,#24243e);min-height:100vh;color:#fff}
 .wingo-hdr{background:rgba(0,0,0,.3);padding:14px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.1)}
@@ -455,603 +462,663 @@ body.dark .ref-user-item{border-color:#2e3244}
 .maintenance-card{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:24px;padding:28px;max-width:380px;backdrop-filter:blur(8px)}
 .maintenance-card .ico{font-size:54px;margin-bottom:10px}
 </style>
+<style id="wingo-final-theme">.wg-modebar{margin:12px 16px 0;padding:12px 14px;border-radius:17px;background:linear-gradient(135deg,rgba(20,105,63,.16),rgba(30,143,87,.07));border:1px solid rgba(20,105,63,.25);display:flex;align-items:center;justify-content:space-between;gap:12px}.wg-mode-title{font-weight:900;font-size:13px}.wg-mode-sub{font-size:10px;color:var(--text2);margin-top:2px}.wg-mode-select{background:#fff;color:#164e36;border:1px solid #b7d7c5;border-radius:12px;padding:9px 11px;font-weight:900;outline:none}.dark .wg-mode-select{background:#111827;color:#fff;border-color:#355a49}.wingo-result-card{border-radius:20px;padding:22px;text-align:center;position:relative;overflow:hidden}.wingo-result-big{background:linear-gradient(145deg,#7f1d1d,#ef4444);box-shadow:0 12px 35px rgba(239,68,68,.3)}.wingo-result-small{background:linear-gradient(145deg,#1e3a8a,#3b82f6);box-shadow:0 12px 35px rgba(59,130,246,.3)}.wingo-result-ico{font-size:34px}.wingo-result-lbl{font-size:30px;font-weight:1000;color:#fff;letter-spacing:2px}.wingo-result-sub{font-size:11px;color:rgba(255,255,255,.8);margin-top:4px}.wingo-win-glow{box-shadow:0 0 50px rgba(16,185,129,.45)}#wingo-popup{backdrop-filter:blur(8px)}#wingo-popup-inner{box-shadow:0 25px 70px rgba(0,0,0,.45)}</style>
+<style id="wingo-bet-ledger-v4">
+.wingo-hist-bet{display:flex;flex-direction:column;align-items:flex-end;gap:2px;min-width:82px}.wingo-pnl{font-size:15px;font-weight:1000;line-height:1}.wingo-pnl.win{color:#16a34a}.wingo-pnl.loss{color:#ef4444}.wingo-pnl.pending{color:#94a3b8}.wingo-payout-mini{font-size:9px;color:#64748b;font-weight:700;white-space:nowrap}.wingo-bet-amount-mini{font-size:10px;color:#94a3b8;font-weight:700}
+</style>
+<style id="home-wingo-theme">
+.home-wingo-card{display:flex;align-items:center;gap:12px;margin:0 0 14px;padding:15px 16px;border-radius:18px;background:linear-gradient(135deg,#eafff2,#f5fffa);border:1px solid #bfe8cf;box-shadow:0 8px 22px rgba(20,105,63,.10);cursor:pointer;transition:.18s}
+.home-wingo-card:active{transform:scale(.985)}.home-wingo-icon{width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,#16a34a,#22c55e);display:flex;align-items:center;justify-content:center;font-size:25px;box-shadow:0 6px 16px rgba(22,163,74,.25)}
+.home-wingo-main{flex:1}.home-wingo-title{font-size:16px;font-weight:900;color:#14532d}.home-wingo-sub{font-size:11px;color:#527364;margin-top:3px}.home-wingo-payout{font-size:11px;color:#16a34a;font-weight:800;margin-top:4px}.home-wingo-arrow{font-size:30px;color:#16a34a;font-weight:300}
+/* screenshot-inspired, clean white Wingo play surface */
+.wingo-wrap{background:#f5f7f8!important;color:#172033!important}.wingo-hdr{background:linear-gradient(135deg,#16a34a,#10c77b)!important;border:0!important;color:#fff}.wingo-bal-card,.wingo-bet-section{background:#fff!important;color:#172033;border:1px solid #e6eaee!important;box-shadow:0 5px 18px rgba(15,23,42,.07)}
+.wg-modebar{background:#fff!important;border:1px solid #e6eaee!important}.wg-mode-title{color:#172033}.wingo-period,.wingo-phase{color:#64748b!important}.wingo-period-num{color:#16a34a!important;font-size:19px!important;letter-spacing:1px!important}.wingo-bs-btn.big{background:#f59e0b!important}.wingo-bs-btn.small{background:#60a5fa!important}.wingo-amt-chip{background:#f1f5f9!important;color:#475569!important;border-color:#e2e8f0!important}.wingo-amt-chip.active{background:#16a34a!important;color:#fff!important;border-color:#16a34a!important}.wingo-custom-inp{background:#fff!important;color:#172033!important;border-color:#d9e1e7!important}.wingo-custom-inp::placeholder{color:#94a3b8!important}.wingo-place-btn{background:linear-gradient(135deg,#16a34a,#10b981)!important}.wingo-result-big{background:linear-gradient(135deg,#fff7ed,#ffedd5)!important;color:#9a3412!important;border:1px solid #fed7aa!important}.wingo-result-small{background:linear-gradient(135deg,#eff6ff,#dbeafe)!important;color:#1d4ed8!important;border:1px solid #bfdbfe!important}.wingo-result-lbl{color:inherit!important}.wingo-hist-section{color:#172033}.wingo-hist-item{background:#fff!important;border-color:#e6eaee!important}.wingo-hist-period{color:#64748b!important}.wingo-locked{background:#fff!important;color:#172033;border-color:#e6eaee!important}
+</style>
+<style id="wingo-polish-v3">
+@keyframes wingoWinPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(16,185,129,.35)}50%{transform:scale(1.025);box-shadow:0 0 0 14px rgba(16,185,129,0)}}
+@keyframes wingoLossPulse{0%,100%{transform:scale(1)}35%{transform:scale(.98)}65%{transform:scale(1.02)}}
+@keyframes wingoCoin{0%{transform:translateY(18px) scale(.5);opacity:0}60%{opacity:1}100%{transform:translateY(-34px) scale(1);opacity:0}}
+.wingo-popup-celebrate{position:relative;overflow:hidden}.wingo-popup-celebrate:before,.wingo-popup-celebrate:after{content:'✦';position:absolute;font-size:28px;animation:wingoCoin 1.4s ease-out infinite;opacity:0}.wingo-popup-celebrate:before{left:18%;top:55%}.wingo-popup-celebrate:after{right:18%;top:60%;animation-delay:.45s}.wingo-win-anim{animation:wingoWinPulse 1.25s ease-in-out infinite}.wingo-loss-anim{animation:wingoLossPulse .55s ease-in-out 2}.wingo-balance-flash{animation:wingoWinPulse .8s ease}.wingo-credit{margin:12px auto 0;padding:9px 12px;border-radius:12px;background:rgba(255,255,255,.14);font-size:12px;font-weight:800}.wingo-bet-closed{opacity:.65;filter:saturate(.7)}
+</style>
+<style id="one-minute-section-style">
+.one-minute-card{margin:0 0 14px;padding:16px;border-radius:20px;background:linear-gradient(135deg,#0f5132,#16a34a);color:#fff;box-shadow:0 10px 28px rgba(22,163,74,.20);position:relative;overflow:hidden;cursor:pointer;border:1px solid rgba(255,255,255,.16)}
+.one-minute-card:before{content:"";position:absolute;width:130px;height:130px;border-radius:50%;right:-38px;top:-55px;background:rgba(255,255,255,.10)}
+.one-minute-top{display:flex;align-items:center;gap:12px;position:relative;z-index:1}.one-minute-icon{width:48px;height:48px;border-radius:15px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:25px}.one-minute-title{font-size:16px;font-weight:900}.one-minute-sub{font-size:11px;opacity:.82;margin-top:3px}.one-minute-live{margin-left:auto;text-align:right}.one-minute-time{font-size:22px;font-weight:900;font-family:monospace;letter-spacing:1px}.one-minute-status{font-size:10px;font-weight:800;opacity:.9}.one-minute-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:13px;padding-top:12px;border-top:1px solid rgba(255,255,255,.15);position:relative;z-index:1}.one-minute-period{font-size:11px;opacity:.78}.one-minute-period b{display:block;font-size:13px;color:#fff;letter-spacing:.5px;margin-top:2px}.one-minute-btn{border:0;border-radius:12px;padding:10px 15px;background:#fff;color:#0f5132;font-weight:900;font-size:12px;box-shadow:0 5px 14px rgba(0,0,0,.16)}
+</style>
+<style>
+.lm-market-state{transition:.2s}.lm-trade-btn:not(.disabled):hover{filter:brightness(1.08);transform:translateY(-1px)}
+.lm-chart-wrap:after{content:'LAST 30s: NO NEW TRADES';position:absolute;right:8px;top:8px;padding:4px 7px;border-radius:6px;background:rgba(245,158,11,.12);color:#fbbf24;font:800 8px monospace;letter-spacing:.3px;opacity:0;pointer-events:none;transition:.2s}
+</style>
+<style id="games-nav-final-css">
+.games-launcher{margin:0 0 14px;border:1px solid #cfe7d8;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 8px 22px rgba(20,105,63,.08)}
+.games-launcher-head{display:flex;align-items:center;gap:11px;padding:14px 15px;background:linear-gradient(135deg,#f1fbf5,#e8f8ee);cursor:pointer}
+.games-launcher-icon{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,#16a34a,#22c55e);display:flex;align-items:center;justify-content:center;font-size:23px;box-shadow:0 6px 16px rgba(22,163,74,.22)}
+.games-launcher-main{flex:1}.games-launcher-main b{display:block;font-size:15px;color:#14532d}.games-launcher-main small{display:block;font-size:10px;color:#688072;margin-top:2px}.games-chevron{font-size:22px;color:#15803d;transition:.2s}.games-launcher.open .games-chevron{transform:rotate(180deg)}
+.games-list{display:none;padding:7px 12px 11px;background:#fbfefd}.games-list.open{display:block;animation:fadeGames .22s ease}@keyframes fadeGames{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.game-mini{display:flex;align-items:center;gap:10px;padding:10px 3px;border-bottom:1px solid #edf3ef;cursor:pointer}.game-mini:last-child{border-bottom:0}.game-mini-icon{width:38px;height:38px;border-radius:11px;background:#eff8f2;display:flex;align-items:center;justify-content:center;font-size:20px}.game-mini-main{flex:1}.game-mini-main b{display:block;font-size:13px;color:#173425}.game-mini-main small{display:block;font-size:10px;color:#71877a;margin-top:2px}.game-mini-arrow{font-size:22px;color:#39a66c}.game-coming{cursor:default;opacity:.8}.game-coming .game-mini-icon{background:#f3f4f6}.game-coming .game-mini-arrow{font-size:11px;color:#9ca3af;font-weight:800}
+body.dark .games-launcher{background:#252836;border-color:#2e3244}.dark .games-launcher-head{background:#1b2a20}.dark .games-launcher-main b{color:#dcfce7}.dark .games-launcher-main small,.dark .game-mini-main small{color:#94a3b8}.dark .games-list{background:#20252f}.dark .game-mini{border-color:#2e3244}.dark .game-mini-main b{color:#e2e8f0}
+.lm-entry-tag{font:800 9px monospace;padding:4px 6px;border-radius:5px;white-space:nowrap}
+</style>
+
+<style id="lm-candle-badge">
+.lm-chart-meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:-2px 0 7px}.lm-meta-chip{font-size:9px;font-weight:800;padding:5px 8px;border-radius:8px;background:#1a202a;border:1px solid #303847;color:#aab4c2}.lm-meta-chip strong{color:#fff}.lm-running-chip{color:#4ade80;border-color:rgba(34,197,94,.25);background:rgba(34,197,94,.07)}
+</style>
 </head>
 <body>
 <div class="app" id="theapp">
-
 <div id="loader">
-  <div class="load-logo" id="load-logo">💰</div>
-  <div class="spin"></div>
-  <div style="font-size:13px;color:var(--g);font-weight:700" id="load-txt">লোড হচ্ছে...</div>
+<div class="load-logo" id="load-logo">💰</div>
+<div class="spin"></div>
+<div id="load-txt" style="font-size:13px;color:var(--g);font-weight:700">লোড হচ্ছে...</div>
 </div>
 <div class="snack" id="snack"></div>
 <div class="maintenance-screen" id="maintenance-screen"><div class="maintenance-card"><div class="ico">🛠️</div><div style="font-size:24px;font-weight:900;margin-bottom:8px">Maintenance Mode</div><div id="maintenance-text" style="font-size:14px;line-height:1.7;opacity:.9">সার্ভার আপডেট চলছে, কিছুক্ষণ পর চেষ্টা করুন</div></div></div>
-
 <!-- ═══════════════ LOGIN ═══════════════ -->
-<div id="s-login" class="login-wrap" style="display:none;flex-direction:column">
-  <div class="login-top">
-    <div class="login-logo-wrap" id="login-logo-wrap">💰</div>
-    <div class="login-site-name" id="login-site-name">EarnifyBD</div>
-    <div class="login-tagline">
-      <span>Task করো</span><span>Refer করো</span><span>টাকা কামাও</span>
-    </div>
-  </div>
-  <div class="login-card">
-    <div class="tab-row">
-      <div class="tab active" onclick="ltab('login')">লগইন</div>
-      <div class="tab" onclick="ltab('reg')">রেজিস্ট্রেশন</div>
-    </div>
-    <!-- LOGIN -->
-    <div id="lf-login">
-      <div class="fg"><label class="flbl">📱 ফোন নম্বর</label><input class="fi" id="l-phone" type="tel" placeholder="01XXXXXXXXX" inputmode="tel"></div>
-      <div class="fg"><label class="flbl">🔒 পাসওয়ার্ড</label>
-        <div class="pw-wrap"><input class="fi" id="l-pass" type="password" placeholder="পাসওয়ার্ড দিন"><span class="pw-eye" onclick="togglePw('l-pass',this)">👁</span></div>
-      </div>
-      <div class="remember-row">
-        <input type="checkbox" id="l-remember" checked>
-        <label for="l-remember">পাসওয়ার্ড মনে রাখুন</label>
-      </div>
-      <button class="btn btn-g" onclick="doLogin()">🔑 লগইন করুন</button>
-    </div>
-    <!-- REGISTER -->
-    <div id="lf-reg" style="display:none">
-      <div class="fg"><label class="flbl">👤 পূর্ণ নাম</label><input class="fi" id="r-name" placeholder="আপনার নাম লিখুন"></div>
-      <div class="fg"><label class="flbl">📱 ফোন নম্বর</label><input class="fi" id="r-phone" type="tel" placeholder="01XXXXXXXXX" inputmode="tel"></div>
-      <div class="fg"><label class="flbl">🔒 পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)</label>
-        <div class="pw-wrap"><input class="fi" id="r-pass" type="password" placeholder="পাসওয়ার্ড তৈরি করুন"><span class="pw-eye" onclick="togglePw('r-pass',this)">👁</span></div>
-      </div>
-      <div class="fg">
-        <label class="flbl">🔗 Referral Code (ঐচ্ছিক)</label>
-        <input class="fi" id="r-ref" placeholder="EARNXXXX" style="text-transform:uppercase;font-family:monospace;font-weight:700;letter-spacing:2px">
-        <div id="r-ref-status" style="font-size:12px;margin-top:5px;display:none"></div>
-      </div>
-      <div class="notice">
-        <strong>⚠️ একাউন্ট Activation সম্পর্কে</strong>
-        রেজিস্ট্রেশনের পর <b id="reg-act-amt">৳১,০০০</b> bKash/Nagad এ পাঠিয়ে একাউন্ট Activate করতে হবে। এই <b>৳১,০০০</b> আপনার account-এ জমা থাকবে এবং account close করলে ফেরত পাবেন।
-      </div>
-      <button class="btn btn-g" onclick="doRegister()">✅ রেজিস্ট্রেশন করুন</button>
-    </div>
-  </div>
+<div class="login-wrap" id="s-login" style="display:none;flex-direction:column">
+<div class="login-top">
+<div class="login-logo-wrap" id="login-logo-wrap">💰</div>
+<div class="login-site-name" id="login-site-name">EarnifyBD</div>
+<div class="login-tagline">
+<span>Task করো</span><span>Refer করো</span><span>টাকা কামাও</span>
 </div>
-
+</div>
+<div class="login-card">
+<div class="tab-row">
+<div class="tab active" onclick="ltab('login')">লগইন</div>
+<div class="tab" onclick="ltab('reg')">রেজিস্ট্রেশন</div>
+</div>
+<!-- LOGIN -->
+<div id="lf-login">
+<div class="fg"><label class="flbl">📱 ফোন নম্বর</label><input class="fi" id="l-phone" inputmode="tel" placeholder="01XXXXXXXXX" type="tel"/></div>
+<div class="fg"><label class="flbl">🔒 পাসওয়ার্ড</label>
+<div class="pw-wrap"><input class="fi" id="l-pass" placeholder="পাসওয়ার্ড দিন" type="password"/><span class="pw-eye" onclick="togglePw('l-pass',this)">👁</span></div>
+</div>
+<div class="remember-row">
+<input checked="" id="l-remember" type="checkbox"/>
+<label for="l-remember">পাসওয়ার্ড মনে রাখুন</label>
+</div>
+<button class="btn btn-g" onclick="doLogin()">🔑 লগইন করুন</button>
+</div>
+<!-- REGISTER -->
+<div id="lf-reg" style="display:none">
+<div class="fg"><label class="flbl">👤 পূর্ণ নাম</label><input class="fi" id="r-name" placeholder="আপনার নাম লিখুন"/></div>
+<div class="fg"><label class="flbl">📱 ফোন নম্বর</label><input class="fi" id="r-phone" inputmode="tel" placeholder="01XXXXXXXXX" type="tel"/></div>
+<div class="fg"><label class="flbl">🔒 পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)</label>
+<div class="pw-wrap"><input class="fi" id="r-pass" placeholder="পাসওয়ার্ড তৈরি করুন" type="password"/><span class="pw-eye" onclick="togglePw('r-pass',this)">👁</span></div>
+</div>
+<div class="fg">
+<label class="flbl">🔗 Referral Code (ঐচ্ছিক)</label>
+<input class="fi" id="r-ref" placeholder="EARNXXXX" style="text-transform:uppercase;font-family:monospace;font-weight:700;letter-spacing:2px"/>
+<div id="r-ref-status" style="font-size:12px;margin-top:5px;display:none"></div>
+</div>
+<div class="notice">
+<strong>⚠️ একাউন্ট Activation সম্পর্কে</strong>
+        রেজিস্ট্রেশনের পর <b id="reg-act-amt">৳১০০</b> bKash/Nagad এ পাঠিয়ে একাউন্ট Activate করতে হবে। এই <b>৳১০০</b> আপনার account-এ জমা থাকবে এবং account close করলে ফেরত পাবেন।
+      </div>
+<button class="btn btn-g" onclick="doRegister()">✅ রেজিস্ট্রেশন করুন</button>
+</div>
+</div>
+</div>
 <!-- ═══════════════ HOME ═══════════════ -->
-<div id="s-home" class="screen">
-  <div class="hdr">
-    <div class="hdr-logo"><span class="hdr-logo-icon" id="h-logo">💰</span><span class="hdr-logo-name" id="h-sitename">EarnifyBD</span></div>
-    <a id="apps-btn" class="apps-btn" href="#" target="_blank" style="display:none">📱 Apps</a>
-    <div class="lang-toggle" onclick="toggleLang()" id="lang-btn">বাং</div>
-    <div class="hdr-btn" onclick="go('notifications')" style="position:relative">🔔<span class="notif-badge" id="notif-badge">0</span></div>
-    <div class="hdr-btn" onclick="toggleDark()">🌙</div>
-  </div>
-  <div id="social-bar"></div>
-  <div class="content">
-    <!-- Activation Banner -->
-    <div id="act-banner" class="act-banner" style="display:none">
-      <div class="act-banner-ttl">🚨 একাউন্ট Activate করুন</div>
-      <div class="act-banner-sub">নিচের নম্বরে <b id="abn-amt">৳১,০০০</b> Send Money করুন, তারপর Deposit করুন।<br><small style="opacity:.7">💡 এই ৳১,০০০ আপনার account-এ জমা থাকবে — close করলে ফেরত পাবেন।</small></div>
-      <div class="act-pay-row">
-        <div class="act-pay-item">
-          <div class="act-pay-item-name">📱 bKash</div>
-          <div class="act-pay-item-num" id="abn-bkash" style="color:#f34b8a">-</div>
-        </div>
-        <div class="act-pay-item" style="border-left:2px solid #f47e1b">
-          <div class="act-pay-item-name" style="color:#f47e1b">🟠 Nagad</div>
-          <div class="act-pay-item-num" id="abn-nagad" style="color:#f47e1b">-</div>
-        </div>
-      </div>
-      <button class="btn btn-gold" onclick="go('deposit')" style="margin-bottom:0">⬇️ এখনই Deposit করুন</button>
-    </div>
-    <!-- Balance Card -->
-    <div class="card card-g bal-card">
-      <div class="bal-lbl">💼 Total Balance</div>
-      <div class="bal-amt" id="h-bal">৳ 0</div>
-      <div class="bal-sub" id="h-bal-sub">যেকোনো সময় Withdraw করতে পারবেন</div>
-      <div class="bal-actions">
-        <button class="bal-action-btn" onclick="go('deposit')">⬇️ Deposit</button>
-        <button class="bal-action-btn" onclick="go('withdraw')">⬆️ Withdraw</button>
-      </div>
-    </div>
-    <!-- Stats -->
-    <div class="grid2">
-      <div class="stat-card"><div class="stat-num" id="h-tasks">0</div><div class="stat-lbl">Task Done ✅</div></div>
-      <div class="stat-card"><div class="stat-num" id="h-refs">0</div><div class="stat-lbl">Direct Refer 🔗</div></div>
-    </div>
-    <!-- Daily Check-in -->
-    <button class="ci-btn" id="ci-btn" onclick="doCheckin()">☀️ Daily Check-in <span style="background:rgba(255,255,255,.2);padding:2px 8px;border-radius:20px;font-size:12px">+১ টাকা</span></button>
-    <!-- Plans Preview Strip -->
-    <div id="home-plan-strip" style="display:none">
-      <div class="home-plan-strip">
-        <div class="home-plan-ttl">📦 Plans — Extra Income করুন</div>
-        <div class="home-plan-sub">Plan কিনলে শুধু Daily Bonus / Daily Claim পাবেন</div>
-        <div class="home-plan-row" id="home-plan-chips"></div>
-        <button class="btn btn-ghost" onclick="go('plans')" style="margin-top:10px;margin-bottom:0;font-size:12px">সব Plans দেখুন →</button>
-      </div>
-    </div>
-    <!-- VIP -->
-    <div class="card" style="margin-bottom:12px">
-      <div class="sec-hdr"><div class="sec-ttl">⭐ VIP Level</div><span id="h-vip-badge" class="badge bgold">VIP 0</span></div>
-      <div class="prog-wrap"><div class="prog-bar" id="h-vip-prog" style="width:0%"></div></div>
-      <div style="font-size:11px;color:var(--text2);margin-top:4px" id="h-vip-lbl">৫টি Refer করলে VIP 1 পাবেন</div>
-    </div>
-    <!-- Admin Notices -->
-    <div id="h-notices"></div>
-    <!-- Tasks preview -->
-    <div class="sec-hdr">
-      <div class="sec-ttl">📋 Available Tasks</div>
-      <div class="sec-lnk" onclick="go('tasks')">সব দেখুন →</div>
-    </div>
-    <div id="h-tasks-list"></div>
-    <!-- Live Chat Float Button -->
-    <div class="chat-float" id="chat-float" onclick="go('live-chat')" style="display:none">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div class="chat-float-badge" id="chat-float-badge" style="display:none">0</div>
-    </div>
-  </div>
-  <div class="bnav">
-    <div class="navi active" onclick="go('home')"><div class="ico">🏠</div>Home</div>
-    <div class="navi" onclick="go('tasks')"><div class="ico">📋</div>Tasks</div>
-    <div class="navi" onclick="go('plans')"><div class="ico">📦</div>Plans</div>
-    <div class="navi" onclick="go('wingo')" style="display:none"><div class="ico">🎯</div>Wingo</div>
-    <div class="navi" onclick="go('wallet')"><div class="ico">💳</div>Wallet</div>
-    <div class="navi" onclick="go('profile')"><div class="ico">👤</div>Me</div>
-  </div>
-</div><!-- /s-home -->
-
-<div id="s-tasks" class="screen">
-  <div class="hdr"><span class="hdr-logo-icon" id="t-logo">💰</span><span class="hdr-sub">📋 Tasks</span></div>
-  <div class="content">
-    <div style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px" id="t-filters">
-      <div class="chip active" onclick="filterTasks('all',this)">🌐 সব</div>
-      <div class="chip" onclick="filterTasks('Facebook',this)">📘 Facebook</div>
-      <div class="chip" onclick="filterTasks('YouTube',this)">📺 YouTube</div>
-      <div class="chip" onclick="filterTasks('Instagram',this)">📸 Instagram</div>
-      <div class="chip" onclick="filterTasks('Other',this)">🌐 Other</div>
-    </div>
-    <div id="tasks-list"></div>
-  </div>
-  <div class="bnav">
-    <div class="navi" onclick="go('home')"><div class="ico">🏠</div>Home</div>
-    <div class="navi active" onclick="go('tasks')"><div class="ico">📋</div>Tasks</div>
-    <div class="navi" onclick="go('plans')"><div class="ico">📦</div>Plans</div>
-    <div class="navi" onclick="go('wingo')" style="display:none"><div class="ico">🎯</div>Wingo</div>
-    <div class="navi" onclick="go('wallet')"><div class="ico">💳</div>Wallet</div>
-    <div class="navi" onclick="go('profile')"><div class="ico">👤</div>Me</div>
-  </div>
+<div class="screen" id="s-home">
+<div class="hdr">
+<div class="hdr-logo"><span class="hdr-logo-icon" id="h-logo">💰</span><span class="hdr-logo-name" id="h-sitename">EarnifyBD</span></div>
+<a class="apps-btn" href="#" id="apps-btn" style="display:none" target="_blank">📱 Apps</a>
+<div class="lang-toggle" id="lang-btn" onclick="toggleLang()">বাং</div>
+<div class="hdr-btn" onclick="go('notifications')" style="position:relative">🔔<span class="notif-badge" id="notif-badge">0</span></div>
+<div class="hdr-btn" onclick="toggleDark()">🌙</div>
 </div>
-
+<div id="social-bar"></div>
+<div class="content">
+<!-- Activation Banner -->
+<div class="act-banner" id="act-banner" style="display:none">
+<div class="act-banner-ttl">🚨 একাউন্ট Activate করুন</div>
+<div class="act-banner-sub">নিচের নম্বরে <b id="abn-amt">৳১০০</b> Send Money করুন, তারপর Deposit করুন।<br/><small style="opacity:.7">💡 এই ৳১০০ আপনার account-এ জমা থাকবে — close করলে ফেরত পাবেন।</small></div>
+<div class="act-pay-row">
+<div class="act-pay-item">
+<div class="act-pay-item-name">📱 bKash</div>
+<div class="act-pay-item-num" id="abn-bkash" style="color:#f34b8a">-</div>
+</div>
+<div class="act-pay-item" style="border-left:2px solid #f47e1b">
+<div class="act-pay-item-name" style="color:#f47e1b">🟠 Nagad</div>
+<div class="act-pay-item-num" id="abn-nagad" style="color:#f47e1b">-</div>
+</div>
+</div>
+<button class="btn btn-gold" onclick="go('deposit')" style="margin-bottom:0">⬇️ এখনই Deposit করুন</button>
+</div>
+<!-- Balance Card -->
+<div class="card card-g bal-card">
+<div class="bal-lbl">💼 Total Balance</div>
+<div class="bal-amt" id="h-bal">৳ 0</div>
+<div class="bal-sub" id="h-bal-sub">যেকোনো সময় Withdraw করতে পারবেন</div>
+<div class="bal-actions">
+<button class="bal-action-btn" onclick="go('deposit')">⬇️ Deposit</button>
+<button class="bal-action-btn" onclick="go('withdraw')">⬆️ Withdraw</button>
+</div>
+</div>
+<!-- Stats -->
+<div class="grid2">
+<div class="stat-card"><div class="stat-num" id="h-tasks">0</div><div class="stat-lbl">Task Done ✅</div></div>
+<div class="stat-card"><div class="stat-num" id="h-refs">0</div><div class="stat-lbl">Direct Refer 🔗</div></div>
+</div>
+<!-- Daily Check-in -->
+<button class="ci-btn" id="ci-btn" onclick="doCheckin()">☀️ Daily Check-in <span style="background:rgba(255,255,255,.2);padding:2px 8px;border-radius:20px;font-size:12px">+১ টাকা</span></button>
+<!-- Games launcher -->
+<div class="games-launcher" id="games-launcher">
+<div aria-expanded="false" class="games-launcher-head" onclick="toggleHomeGames()">
+<span class="games-launcher-icon">🎮</span>
+<span class="games-launcher-main"><b>Games</b><small>Wingo • Live Market • More Games</small></span>
+<span class="games-chevron">⌄</span>
+</div>
+<div class="games-list" id="home-games-list">
+<div class="game-mini game-live-card" onclick="go('wingo')"><span class="game-mini-icon wingo-game-icon">🎯</span><span class="game-mini-main"><b>Wingo</b><small>BIG / SMALL • 30s • 1m • 3m • 5m • 1.90×</small></span><span class="game-mini-arrow">›</span></div>
+<div class="game-mini game-live-card" onclick="openLiveMarket()"><span class="game-mini-icon market-game-icon">🕯️</span><span class="game-mini-main"><b>Live Market</b><small>1 Minute Candles • UP / DOWN • Chart • 1.90×</small></span><span class="game-mini-arrow">›</span></div>
+<div class="game-mini game-coming"><span class="game-mini-icon">✈️</span><span class="game-mini-main"><b>Aviator</b><small>Coming Soon</small></span><span class="game-mini-arrow">SOON</span></div>
+<div class="game-mini game-coming"><span class="game-mini-icon">🎮</span><span class="game-mini-main"><b>More Games</b><small>Coming Soon</small></span><span class="game-mini-arrow">SOON</span></div>
+</div>
+</div>
+<!-- Wingo Quick Access -->
+<div class="home-wingo-card" onclick="go('wingo')">
+<div class="home-wingo-icon">🎯</div>
+<div class="home-wingo-main"><div class="home-wingo-title">WinGo Game</div><div class="home-wingo-sub">30 Sec • 1 Min • 3 Min • 5 Min</div><div class="home-wingo-payout">Win করলে 1.90× payout</div></div>
+<div class="home-wingo-arrow">›</div>
+</div>
+<div class="one-minute-card live-market-home-card" id="home-live-market-card" onclick="openLiveMarket()">
+<div class="one-minute-top">
+<div class="one-minute-icon">🕯️</div>
+<div><div class="one-minute-title">Live Market</div><div class="one-minute-sub">1 Minute Candles • Up / Down Trade</div></div>
+<div class="one-minute-live"><div class="one-minute-time" id="home-1m-time">01:00</div><div class="one-minute-status" id="home-1m-status">MARKET OPEN</div></div>
+</div>
+<div class="one-minute-bottom"><div class="one-minute-period">Current Market<b id="home-1m-period">—</b></div><button class="one-minute-btn" onclick="event.stopPropagation();openLiveMarket()" type="button">Open Live Market →</button></div>
+</div>
+<!-- Plans Preview Strip -->
+<div id="home-plan-strip" style="display:none">
+<div class="home-plan-strip">
+<div class="home-plan-ttl">📦 Plans — Extra Income করুন</div>
+<div class="home-plan-sub">Plan কিনলে শুধু Daily Bonus / Daily Claim পাবেন</div>
+<div class="home-plan-row" id="home-plan-chips"></div>
+<button class="btn btn-ghost" onclick="go('plans')" style="margin-top:10px;margin-bottom:0;font-size:12px">সব Plans দেখুন →</button>
+</div>
+</div>
+<!-- VIP -->
+<div class="card" style="margin-bottom:12px">
+<div class="sec-hdr"><div class="sec-ttl">⭐ VIP Level</div><span class="badge bgold" id="h-vip-badge">VIP 0</span></div>
+<div class="prog-wrap"><div class="prog-bar" id="h-vip-prog" style="width:0%"></div></div>
+<div id="h-vip-lbl" style="font-size:11px;color:var(--text2);margin-top:4px">৫টি Refer করলে VIP 1 পাবেন</div>
+</div>
+<!-- Admin Notices -->
+<div id="h-notices"></div>
+<!-- Tasks preview -->
+<div class="sec-hdr">
+<div class="sec-ttl">📋 Available Tasks</div>
+<div class="sec-lnk" onclick="go('tasks')">সব দেখুন →</div>
+</div>
+<div id="h-tasks-list"></div>
+<!-- Live Chat Float Button -->
+<div class="chat-float" id="chat-float" onclick="go('live-chat')" style="display:none">
+<svg fill="none" height="26" viewbox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg"><path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<div class="chat-float-badge" id="chat-float-badge" style="display:none">0</div>
+</div>
+</div>
+<div class="bnav"><div class="navi" onclick="go('home')"><div class="ico">🏠</div>Home</div><div class="navi" onclick="go('tasks')"><div class="ico">📋</div>Tasks</div><div class="navi" onclick="go('games')"><div class="ico">🎮</div>Games</div><div class="navi" onclick="go('wallet')"><div class="ico">💳</div>Wallet</div><div class="navi" onclick="go('profile')"><div class="ico">👤</div>Me</div></div>
+</div><!-- /s-home -->
+<div class="screen" id="s-tasks">
+<div class="hdr"><span class="hdr-logo-icon" id="t-logo">💰</span><span class="hdr-sub">📋 Tasks</span></div>
+<div class="content">
+<div id="t-filters" style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px">
+<div class="chip active" onclick="filterTasks('all',this)">🌐 সব</div>
+<div class="chip" onclick="filterTasks('Facebook',this)">📘 Facebook</div>
+<div class="chip" onclick="filterTasks('YouTube',this)">📺 YouTube</div>
+<div class="chip" onclick="filterTasks('Instagram',this)">📸 Instagram</div>
+<div class="chip" onclick="filterTasks('Other',this)">🌐 Other</div>
+</div>
+<div id="tasks-list"></div>
+</div>
+<div class="bnav"><div class="navi" onclick="go('home')"><div class="ico">🏠</div>Home</div><div class="navi" onclick="go('tasks')"><div class="ico">📋</div>Tasks</div><div class="navi" onclick="go('games')"><div class="ico">🎮</div>Games</div><div class="navi" onclick="go('wallet')"><div class="ico">💳</div>Wallet</div><div class="navi" onclick="go('profile')"><div class="ico">👤</div>Me</div></div>
+</div>
 <!-- CHIP style here too -->
 <style>.chip{display:inline-block;background:var(--grayl);color:var(--text2);border-radius:20px;padding:6px 13px;font-size:12px;font-weight:700;cursor:pointer;flex-shrink:0;border:1px solid var(--border)}.chip.active{background:var(--g);color:#fff;border-color:var(--g)}</style>
-
 <!-- ═══════════════ TASK DETAIL ═══════════════ -->
-<div id="s-task-detail" class="screen">
-  <div class="hdr"><span class="hdr-back" onclick="go('tasks')">←</span><span class="hdr-sub" id="td-hdr">Task</span></div>
-  <div class="content">
-    <div class="card" style="margin-bottom:12px;padding:18px">
-      <div class="task-plat-row" id="td-plat-row"></div>
-      <div class="task-title" id="td-title" style="font-size:18px;margin-bottom:10px"></div>
-      <div class="task-desc" id="td-desc"></div>
-    </div>
-    <div class="card" style="margin-bottom:12px;background:var(--gl);border-color:var(--g2)">
-      <div style="font-size:12px;color:var(--g);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">💰 পুরস্কার</div>
-      <div style="font-size:34px;font-weight:900;color:var(--g)" id="td-reward">৳0</div>
-    </div>
-    <div id="td-link-wrap" style="display:none;margin-bottom:12px">
-      <a id="td-link" href="#" target="_blank" class="btn btn-g" style="text-decoration:none">🔗 Task Link খুলুন ↗</a>
-    </div>
-    <div id="td-done" class="notice ng" style="display:none"><strong>✅ ইতিমধ্যে সাবমিট হয়েছে</strong>Admin approval এর জন্য অপেক্ষা করুন।</div>
-    <div id="td-form">
-      <div class="flbl" style="margin-bottom:8px">📸 Screenshot সাবমিট করুন</div>
-      <div class="upload-area" id="td-upl" onclick="document.getElementById('td-file').click()">
-        <span class="uico">📷</span>
-        Screenshot এখানে click করে আপলোড করুন<br>
-        <small style="font-size:11px;opacity:.6">JPG / PNG — সর্বোচ্চ ৩MB</small>
-      </div>
-      <input type="file" id="td-file" accept="image/*" style="display:none" onchange="taskFile(this)">
-      <img id="td-prev" style="display:none;width:100%;border-radius:12px;max-height:200px;object-fit:contain;margin-bottom:10px;border:1px solid var(--border)">
-      <button class="btn btn-g" id="td-sbtn" onclick="submitTask()" disabled>📤 Submit করুন</button>
-    </div>
-  </div>
+<div class="screen" id="s-task-detail">
+<div class="hdr"><span class="hdr-back" onclick="go('tasks')">←</span><span class="hdr-sub" id="td-hdr">Task</span></div>
+<div class="content">
+<div class="card" style="margin-bottom:12px;padding:18px">
+<div class="task-plat-row" id="td-plat-row"></div>
+<div class="task-title" id="td-title" style="font-size:18px;margin-bottom:10px"></div>
+<div class="task-desc" id="td-desc"></div>
 </div>
-
+<div class="card" style="margin-bottom:12px;background:var(--gl);border-color:var(--g2)">
+<div style="font-size:12px;color:var(--g);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">💰 পুরস্কার</div>
+<div id="td-reward" style="font-size:34px;font-weight:900;color:var(--g)">৳0</div>
+</div>
+<div id="td-link-wrap" style="display:none;margin-bottom:12px">
+<a class="btn btn-g" href="#" id="td-link" style="text-decoration:none" target="_blank">🔗 Task Link খুলুন ↗</a>
+</div>
+<div class="notice ng" id="td-done" style="display:none"><strong>✅ ইতিমধ্যে সাবমিট হয়েছে</strong>Admin approval এর জন্য অপেক্ষা করুন।</div>
+<div id="td-form">
+<div class="flbl" style="margin-bottom:8px">📸 Screenshot সাবমিট করুন</div>
+<div class="upload-area" id="td-upl" onclick="document.getElementById('td-file').click()">
+<span class="uico">📷</span>
+        Screenshot এখানে click করে আপলোড করুন<br/>
+<small style="font-size:11px;opacity:.6">JPG / PNG — সর্বোচ্চ ৩MB</small>
+</div>
+<input accept="image/*" id="td-file" onchange="taskFile(this)" style="display:none" type="file"/>
+<img id="td-prev" style="display:none;width:100%;border-radius:12px;max-height:200px;object-fit:contain;margin-bottom:10px;border:1px solid var(--border)"/>
+<button class="btn btn-g" disabled="" id="td-sbtn" onclick="submitTask()">📤 Submit করুন</button>
+</div>
+</div>
+</div>
 <!-- ═══════════════ WALLET ═══════════════ -->
-<div id="s-wallet" class="screen">
-  <div class="hdr"><span class="hdr-logo-icon" id="w-logo">💰</span><span class="hdr-sub">💳 Wallet</span></div>
-  <div class="content">
-    <div class="card card-g bal-card">
-      <div class="bal-lbl">💼 Available Balance</div>
-      <div class="bal-amt" id="w-bal">৳ 0</div>
-      <div class="bal-sub" id="w-min">সর্বনিম্ন ৳100 Withdraw করা যাবে</div>
-      <div class="bal-actions">
-        <button class="bal-action-btn" onclick="go('deposit')">⬇️ Deposit</button>
-        <button class="bal-action-btn" onclick="go('withdraw')">⬆️ Withdraw</button>
-      </div>
-    </div>
-    <div class="sec-hdr"><div class="sec-ttl" id="w-hist-lbl">📜 Transaction History</div></div>
-    <div class="wfilt">
-      <div class="wfilt-btn active" onclick="filterWallet('all',this)" id="wf-all">🌐 All</div>
-      <div class="wfilt-btn" onclick="filterWallet('deposit',this)">⬇️ Deposit</div>
-      <div class="wfilt-btn" onclick="filterWallet('withdraw',this)">⬆️ Withdraw</div>
-      <div class="wfilt-btn" onclick="filterWallet('task',this)">📋 Task</div>
-      <div class="wfilt-btn" onclick="filterWallet('refer',this)">🔗 Refer</div>
-    </div>
-    <div id="w-hist"></div>
-  </div>
-  <div class="bnav">
-    <div class="navi" onclick="go('home')"><div class="ico">🏠</div>Home</div>
-    <div class="navi" onclick="go('tasks')"><div class="ico">📋</div>Tasks</div>
-    <div class="navi" onclick="go('plans')"><div class="ico">📦</div>Plans</div>
-    <div class="navi" onclick="go('wingo')" style="display:none"><div class="ico">🎯</div>Wingo</div>
-    <div class="navi active" onclick="go('wallet')"><div class="ico">💳</div>Wallet</div>
-    <div class="navi" onclick="go('profile')"><div class="ico">👤</div>Me</div>
-  </div>
+<div class="screen" id="s-wallet">
+<div class="hdr"><span class="hdr-logo-icon" id="w-logo">💰</span><span class="hdr-sub">💳 Wallet</span></div>
+<div class="content">
+<div class="card card-g bal-card">
+<div class="bal-lbl">💼 Available Balance</div>
+<div class="bal-amt" id="w-bal">৳ 0</div>
+<div class="bal-sub" id="w-min">সর্বনিম্ন ৳100 Withdraw করা যাবে</div>
+<div class="bal-actions">
+<button class="bal-action-btn" onclick="go('deposit')">⬇️ Deposit</button>
+<button class="bal-action-btn" onclick="go('withdraw')">⬆️ Withdraw</button>
+</div>
+</div>
+<div class="sec-hdr"><div class="sec-ttl" id="w-hist-lbl">📜 Transaction History</div></div>
+<div class="wfilt">
+<div class="wfilt-btn active" id="wf-all" onclick="filterWallet('all',this)">🌐 All</div>
+<div class="wfilt-btn" onclick="filterWallet('deposit',this)">⬇️ Deposit</div>
+<div class="wfilt-btn" onclick="filterWallet('withdraw',this)">⬆️ Withdraw</div>
+<div class="wfilt-btn" onclick="filterWallet('task',this)">📋 Task</div>
+<div class="wfilt-btn" onclick="filterWallet('refer',this)">🔗 Refer</div>
+</div>
+<div id="w-hist"></div>
+</div>
+<div class="bnav"><div class="navi" onclick="go('home')"><div class="ico">🏠</div>Home</div><div class="navi" onclick="go('tasks')"><div class="ico">📋</div>Tasks</div><div class="navi" onclick="go('games')"><div class="ico">🎮</div>Games</div><div class="navi" onclick="go('wallet')"><div class="ico">💳</div>Wallet</div><div class="navi" onclick="go('profile')"><div class="ico">👤</div>Me</div></div>
+</div>
+<!-- ═══════════════ LIVE MARKET GAME ═══════════════ -->
+<!-- ═══════════════ GAMES ═══════════════ -->
+<div class="screen" id="s-games">
+<div class="hdr"><span class="hdr-back" onclick="go('home')">←</span><span class="hdr-sub">🎮 Games</span></div>
+<div class="content">
+<div class="games-launcher" style="margin-top:2px">
+<div style="padding:16px 15px;background:linear-gradient(135deg,#0f5132,#16a34a);color:#fff">
+<div style="font-size:20px;font-weight:900">Game Center</div><div style="font-size:11px;opacity:.82;margin-top:4px">Wingo ও Live Market এখন চালু • আরও games শীঘ্রই আসছে</div>
+</div>
+<div class="games-list open" style="display:block">
+<div class="game-mini game-live-card" onclick="go('wingo')"><span class="game-mini-icon wingo-game-icon">🎯</span><span class="game-mini-main"><b>Wingo</b><small>BIG / SMALL • 30s / 1m / 3m / 5m • 1.90×</small></span><span class="game-mini-arrow">›</span></div>
+<div class="game-mini game-live-card" onclick="openLiveMarket()"><span class="game-mini-icon market-game-icon">🕯️</span><span class="game-mini-main"><b>Live Market</b><small>1m Candles • UP / DOWN • Chart • 1.90×</small></span><span class="game-mini-arrow">›</span></div>
+<div class="game-mini game-coming"><span class="game-mini-icon">✈️</span><span class="game-mini-main"><b>Aviator</b><small>Coming Soon</small></span><span class="game-mini-arrow">SOON</span></div>
+<div class="game-mini game-coming"><span class="game-mini-icon">🎮</span><span class="game-mini-main"><b>More Games</b><small>Coming Soon</small></span><span class="game-mini-arrow">SOON</span></div>
+</div>
+</div>
+</div>
+<div class="bnav"><div class="navi" onclick="go('home')"><div class="ico">🏠</div>Home</div><div class="navi" onclick="go('tasks')"><div class="ico">📋</div>Tasks</div><div class="navi" onclick="go('games')"><div class="ico">🎮</div>Games</div><div class="navi" onclick="go('wallet')"><div class="ico">💳</div>Wallet</div><div class="navi" onclick="go('profile')"><div class="ico">👤</div>Me</div></div>
+</div>
+<div class="screen live-market-wrap" id="s-live-market">
+<div class="live-market-hdr">
+<span class="hdr-back" onclick="go('home')">←</span>
+<div style="flex:1"><div class="lm-title">Live Market</div><div class="lm-subtitle"><span class="lm-dot"></span> 1 Minute Market</div></div>
+<div class="lm-live-pill">LIVE</div>
+</div>
+<div class="live-market-content">
+<div class="lm-balance-row"><div><div class="lm-label">Available Balance</div><div class="lm-balance" id="lm-bal">৳ 0</div></div><div class="lm-asset"><b>GBP/NZD</b><span>1 Minute</span></div></div>
+<div class="lm-chart-card">
+<div class="lm-chart-head"><div><div class="lm-symbol">GBP/NZD</div><div class="lm-price" id="lm-price">1.91211</div></div><div class="lm-market-state" id="lm-market-state">MARKET OPEN</div></div>
+<div class="lm-chart-meta"><span class="lm-meta-chip">CURRENT CANDLE <strong id="lm-current-candle-period">—</strong></span><span class="lm-meta-chip lm-running-chip">RUNNING <strong id="lm-running-candle-time">00s</strong></span><span class="lm-meta-chip">NEXT <strong id="lm-next-candle-period">—</strong></span></div><div class="lm-chart-tools"><button onclick="lmZoomOut()" title="Zoom out" type="button">−</button><button onclick="lmZoomIn()" title="Zoom in" type="button">+</button><button onclick="lmResetView()" title="Reset chart" type="button">↺</button><span id="lm-zoom-label">30 candles</span></div><div class="lm-chart-wrap" id="lm-chart-wrap"><canvas height="430" id="lm-chart" width="900"></canvas><div class="lm-price-line" id="lm-price-line"><span id="lm-price-line-label">1.91211</span></div></div>
+<div class="lm-chart-footer"><span>1m candles • BD Time • <b id="lm-data-source">SIMULATED</b></span><span id="lm-candle-time">00:00</span><span id="lm-bd-clock">BD</span></div>
+</div>
+<div class="lm-trade-card">
+<div class="lm-trade-head"><div><b>1 Minute Trade</b><span>Choose direction before the candle closes</span></div><div class="lm-countdown" id="lm-countdown">00:45</div></div>
+<div class="lm-entry-row"><span>Entry Price</span><b id="lm-entry">1.91211</b></div>
+<div class="lm-amount-title">Investment</div>
+<div class="lm-amounts">
+<button class="lm-amt active" onclick="setLiveAmt(1,this)">৳1</button><button class="lm-amt" onclick="setLiveAmt(5,this)">৳5</button><button class="lm-amt" onclick="setLiveAmt(10,this)">৳10</button><button class="lm-amt" onclick="setLiveAmt(50,this)">৳50</button><button class="lm-amt" onclick="setLiveAmt(100,this)">৳100</button>
+</div>
+<input class="lm-custom" id="lm-custom-amt" min="1" oninput="customLiveAmt(this)" placeholder="Custom amount" step="1" type="number"/>
+<div class="lm-payout-row"><span>Payout if correct</span><b id="lm-payout">৳1.90</b></div>
+<div class="lm-trade-buttons">
+<button class="lm-trade-btn lm-up" id="lm-up" onclick="placeLiveTrade('up')"><span>↗</span><div><b>UP</b><small>Tap = Trade instantly</small></div></button>
+<button class="lm-trade-btn lm-down" id="lm-down" onclick="placeLiveTrade('down')"><span>↘</span><div><b>DOWN</b><small>Tap = Trade instantly</small></div></button>
+</div>
+<div class="lm-active-trade" id="lm-active-trade" style="display:none"></div>
+</div>
+<div class="lm-history-card"><div class="lm-history-title">Recent Trades</div><div id="lm-history"></div></div>
+<div class="lm-note">Bangladesh time (Asia/Dhaka) • প্রতি 60 সেকেন্ডে নতুন 1-minute candle শুরু হয় • UP/DOWN চাপলেই সঙ্গে সঙ্গে trade হয় • chart-এ entry point ও countdown দেখা যায়।</div>
+</div>
 </div>
 <!-- ═══════════════ WINGO GAME ═══════════════ -->
-<div id="s-wingo" class="screen wingo-wrap">
-  <div class="wingo-hdr">
-    <span style="font-size:20px">🎯</span>
-    <span style="font-size:17px;font-weight:900;flex:1;letter-spacing:.5px">Wingo</span>
-    <span style="font-size:12px;color:rgba(255,255,255,.6);font-weight:700">1.90× Profit</span>
-  </div>
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px 0">
-    <div style="font-size:12px;color:rgba(255,255,255,.6);font-weight:700">আমার Balance</div>
-    <div style="font-size:18px;font-weight:900;color:#ffd700" id="wg-bal">৳ 0</div>
-  </div>
-  <div style="margin:10px 16px 0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:16px;display:flex;align-items:center;gap:16px">
-    <div style="flex:1">
-      <div class="wingo-period">পিরিয়ড নম্বর</div>
-      <div class="wingo-period-num" id="wg-period">—</div>
-      <div id="wg-phase" class="wingo-phase" style="margin-top:6px">লোড হচ্ছে...</div>
-    </div>
-    <div class="wingo-timer-ring">
-      <svg class="wingo-timer-svg" viewBox="0 0 70 70">
-        <circle class="wingo-timer-bg" cx="35" cy="35" r="30"/>
-        <circle class="wingo-timer-fg" id="wg-ring" cx="35" cy="35" r="30" style="stroke-dashoffset:0"/>
-      </svg>
-      <div class="wingo-timer-txt" id="wg-countdown">—</div>
-    </div>
-  </div>
-  <div id="wg-result-card" style="display:none"></div>
-  <div id="wg-bet-section" class="wingo-bet-section" style="margin-top:14px">
-    <div class="wingo-bet-ttl">🎲 Bet করুন — Big বা Small বেছে নিন</div>
-    <div class="wingo-bs-row">
-      <div class="wingo-bs-btn big" id="wg-btn-big" onclick="selectSide('big')">BIG 🔴<div class="wingo-bs-sub">5 – 9</div></div>
-      <div class="wingo-bs-btn small" id="wg-btn-small" onclick="selectSide('small')">SMALL 🔵<div class="wingo-bs-sub">0 – 4</div></div>
-    </div>
-    <div style="font-size:12px;color:rgba(255,255,255,.5);font-weight:700;margin-bottom:8px">Bet Amount বেছে নিন</div>
-    <div class="wingo-amt-row">
-      <div class="wingo-amt-chip active" onclick="setAmt(1,this)">৳1</div>
-      <div class="wingo-amt-chip" onclick="setAmt(5,this)">৳5</div>
-      <div class="wingo-amt-chip" onclick="setAmt(10,this)">৳10</div>
-      <div class="wingo-amt-chip" onclick="setAmt(50,this)">৳50</div>
-      <div class="wingo-amt-chip" onclick="setAmt(100,this)">৳100</div>
-    </div>
-    <input class="wingo-custom-inp" id="wg-custom-amt" type="number" min="1" placeholder="নিজে Amount লিখুন..." oninput="customAmt(this)">
-    <div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:10px">জিতলে পাবেন: <span style="color:#4caf50;font-weight:800" id="wg-win-preview">৳ 1.90</span></div>
-    <button class="wingo-place-btn" id="wg-place-btn" onclick="placeBet()">✅ Bet করুন</button>
-    <div id="wg-my-bet" style="display:none;margin-top:10px;background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:12px;padding:12px;font-size:13px;text-align:center;font-weight:700;color:#ffd700"></div>
-  </div>
-  <div id="wg-locked" class="wingo-locked" style="display:none;margin-top:14px">
-    <div style="font-size:40px;margin-bottom:10px">🔒</div>
-    <div style="font-size:16px;font-weight:800;margin-bottom:6px">একাউন্ট Activate করুন</div>
-    <div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.6">Wingo গেম খেলতে প্রথমে একাউন্ট Activate করতে হবে।</div>
-    <button class="btn btn-gold" onclick="go('deposit')" style="margin-top:14px;max-width:200px">⬇️ Deposit করুন</button>
-  </div>
-  <div class="wingo-hist-section">
-    <div class="wingo-hist-hdr">🕐 পিরিয়ড ফলাফল ও আমার Profit/Loss</div>
-    <div id="wg-period-hist"></div>
-  </div>
-  <div class="bnav">
-    <div class="navi" onclick="go('home')"><div class="ico">🏠</div>Home</div>
-    <div class="navi" onclick="go('tasks')"><div class="ico">📋</div>Tasks</div>
-    <div class="navi" onclick="go('wingo')"><div class="ico">🎯</div>Wingo</div>
-    <div class="navi" onclick="go('wallet')"><div class="ico">💳</div>Wallet</div>
-    <div class="navi" onclick="go('profile')"><div class="ico">👤</div>Me</div>
-  </div>
+<div class="screen wingo-wrap" id="s-wingo">
+<div class="wingo-hdr">
+<span style="font-size:20px">🎯</span>
+<span style="font-size:17px;font-weight:900;flex:1;letter-spacing:.5px">Wingo</span>
+<span style="font-size:12px;color:rgba(255,255,255,.6);font-weight:700">1.90× Profit</span>
 </div>
-<div id="s-deposit" class="screen">
-  <div class="hdr"><span class="hdr-back" onclick="go('wallet')">←</span><span class="hdr-sub">⬇️ Deposit</span></div>
-  <div class="content">
-    <!-- Limits -->
-    <div class="limit-row">
-      <div class="limit-box"><div class="limit-box-lbl">সর্বনিম্ন</div><div class="limit-box-val" id="dep-min-lbl">৳ 100</div></div>
-      <div class="limit-box"><div class="limit-box-lbl">সর্বোচ্চ</div><div class="limit-box-val" id="dep-max-lbl">৳ 10,000</div></div>
-    </div>
-    <!-- Step 1 -->
-    <div class="dep-step">
-      <div class="dep-step-num">১</div>
-      <div class="dep-step-body">
-        <div class="dep-step-ttl">নিচের নম্বরে Send Money করুন</div>
-        <!-- bKash -->
-        <div class="pay-method-card" style="background:linear-gradient(135deg,#fff0f4,#ffe0eb);border-color:#f34b8a">
-          <div class="pay-method-top">
-            <div class="pay-method-logo bk">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/BKash_Logo.svg/120px-BKash_Logo.svg.png" style="width:36px;height:36px;object-fit:contain;border-radius:8px" onerror="this.outerHTML='💳'">
-            </div>
-            <div>
-              <div class="pay-method-name" style="color:#e2094b">bKash</div>
-              <div class="pay-method-type" style="color:#c0195e">Send Money করুন</div>
-            </div>
-            <div style="margin-left:auto;background:#e2094b;color:#fff;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700">bKash</div>
-          </div>
-          <div class="pay-method-num" id="d-bkash" style="color:#e2094b">-</div>
-          <div class="pay-method-copy" style="background:rgba(226,9,75,.08);border-radius:9px">
-            <span style="font-size:12px;color:#c0195e;font-weight:600">নম্বরটি copy করুন</span>
-            <span class="pay-copy-btn" style="background:#e2094b;color:#fff;border:none" onclick="copyText(document.getElementById('d-bkash').textContent)">📋 Copy</span>
-          </div>
-        </div>
-        <!-- Nagad -->
-        <div class="pay-method-card" style="background:linear-gradient(135deg,#fff8f0,#ffeedd);border-color:#f47e1b">
-          <div class="pay-method-top">
-            <div class="pay-method-logo ng" style="background:linear-gradient(135deg,#f47e1b,#faa61a)">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Nagad_logo.svg/120px-Nagad_logo.svg.png" style="width:36px;height:36px;object-fit:contain;border-radius:8px" onerror="this.outerHTML='📱'">
-            </div>
-            <div>
-              <div class="pay-method-name" style="color:#e06c00">Nagad</div>
-              <div class="pay-method-type" style="color:#c05a00">Send Money করুন</div>
-            </div>
-            <div style="margin-left:auto;background:#f47e1b;color:#fff;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700">Nagad</div>
-          </div>
-          <div class="pay-method-num" id="d-nagad" style="color:#e06c00">-</div>
-          <div class="pay-method-copy" style="background:rgba(244,126,27,.08);border-radius:9px">
-            <span style="font-size:12px;color:#c05a00;font-weight:600">নম্বরটি copy করুন</span>
-            <span class="pay-copy-btn" style="background:#f47e1b;color:#fff;border:none" onclick="copyText(document.getElementById('d-nagad').textContent)">📋 Copy</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Step 2 -->
-    <div class="dep-step">
-      <div class="dep-step-num">২</div>
-      <div class="dep-step-body">
-        <div class="dep-step-ttl">নিচের Form পূরণ করুন</div>
-        <div class="fg"><label class="flbl">পরিমাণ (৳)</label><input class="fi" id="d-amt" type="number" min="100" placeholder="যে পরিমাণ পাঠিয়েছেন"></div>
-        <div class="fg"><label class="flbl">Payment Method</label><select class="fsel" id="d-mth"><option>bKash</option><option>Nagad</option></select></div>
-        <div class="fg"><label class="flbl">Transaction ID (TrxID)</label><input class="fi" id="d-trx" placeholder="যেমন: 8AB7C6D5E4" style="font-family:monospace;font-weight:700;letter-spacing:1px"></div>
-        <div class="flbl" style="margin-bottom:8px">📸 Payment Screenshot</div>
-        <div class="upload-area" id="d-upl" onclick="document.getElementById('d-ss').click()">
-          <span class="uico">📷</span>
+<div class="wg-modebar">
+<div><div class="wg-mode-title">🎮 Game Time</div><div class="wg-mode-sub">প্রতিটি mode-এর period আলাদা</div></div>
+<select class="wg-mode-select" id="wg-mode" onchange="changeWingoMode(this.value)">
+<option value="30s">30 Seconds</option><option value="1m">1 Minute</option><option value="3m">3 Minutes</option><option value="5m">5 Minutes</option>
+</select>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px 0">
+<div style="font-size:12px;color:rgba(255,255,255,.6);font-weight:700">আমার Balance</div>
+<div id="wg-bal" style="font-size:18px;font-weight:900;color:#ffd700">৳ 0</div>
+</div>
+<div style="margin:10px 16px 0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:16px;display:flex;align-items:center;gap:16px">
+<div style="flex:1">
+<div class="wingo-period">পিরিয়ড নম্বর</div>
+<div class="wingo-period-num" id="wg-period">—</div>
+<div class="wingo-phase" id="wg-phase" style="margin-top:6px">লোড হচ্ছে...</div>
+</div>
+<div class="wingo-timer-ring">
+<svg class="wingo-timer-svg" viewbox="0 0 70 70">
+<circle class="wingo-timer-bg" cx="35" cy="35" r="30"></circle>
+<circle class="wingo-timer-fg" cx="35" cy="35" id="wg-ring" r="30" style="stroke-dashoffset:0"></circle>
+</svg>
+<div class="wingo-timer-txt" id="wg-countdown">—</div>
+</div>
+</div>
+<div id="wg-result-card" style="display:none"></div>
+<div class="wingo-bet-section" id="wg-bet-section" style="margin-top:14px">
+<div class="wingo-bet-ttl">🎲 Bet করুন — Big বা Small বেছে নিন</div>
+<div class="wingo-bs-row">
+<div class="wingo-bs-btn big" id="wg-btn-big" onclick="selectSide('big')">BIG 🔴<div class="wingo-bs-sub">5 – 9</div></div>
+<div class="wingo-bs-btn small" id="wg-btn-small" onclick="selectSide('small')">SMALL 🔵<div class="wingo-bs-sub">0 – 4</div></div>
+</div>
+<div style="font-size:12px;color:rgba(255,255,255,.5);font-weight:700;margin-bottom:8px">Bet Amount বেছে নিন</div>
+<div class="wingo-amt-row">
+<div class="wingo-amt-chip active" onclick="setAmt(1,this)">৳1</div>
+<div class="wingo-amt-chip" onclick="setAmt(5,this)">৳5</div>
+<div class="wingo-amt-chip" onclick="setAmt(10,this)">৳10</div>
+<div class="wingo-amt-chip" onclick="setAmt(50,this)">৳50</div>
+<div class="wingo-amt-chip" onclick="setAmt(100,this)">৳100</div>
+</div>
+<input class="wingo-custom-inp" id="wg-custom-amt" min="1" oninput="customAmt(this)" placeholder="নিজে Amount লিখুন..." type="number"/>
+<div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:10px">জিতলে পাবেন: <span id="wg-win-preview" style="color:#4caf50;font-weight:800">৳ 1.90</span></div>
+<button class="wingo-place-btn" id="wg-place-btn" onclick="placeBet()">✅ Bet করুন</button>
+<div id="wg-my-bet" style="display:none;margin-top:10px;background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:12px;padding:12px;font-size:13px;text-align:center;font-weight:700;color:#ffd700"></div>
+</div>
+<div class="wingo-locked" id="wg-locked" style="display:none;margin-top:14px">
+<div style="font-size:40px;margin-bottom:10px">🔒</div>
+<div style="font-size:16px;font-weight:800;margin-bottom:6px">একাউন্ট Activate করুন</div>
+<div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.6">Wingo গেম খেলতে প্রথমে একাউন্ট Activate করতে হবে।</div>
+<button class="btn btn-gold" onclick="go('deposit')" style="margin-top:14px;max-width:200px">⬇️ Deposit করুন</button>
+</div>
+<div class="wingo-hist-section">
+<div class="wingo-hist-hdr">🕐 পিরিয়ড ফলাফল ও আমার Profit/Loss</div>
+<div id="wg-period-hist"></div>
+</div>
+<div class="bnav"><div class="navi" onclick="go('home')"><div class="ico">🏠</div>Home</div><div class="navi" onclick="go('tasks')"><div class="ico">📋</div>Tasks</div><div class="navi" onclick="go('games')"><div class="ico">🎮</div>Games</div><div class="navi" onclick="go('wallet')"><div class="ico">💳</div>Wallet</div><div class="navi" onclick="go('profile')"><div class="ico">👤</div>Me</div></div>
+</div>
+<div class="screen" id="s-deposit">
+<div class="hdr"><span class="hdr-back" onclick="go('wallet')">←</span><span class="hdr-sub">⬇️ Deposit</span></div>
+<div class="content">
+<!-- Limits -->
+<div class="limit-row">
+<div class="limit-box"><div class="limit-box-lbl">সর্বনিম্ন</div><div class="limit-box-val" id="dep-min-lbl">৳ 100</div></div>
+<div class="limit-box"><div class="limit-box-lbl">সর্বোচ্চ</div><div class="limit-box-val" id="dep-max-lbl">৳ 10,000</div></div>
+</div>
+<!-- Step 1 -->
+<div class="dep-step">
+<div class="dep-step-num">১</div>
+<div class="dep-step-body">
+<div class="dep-step-ttl">নিচের নম্বরে Send Money করুন</div>
+<!-- bKash -->
+<div class="pay-method-card" style="background:linear-gradient(135deg,#fff0f4,#ffe0eb);border-color:#f34b8a">
+<div class="pay-method-top">
+<div class="pay-method-logo bk">
+<img onerror="this.outerHTML='💳'" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/BKash_Logo.svg/120px-BKash_Logo.svg.png" style="width:36px;height:36px;object-fit:contain;border-radius:8px"/>
+</div>
+<div>
+<div class="pay-method-name" style="color:#e2094b">bKash</div>
+<div class="pay-method-type" style="color:#c0195e">Send Money করুন</div>
+</div>
+<div style="margin-left:auto;background:#e2094b;color:#fff;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700">bKash</div>
+</div>
+<div class="pay-method-num" id="d-bkash" style="color:#e2094b">-</div>
+<div class="pay-method-copy" style="background:rgba(226,9,75,.08);border-radius:9px">
+<span style="font-size:12px;color:#c0195e;font-weight:600">নম্বরটি copy করুন</span>
+<span class="pay-copy-btn" onclick="copyText(document.getElementById('d-bkash').textContent)" style="background:#e2094b;color:#fff;border:none">📋 Copy</span>
+</div>
+</div>
+<!-- Nagad -->
+<div class="pay-method-card" style="background:linear-gradient(135deg,#fff8f0,#ffeedd);border-color:#f47e1b">
+<div class="pay-method-top">
+<div class="pay-method-logo ng" style="background:linear-gradient(135deg,#f47e1b,#faa61a)">
+<img onerror="this.outerHTML='📱'" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Nagad_logo.svg/120px-Nagad_logo.svg.png" style="width:36px;height:36px;object-fit:contain;border-radius:8px"/>
+</div>
+<div>
+<div class="pay-method-name" style="color:#e06c00">Nagad</div>
+<div class="pay-method-type" style="color:#c05a00">Send Money করুন</div>
+</div>
+<div style="margin-left:auto;background:#f47e1b;color:#fff;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700">Nagad</div>
+</div>
+<div class="pay-method-num" id="d-nagad" style="color:#e06c00">-</div>
+<div class="pay-method-copy" style="background:rgba(244,126,27,.08);border-radius:9px">
+<span style="font-size:12px;color:#c05a00;font-weight:600">নম্বরটি copy করুন</span>
+<span class="pay-copy-btn" onclick="copyText(document.getElementById('d-nagad').textContent)" style="background:#f47e1b;color:#fff;border:none">📋 Copy</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="dep-step">
+<div class="dep-step-num">২</div>
+<div class="dep-step-body">
+<div class="dep-step-ttl">নিচের Form পূরণ করুন</div>
+<div class="fg"><label class="flbl">পরিমাণ (৳)</label><input class="fi" id="d-amt" min="100" placeholder="যে পরিমাণ পাঠিয়েছেন" type="number"/></div>
+<div class="fg"><label class="flbl">Payment Method</label><select class="fsel" id="d-mth"><option>bKash</option><option>Nagad</option></select></div>
+<div class="fg"><label class="flbl">Transaction ID (TrxID)</label><input class="fi" id="d-trx" placeholder="যেমন: 8AB7C6D5E4" style="font-family:monospace;font-weight:700;letter-spacing:1px"/></div>
+<div class="flbl" style="margin-bottom:8px">📸 Payment Screenshot</div>
+<div class="upload-area" id="d-upl" onclick="document.getElementById('d-ss').click()">
+<span class="uico">📷</span>
           Payment এর Screenshot আপলোড করুন
         </div>
-        <input type="file" id="d-ss" accept="image/*" style="display:none" onchange="depFile(this)">
-        <img id="d-prev" style="display:none;width:100%;border-radius:12px;max-height:160px;object-fit:contain;margin-bottom:10px;border:1px solid var(--border)">
-      </div>
-    </div>
-    <!-- Step 3 -->
-    <div class="dep-step">
-      <div class="dep-step-num">৩</div>
-      <div class="dep-step-body">
-        <div class="dep-step-ttl">Submit করুন → Admin approve করবেন</div>
-        <button class="btn btn-g" onclick="submitDeposit()">📤 Deposit Submit করুন</button>
-      </div>
-    </div>
-  </div>
+<input accept="image/*" id="d-ss" onchange="depFile(this)" style="display:none" type="file"/>
+<img id="d-prev" style="display:none;width:100%;border-radius:12px;max-height:160px;object-fit:contain;margin-bottom:10px;border:1px solid var(--border)"/>
 </div>
-
+</div>
+<!-- Step 3 -->
+<div class="dep-step">
+<div class="dep-step-num">৩</div>
+<div class="dep-step-body">
+<div class="dep-step-ttl">Submit করুন → Admin approve করবেন</div>
+<button class="btn btn-g" onclick="submitDeposit()">📤 Deposit Submit করুন</button>
+</div>
+</div>
+</div>
+</div>
 <!-- ═══════════════ WITHDRAW ═══════════════ -->
-<div id="s-withdraw" class="screen">
-  <div class="hdr"><span class="hdr-back" onclick="go('wallet')">←</span><span class="hdr-sub">⬆️ Withdraw</span></div>
-  <div class="content">
-    <div class="card card-g bal-card" style="margin-bottom:14px">
-      <div class="bal-lbl">Available to Withdraw</div><div class="bal-amt" id="wd-bal">৳ 0</div>
-      <div class="bal-sub" id="wd-act-bal-info" style="background:rgba(255,215,0,.15);border-radius:8px;padding:6px 10px;margin-top:8px;font-size:12px"></div>
-    </div>
-    <!-- Limits -->
-    <div class="limit-row">
-      <div class="limit-box"><div class="limit-box-lbl">সর্বনিম্ন</div><div class="limit-box-val" id="wd-min-lbl">৳ 100</div></div>
-      <div class="limit-box"><div class="limit-box-lbl">সর্বোচ্চ</div><div class="limit-box-val" id="wd-max-lbl">৳ 25,000</div></div>
-    </div>
-    <div class="notice nblue" id="wd-invite-notice" style="display:none">⚠️ <strong>Withdraw করতে হলে</strong> প্রথমে ১ জনকে Invite করে Active করতে হবে। <span onclick="go('refer')" style="color:var(--blue);font-weight:700;cursor:pointer">Invite করুন →</span></div>
-    <div class="fg"><label class="flbl">পরিমাণ (৳)</label><input class="fi" id="wd-amt" type="number" min="100" placeholder="যে পরিমাণ তুলতে চান"></div>
-    <div class="fg"><label class="flbl">Method</label><select class="fsel" id="wd-mth"><option>bKash</option><option>Nagad</option></select></div>
-    <div class="fg"><label class="flbl">আপনার bKash/Nagad নম্বর</label><input class="fi" id="wd-num" type="tel" placeholder="01XXXXXXXXX" inputmode="tel"></div>
-    <div class="notice">⚠️ Admin manually আপনার নম্বরে পাঠাবেন। সাধারণত ১-২৪ ঘণ্টার মধ্যে।</div>
-    <button class="btn btn-g" onclick="submitWithdraw()">📤 Withdraw Request করুন</button>
-  </div>
+<div class="screen" id="s-withdraw">
+<div class="hdr"><span class="hdr-back" onclick="go('wallet')">←</span><span class="hdr-sub">⬆️ Withdraw</span></div>
+<div class="content">
+<div class="card card-g bal-card" style="margin-bottom:14px">
+<div class="bal-lbl">Available to Withdraw</div><div class="bal-amt" id="wd-bal">৳ 0</div>
+<div class="bal-sub" id="wd-act-bal-info" style="background:rgba(255,215,0,.15);border-radius:8px;padding:6px 10px;margin-top:8px;font-size:12px"></div>
 </div>
-
+<!-- Limits -->
+<div class="limit-row">
+<div class="limit-box"><div class="limit-box-lbl">সর্বনিম্ন</div><div class="limit-box-val" id="wd-min-lbl">৳ 100</div></div>
+<div class="limit-box"><div class="limit-box-lbl">সর্বোচ্চ</div><div class="limit-box-val" id="wd-max-lbl">৳ 25,000</div></div>
+</div>
+<div class="notice nblue" id="wd-invite-notice" style="display:none">⚠️ <strong>Withdraw করতে হলে</strong> প্রথমে ১ জনকে Invite করে Active করতে হবে। <span onclick="go('refer')" style="color:var(--blue);font-weight:700;cursor:pointer">Invite করুন →</span></div>
+<div class="fg"><label class="flbl">পরিমাণ (৳)</label><input class="fi" id="wd-amt" min="100" placeholder="যে পরিমাণ তুলতে চান" type="number"/></div>
+<div class="fg"><label class="flbl">Method</label><select class="fsel" id="wd-mth"><option>bKash</option><option>Nagad</option></select></div>
+<div class="fg"><label class="flbl">আপনার bKash/Nagad নম্বর</label><input class="fi" id="wd-num" inputmode="tel" placeholder="01XXXXXXXXX" type="tel"/></div>
+<div class="notice">⚠️ Admin manually আপনার নম্বরে পাঠাবেন। সাধারণত ১-২৪ ঘণ্টার মধ্যে।</div>
+<button class="btn btn-g" onclick="submitWithdraw()">📤 Withdraw Request করুন</button>
+</div>
+</div>
 <!-- ═══════════════ REFER ═══════════════ -->
-<div id="s-refer" class="screen">
-  <div class="hdr"><span class="hdr-logo-icon" id="r-logo">💰</span><span class="hdr-sub">🔗 Refer &amp; Earn</span></div>
-  <div class="content">
-    <!-- Locked state -->
-    <div id="ref-locked" class="ref-locked" style="display:none">
-      <div class="ref-locked-ico">🔒</div>
-      <div class="ref-locked-ttl">Refer System Locked</div>
-      <div class="ref-locked-sub">একাউন্ট Activate করলে Referral Code ও Link পাবেন এবং Refer করে টাকা আয় করতে পারবেন।</div>
-      <button class="btn btn-gold" onclick="go('deposit')" style="margin-top:14px;margin-bottom:0">⬇️ একাউন্ট Activate করুন</button>
-    </div>
-    <!-- Active state -->
-    <div id="ref-active" style="display:none">
-      <div class="ref-active-card">
-        <div style="font-size:13px;opacity:.8;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">আপনার Referral Code</div>
-        <div class="ref-code-wrap">
-          <div class="ref-code-txt" id="ref-code">-</div>
-          <div class="ref-code-copy" onclick="copyRefCode()">📋 Copy</div>
-        </div>
-        <div style="font-size:12px;opacity:.75;margin-bottom:8px;font-weight:600">অথবা সরাসরি Link শেয়ার করুন:</div>
-        <div class="ref-link-wrap">
-          <span class="ref-link-txt" id="ref-link-txt">-</span>
-          <span class="ref-code-copy" onclick="copyRefLink()" style="flex-shrink:0">🔗 Link Copy</span>
-        </div>
-        <div style="font-size:12px;opacity:.7">বন্ধুরা এই link/code দিয়ে account করে <b id="ref-act-amt">৳১,০০০</b> দিয়ে active করলে আপনি bonus পাবেন।</div>
-      </div>
-      <!-- Gen table -->
-      <div class="card" style="margin-bottom:12px">
-        <div class="sec-ttl" style="margin-bottom:12px">💰 Refer Bonus — ৮ Generation</div>
-        <div id="ref-gen-table"></div>
-      </div>
-      <!-- Referred users list -->
-      <div class="card" style="margin-bottom:12px" id="ref-users-card">
-        <div class="sec-ttl" style="margin-bottom:12px">👥 Referred Users</div>
-        <div id="ref-users-list"><div style="color:var(--text2);font-size:13px;text-align:center;padding:16px">লোড হচ্ছে...</div></div>
-      </div>
-      <!-- Stats -->
-      <div class="grid2" style="margin-bottom:12px">
-        <div class="stat-card"><div class="stat-num" id="ref-direct">0</div><div class="stat-lbl">Direct Refer 🔗</div></div>
-        <div class="stat-card"><div class="stat-num" id="ref-earned">৳0</div><div class="stat-lbl">Refer Income 💰</div></div>
-      </div>
-    </div>
-    <!-- VIP (always visible) -->
-    <div class="card">
-      <div class="sec-ttl" style="margin-bottom:12px">⭐ VIP Levels (VIP 0 → VIP 12)</div>
-      <div class="vip-scroll" id="ref-vip-bar"></div>
-      <div style="font-size:12px;color:var(--text2);padding:6px 0" id="ref-vip-next"></div>
-      <div style="margin-top:10px;border-top:1px solid var(--border);padding-top:10px">
-        <div class="sec-ttl" style="font-size:13px;margin-bottom:8px">📈 VIP 0–12 Profit List</div>
-        <div id="ref-vip-profit-list"></div>
-      </div>
-    </div>
-  </div>
-  <div class="bnav">
-    <div class="navi" onclick="go('home')"><div class="ico">🏠</div>Home</div>
-    <div class="navi" onclick="go('tasks')"><div class="ico">📋</div>Tasks</div>
-    <div class="navi" onclick="go('wallet')"><div class="ico">💳</div>Wallet</div>
-    <div class="navi active" onclick="go('refer')"><div class="ico">🔗</div>Refer</div>
-    <div class="navi" onclick="go('profile')"><div class="ico">👤</div>Me</div>
-  </div>
+<div class="screen" id="s-refer">
+<div class="hdr"><span class="hdr-logo-icon" id="r-logo">💰</span><span class="hdr-sub">🔗 Refer &amp; Earn</span></div>
+<div class="content">
+<!-- Locked state -->
+<div class="ref-locked" id="ref-locked" style="display:none">
+<div class="ref-locked-ico">🔒</div>
+<div class="ref-locked-ttl">Refer System Locked</div>
+<div class="ref-locked-sub">একাউন্ট Activate করলে Referral Code ও Link পাবেন এবং Refer করে টাকা আয় করতে পারবেন।</div>
+<button class="btn btn-gold" onclick="go('deposit')" style="margin-top:14px;margin-bottom:0">⬇️ একাউন্ট Activate করুন</button>
 </div>
-
+<!-- Active state -->
+<div id="ref-active" style="display:none">
+<div class="ref-active-card">
+<div style="font-size:13px;opacity:.8;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">আপনার Referral Code</div>
+<div class="ref-code-wrap">
+<div class="ref-code-txt" id="ref-code">-</div>
+<div class="ref-code-copy" onclick="copyRefCode()">📋 Copy</div>
+</div>
+<div style="font-size:12px;opacity:.75;margin-bottom:8px;font-weight:600">অথবা সরাসরি Link শেয়ার করুন:</div>
+<div class="ref-link-wrap">
+<span class="ref-link-txt" id="ref-link-txt">-</span>
+<span class="ref-code-copy" onclick="copyRefLink()" style="flex-shrink:0">🔗 Link Copy</span>
+</div>
+<div style="font-size:12px;opacity:.7">বন্ধুরা এই link/code দিয়ে account করে <b id="ref-act-amt">৳১০০</b> দিয়ে active করলে আপনি bonus পাবেন।</div>
+</div>
+<!-- Gen table -->
+<div class="card" style="margin-bottom:12px">
+<div class="sec-ttl" style="margin-bottom:12px">💰 Refer Bonus — ৮ Generation</div>
+<div id="ref-gen-table"></div>
+</div>
+<!-- Referred users list -->
+<div class="card" id="ref-users-card" style="margin-bottom:12px">
+<div class="sec-ttl" style="margin-bottom:12px">👥 Referred Users</div>
+<div id="ref-users-list"><div style="color:var(--text2);font-size:13px;text-align:center;padding:16px">লোড হচ্ছে...</div></div>
+</div>
+<!-- Stats -->
+<div class="grid2" style="margin-bottom:12px">
+<div class="stat-card"><div class="stat-num" id="ref-direct">0</div><div class="stat-lbl">Direct Refer 🔗</div></div>
+<div class="stat-card"><div class="stat-num" id="ref-earned">৳0</div><div class="stat-lbl">Refer Income 💰</div></div>
+</div>
+</div>
+<!-- VIP (always visible) -->
+<div class="card">
+<div class="sec-ttl" style="margin-bottom:12px">⭐ VIP Levels (VIP 0 → VIP 12)</div>
+<div class="vip-scroll" id="ref-vip-bar"></div>
+<div id="ref-vip-next" style="font-size:12px;color:var(--text2);padding:6px 0"></div>
+<div style="margin-top:10px;border-top:1px solid var(--border);padding-top:10px">
+<div class="sec-ttl" style="font-size:13px;margin-bottom:8px">📈 VIP 0–12 Profit List</div>
+<div id="ref-vip-profit-list"></div>
+</div>
+</div>
+</div>
+<div class="bnav"><div class="navi" onclick="go('home')"><div class="ico">🏠</div>Home</div><div class="navi" onclick="go('tasks')"><div class="ico">📋</div>Tasks</div><div class="navi" onclick="go('games')"><div class="ico">🎮</div>Games</div><div class="navi" onclick="go('wallet')"><div class="ico">💳</div>Wallet</div><div class="navi" onclick="go('profile')"><div class="ico">👤</div>Me</div></div>
+</div>
 <!-- ═══════════════ PROFILE ═══════════════ -->
-<div id="s-profile" class="screen">
-  <div class="prof-banner">
-    <div class="avatar-circle" id="p-av">👤</div>
-    <div class="prof-name" id="p-name">-</div>
-    <div class="prof-phone" id="p-phone">-</div>
-    <div style="margin-top:10px;display:flex;gap:6px;justify-content:center" id="p-badges"></div>
-  </div>
-  <div class="content" style="padding-top:12px">
-    <div class="menu-item" onclick="go('wallet')"><div class="menu-ico">💳</div><div class="menu-txt">Wallet & History</div><div style="color:var(--text2)">›</div></div>
-    <div class="menu-item" onclick="go('deposit')"><div class="menu-ico" style="background:#e8f5fe">⬇️</div><div class="menu-txt">Deposit</div><div style="color:var(--text2)">›</div></div>
-    <div class="menu-item" onclick="go('withdraw')"><div class="menu-ico" style="background:var(--redl)">⬆️</div><div class="menu-txt">Withdraw</div><div style="color:var(--text2)">›</div></div>
-    <div class="menu-item" onclick="go('refer')"><div class="menu-ico">🔗</div><div class="menu-txt">Refer & Earn</div><div style="color:var(--text2)">›</div></div>
-    <div class="menu-item" id="chat-menu-item" onclick="go('live-chat')"><div class="menu-ico">💬</div><div class="menu-txt">Live Chat (Support)</div><div style="color:var(--text2)">›</div></div>
-    <div class="menu-item" onclick="go('edit-profile')"><div class="menu-ico">✏️</div><div class="menu-txt">Profile Edit করুন</div><div style="color:var(--text2)">›</div></div>
-    <div class="menu-item" onclick="go('account-close')"><div class="menu-ico" style="background:var(--redl)">🔒</div><div class="menu-txt" style="color:var(--red)">Account Close করুন</div><div style="color:var(--text2)">›</div></div>
-    <div class="divider"></div>
-    <div class="menu-item" onclick="doLogout()"><div class="menu-ico" style="background:var(--redl)">🚪</div><div class="menu-txt" style="color:var(--red);font-weight:700">Logout</div></div>
-  </div>
-  <div class="bnav">
-    <div class="navi" onclick="go('home')"><div class="ico">🏠</div>Home</div>
-    <div class="navi" onclick="go('tasks')"><div class="ico">📋</div>Tasks</div>
-    <div class="navi" onclick="go('wallet')"><div class="ico">💳</div>Wallet</div>
-    <div class="navi" onclick="go('wingo')" style="display:none"><div class="ico">🎯</div>Wingo</div>
-    <div class="navi" onclick="go('refer')"><div class="ico">🔗</div>Refer</div>
-    <div class="navi active" onclick="go('profile')"><div class="ico">👤</div>Me</div>
-  </div>
+<div class="screen" id="s-profile">
+<div class="prof-banner">
+<div class="avatar-circle" id="p-av">👤</div>
+<div class="prof-name" id="p-name">-</div>
+<div class="prof-phone" id="p-phone">-</div>
+<div id="p-badges" style="margin-top:10px;display:flex;gap:6px;justify-content:center"></div>
 </div>
-
+<div class="content" style="padding-top:12px">
+<div class="menu-item" onclick="go('wallet')"><div class="menu-ico">💳</div><div class="menu-txt">Wallet &amp; History</div><div style="color:var(--text2)">›</div></div>
+<div class="menu-item" onclick="go('deposit')"><div class="menu-ico" style="background:#e8f5fe">⬇️</div><div class="menu-txt">Deposit</div><div style="color:var(--text2)">›</div></div>
+<div class="menu-item" onclick="go('withdraw')"><div class="menu-ico" style="background:var(--redl)">⬆️</div><div class="menu-txt">Withdraw</div><div style="color:var(--text2)">›</div></div>
+<div class="menu-item" onclick="go('refer')"><div class="menu-ico">🔗</div><div class="menu-txt">Refer &amp; Earn</div><div style="color:var(--text2)">›</div></div>
+<div class="menu-item" id="chat-menu-item" onclick="go('live-chat')"><div class="menu-ico">💬</div><div class="menu-txt">Live Chat (Support)</div><div style="color:var(--text2)">›</div></div>
+<div class="menu-item" onclick="go('edit-profile')"><div class="menu-ico">✏️</div><div class="menu-txt">Profile Edit করুন</div><div style="color:var(--text2)">›</div></div>
+<div class="menu-item" onclick="go('account-close')"><div class="menu-ico" style="background:var(--redl)">🔒</div><div class="menu-txt" style="color:var(--red)">Account Close করুন</div><div style="color:var(--text2)">›</div></div>
+<div class="divider"></div>
+<div class="menu-item" onclick="doLogout()"><div class="menu-ico" style="background:var(--redl)">🚪</div><div class="menu-txt" style="color:var(--red);font-weight:700">Logout</div></div>
+</div>
+<div class="bnav"><div class="navi" onclick="go('home')"><div class="ico">🏠</div>Home</div><div class="navi" onclick="go('tasks')"><div class="ico">📋</div>Tasks</div><div class="navi" onclick="go('games')"><div class="ico">🎮</div>Games</div><div class="navi" onclick="go('wallet')"><div class="ico">💳</div>Wallet</div><div class="navi" onclick="go('profile')"><div class="ico">👤</div>Me</div></div>
+</div>
 <!-- ═══════════════ EDIT PROFILE ═══════════════ -->
-<div id="s-edit-profile" class="screen">
-  <div class="hdr"><span class="hdr-back" onclick="go('profile')">←</span><span class="hdr-sub">✏️ Edit Profile</span></div>
-  <div class="content">
-    <div class="fg"><label class="flbl">👤 পূর্ণ নাম</label><input class="fi" id="ep-name"></div>
-    <div class="fg"><label class="flbl">🔵 Facebook Profile Link</label><input class="fi" id="ep-fb" placeholder="https://facebook.com/yourname"></div>
-    <button class="btn btn-g" onclick="saveProfile()">✅ Save করুন</button>
-    <div class="divider"></div>
-    <div style="font-size:15px;font-weight:800;margin-bottom:14px">🔒 পাসওয়ার্ড পরিবর্তন</div>
-    <div class="fg"><label class="flbl">পুরনো পাসওয়ার্ড</label><input class="fi" id="ep-old" type="password"></div>
-    <div class="fg"><label class="flbl">নতুন পাসওয়ার্ড</label><input class="fi" id="ep-new" type="password"></div>
-    <button class="btn btn-out" onclick="changePass()">🔑 পাসওয়ার্ড পরিবর্তন করুন</button>
-  </div>
+<div class="screen" id="s-edit-profile">
+<div class="hdr"><span class="hdr-back" onclick="go('profile')">←</span><span class="hdr-sub">✏️ Edit Profile</span></div>
+<div class="content">
+<div class="fg"><label class="flbl">👤 পূর্ণ নাম</label><input class="fi" id="ep-name"/></div>
+<div class="fg"><label class="flbl">🔵 Facebook Profile Link</label><input class="fi" id="ep-fb" placeholder="https://facebook.com/yourname"/></div>
+<button class="btn btn-g" onclick="saveProfile()">✅ Save করুন</button>
+<div class="divider"></div>
+<div style="font-size:15px;font-weight:800;margin-bottom:14px">🔒 পাসওয়ার্ড পরিবর্তন</div>
+<div class="fg"><label class="flbl">পুরনো পাসওয়ার্ড</label><input class="fi" id="ep-old" type="password"/></div>
+<div class="fg"><label class="flbl">নতুন পাসওয়ার্ড</label><input class="fi" id="ep-new" type="password"/></div>
+<button class="btn btn-out" onclick="changePass()">🔑 পাসওয়ার্ড পরিবর্তন করুন</button>
 </div>
-
+</div>
 <!-- ═══════════════ PLANS ═══════════════ -->
-<div id="s-plans" class="screen">
-  <div class="hdr"><span class="hdr-logo-icon" id="pl-logo">💰</span><span class="hdr-sub" id="pl-hdr">📦 Plans</span></div>
-  <div class="content">
-    <!-- My active plan -->
-    <div id="my-plan-section" style="display:none">
-      <div class="card card-g bal-card" id="my-plan-card">
-        <div class="bal-lbl">📦 Active Plan</div>
-        <div class="bal-amt" id="mp-name" style="font-size:20px">-</div>
-        <div class="bal-sub" id="mp-expiry">-</div>
-        <div style="background:rgba(255,255,255,.15);border-radius:10px;padding:10px;margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="text-align:center"><div style="font-size:18px;font-weight:900" id="mp-daily">-</div><div style="font-size:10px;opacity:.7">Daily Bonus</div></div>
-          <div style="text-align:center"><div style="font-size:18px;font-weight:900" id="mp-days-left">-</div><div style="font-size:10px;opacity:.7">Days Left</div></div>
-        </div>
-        <button class="btn btn-ghost" onclick="claimPlanBonus()" id="plan-claim-btn" style="margin-top:12px;margin-bottom:0">☀️ Daily Bonus Claim করুন</button>
-      </div>
-    </div>
-    <!-- Buy plan notice -->
-    <div id="plan-buy-notice" class="notice ng" style="display:none">
-      <strong>💡 Plan কিনুন, বেশি আয় করুন!</strong>
+<div class="screen" id="s-plans">
+<div class="hdr"><span class="hdr-logo-icon" id="pl-logo">💰</span><span class="hdr-sub" id="pl-hdr">📦 Plans</span></div>
+<div class="content">
+<!-- My active plan -->
+<div id="my-plan-section" style="display:none">
+<div class="card card-g bal-card" id="my-plan-card">
+<div class="bal-lbl">📦 Active Plan</div>
+<div class="bal-amt" id="mp-name" style="font-size:20px">-</div>
+<div class="bal-sub" id="mp-expiry">-</div>
+<div style="background:rgba(255,255,255,.15);border-radius:10px;padding:10px;margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div style="text-align:center"><div id="mp-daily" style="font-size:18px;font-weight:900">-</div><div style="font-size:10px;opacity:.7">Daily Bonus</div></div>
+<div style="text-align:center"><div id="mp-days-left" style="font-size:18px;font-weight:900">-</div><div style="font-size:10px;opacity:.7">Days Left</div></div>
+</div>
+<button class="btn btn-ghost" id="plan-claim-btn" onclick="claimPlanBonus()" style="margin-top:12px;margin-bottom:0">☀️ Daily Bonus Claim করুন</button>
+</div>
+</div>
+<!-- Buy plan notice -->
+<div class="notice ng" id="plan-buy-notice" style="display:none">
+<strong>💡 Plan কিনুন, বেশি আয় করুন!</strong>
       Plan কিনলে প্রতিদিন Bonus + Extra Task পাবেন। Deposit করে plan কিনুন।
     </div>
-    <!-- Plans list -->
-    <div class="sec-hdr"><div class="sec-ttl" id="pl-all-lbl">📋 সব Plans</div></div>
-    <div id="plans-list"></div>
-  </div>
-  <div class="bnav">
-    <div class="navi" onclick="go('home')"><div class="ico">🏠</div>Home</div>
-    <div class="navi" onclick="go('tasks')"><div class="ico">📋</div>Tasks</div>
-    <div class="navi active" onclick="go('plans')"><div class="ico">📦</div><span id="nav-plans-lbl">Plans</span></div>
-    <div class="navi" onclick="go('wingo')" style="display:none"><div class="ico">🎯</div>Wingo</div>
-    <div class="navi" onclick="go('wallet')"><div class="ico">💳</div>Wallet</div>
-    <div class="navi" onclick="go('profile')"><div class="ico">👤</div>Me</div>
-  </div>
+<!-- Plans list -->
+<div class="sec-hdr"><div class="sec-ttl" id="pl-all-lbl">📋 সব Plans</div></div>
+<div id="plans-list"></div>
 </div>
-
+<div class="bnav"><div class="navi" onclick="go('home')"><div class="ico">🏠</div>Home</div><div class="navi" onclick="go('tasks')"><div class="ico">📋</div>Tasks</div><div class="navi" onclick="go('games')"><div class="ico">🎮</div>Games</div><div class="navi" onclick="go('wallet')"><div class="ico">💳</div>Wallet</div><div class="navi" onclick="go('profile')"><div class="ico">👤</div>Me</div></div>
+</div>
 <!-- ═══════════════ ACCOUNT CLOSE ═══════════════ -->
-<div id="s-account-close" class="screen">
-  <div class="hdr"><span class="hdr-back" onclick="go('profile')">←</span><span class="hdr-sub">🔒 Account Close</span></div>
-  <div class="content">
-    <div class="notice ng" style="font-size:14px;padding:16px">
-      <strong>💰 Account Close করলে কী পাবেন?</strong>
-      <div style="margin-top:6px;line-height:1.8">
-        ✅ Activation Amount: <b id="ac-refund-amt">৳১,০০০</b> ফেরত পাবেন<br>
-        ✅ বর্তমান Wallet Balance: <b id="ac-cur-bal">৳ 0</b> ফেরত পাবেন<br>
+<div class="screen" id="s-account-close">
+<div class="hdr"><span class="hdr-back" onclick="go('profile')">←</span><span class="hdr-sub">🔒 Account Close</span></div>
+<div class="content">
+<div class="notice ng" style="font-size:14px;padding:16px">
+<strong>💰 Account Close করলে কী পাবেন?</strong>
+<div style="margin-top:6px;line-height:1.8">
+        ✅ Activation Amount: <b id="ac-refund-amt">৳১০০</b> ফেরত পাবেন<br/>
+        ✅ বর্তমান Wallet Balance: <b id="ac-cur-bal">৳ 0</b> ফেরত পাবেন<br/>
         📱 Admin bKash/Nagad এ manually পাঠাবেন
       </div>
-    </div>
-    <div class="close-info-row"><span style="font-size:22px">⚠️</span><span>একবার Close করলে সব Data মুছে যাবে — পূর্বাবস্থায় ফেরানো যাবে না।</span></div>
-    <div style="height:10px"></div>
-    <div class="fg"><label class="flbl">Method</label><select class="fsel" id="ac-mth"><option>bKash</option><option>Nagad</option></select></div>
-    <div class="fg"><label class="flbl">আপনার নম্বর</label><input class="fi" id="ac-num" type="tel" placeholder="01XXXXXXXXX"></div>
-    <div class="notice nred"><strong>⚠️ সতর্কতা</strong>একবার Close করলে পূর্বাবস্থায় ফেরানো যাবে না।</div>
-    <button class="btn btn-red" onclick="submitAccountClose()">🔒 Account Close Request করুন</button>
-  </div>
 </div>
-
+<div class="close-info-row"><span style="font-size:22px">⚠️</span><span>একবার Close করলে সব Data মুছে যাবে — পূর্বাবস্থায় ফেরানো যাবে না।</span></div>
+<div style="height:10px"></div>
+<div class="fg"><label class="flbl">Method</label><select class="fsel" id="ac-mth"><option>bKash</option><option>Nagad</option></select></div>
+<div class="fg"><label class="flbl">আপনার নম্বর</label><input class="fi" id="ac-num" placeholder="01XXXXXXXXX" type="tel"/></div>
+<div class="notice nred"><strong>⚠️ সতর্কতা</strong>একবার Close করলে পূর্বাবস্থায় ফেরানো যাবে না।</div>
+<button class="btn btn-red" onclick="submitAccountClose()">🔒 Account Close Request করুন</button>
+</div>
+</div>
 <!-- ═══════════════ NOTIFICATIONS ═══════════════ -->
-<div id="s-notifications" class="screen">
-  <div class="hdr"><span class="hdr-back" onclick="go('home')">←</span><span class="hdr-sub">🔔 Notifications</span></div>
-  <div class="content" id="notif-list"></div>
+<div class="screen" id="s-notifications">
+<div class="hdr"><span class="hdr-back" onclick="go('home')">←</span><span class="hdr-sub">🔔 Notifications</span></div>
+<div class="content" id="notif-list"></div>
 </div>
-
 <!-- ═══ LIVE CHAT ═══ -->
-<div id="s-live-chat" class="screen">
-  <div class="hdr"><span class="hdr-back" onclick="go('home')">←</span><span class="hdr-sub">💬 Live Chat — Support</span></div>
-  <div class="content" style="padding-bottom:80px">
-    <!-- TG support button at top -->
-    <div id="chat-tg-btn" style="display:none;margin-bottom:14px;text-align:center"></div>
-    <!-- Chat messages -->
-    <div id="user-chat-msgs" style="min-height:200px"></div>
-  </div>
-  <!-- Message input bar - site themed green -->
-  <div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:linear-gradient(135deg,var(--g),var(--gm));padding:12px 14px;display:flex;gap:8px;z-index:60;box-shadow:0 -4px 16px rgba(20,105,63,.25)">
-    <input class="fi" id="user-chat-inp" placeholder="Message লিখুন..." style="flex:1;border-radius:24px;padding:10px 16px;font-size:14px;border:none;background:#fff;color:var(--text)">
-    <button onclick="sendUserChat()" style="width:44px;height:44px;border-radius:50%;background:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.15);transition:.15s" onmousedown="this.style.transform='scale(.92)'" onmouseup="this.style.transform='scale(1)'">➤</button>
-  </div>
+<div class="screen" id="s-live-chat">
+<div class="hdr"><span class="hdr-back" onclick="go('home')">←</span><span class="hdr-sub">💬 Live Chat — Support</span></div>
+<div class="content" style="padding-bottom:80px">
+<!-- TG support button at top -->
+<div id="chat-tg-btn" style="display:none;margin-bottom:14px;text-align:center"></div>
+<!-- Chat messages -->
+<div id="user-chat-msgs" style="min-height:200px"></div>
 </div>
-
+<!-- Message input bar - site themed green -->
+<div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:linear-gradient(135deg,var(--g),var(--gm));padding:12px 14px;display:flex;gap:8px;z-index:60;box-shadow:0 -4px 16px rgba(20,105,63,.25)">
+<input class="fi" id="user-chat-inp" placeholder="Message লিখুন..." style="flex:1;border-radius:24px;padding:10px 16px;font-size:14px;border:none;background:#fff;color:var(--text)"/>
+<button onclick="sendUserChat()" onmousedown="this.style.transform='scale(.92)'" onmouseup="this.style.transform='scale(1)'" style="width:44px;height:44px;border-radius:50%;background:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.15);transition:.15s">➤</button>
+</div>
+</div>
 <!-- ═══ WIN/LOSS POPUP ═══ -->
 <div id="wingo-popup" style="display:none;position:fixed;inset:0;z-index:500;align-items:center;justify-content:center;background:rgba(0,0,0,.6)">
-  <div id="wingo-popup-inner" style="border-radius:24px;padding:32px 28px;text-align:center;min-width:260px;max-width:90%;animation:popIn .4s ease">
-    <div id="popup-ico" style="font-size:60px;margin-bottom:12px"></div>
-    <div id="popup-title" style="font-size:28px;font-weight:900;margin-bottom:8px"></div>
-    <div id="popup-sub" style="font-size:16px;font-weight:700;margin-bottom:20px"></div>
-    <button onclick="document.getElementById('wingo-popup').style.display='none'" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);color:#fff;padding:10px 28px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer">OK</button>
-  </div>
+<div id="wingo-popup-inner" style="border-radius:24px;padding:32px 28px;text-align:center;min-width:260px;max-width:90%;animation:popIn .4s ease">
+<div id="popup-ico" style="font-size:60px;margin-bottom:12px"></div>
+<div id="popup-title" style="font-size:28px;font-weight:900;margin-bottom:8px"></div>
+<div id="popup-sub" style="font-size:16px;font-weight:700;margin-bottom:20px"></div>
+<button onclick="document.getElementById('wingo-popup').style.display='none';document.getElementById('wingo-popup-inner').classList.remove('wingo-win-glow','wingo-win-anim','wingo-loss-anim','wingo-popup-celebrate')" style="background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);color:#fff;padding:10px 28px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer">OK</button>
 </div>
-
+</div>
 <!-- ═══ SOCIAL HEADER BAR ═══ -->
 <div id="social-bar" style="display:none"></div>
-
 <!-- Beep audio -->
 <audio id="beep-sound" preload="auto">
-  <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2o3FRVSnsziqVcpBQVAls/cp1MjAgMwi8XVoU8eAAIpf7nNmkcZAAIle7XJlEMVAAIkcLHFlT8TAAIkaK3ElDwSAAIkY6jElTsRAAIkYKXElTsQAAIkXqLElTsQAAIkXqDElTsQAAIkXqDElTsQ" type="audio/wav">
+<source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2o3FRVSnsziqVcpBQVAls/cp1MjAgMwi8XVoU8eAAIpf7nNmkcZAAIle7XJlEMVAAIkcLHFlT8TAAIkaK3ElDwSAAIkY6jElTsRAAIkYKXElTsQAAIkXqLElTsQAAIkXqDElTsQAAIkXqDElTsQ" type="audio/wav"/>
 </audio>
-
 </div>
 <script>
 // ── DARK MODE ──────────────────────────────────────────
@@ -1223,11 +1290,14 @@ firebase.initializeApp({
   appId:"1:611953936063:web:52153dcf9af5eb17b2a80a"
 });
 const db=firebase.database();
-const fbGet=p=>db.ref(p).once('value').then(s=>s.val());
-const fbSet=(p,d)=>db.ref(p).set(d);
-const fbUpd=(p,d)=>db.ref(p).update(d);
-const fbPush=(p,d)=>{const r=db.ref(p).push();return r.set({...d,id:r.key}).then(()=>r.key);};
-const fbDel=p=>db.ref(p).remove();
+// Network-safe Firebase helpers: prevent the splash screen from hanging forever.
+const FB_TIMEOUT=7000;
+const withTimeout=(promise,ms=FB_TIMEOUT,label='Firebase request')=>Promise.race([promise,new Promise((_,reject)=>setTimeout(()=>reject(new Error(label+' timed out')),ms))]);
+const fbGet=p=>withTimeout(db.ref(p).once('value').then(s=>s.val()));
+const fbSet=(p,d)=>withTimeout(db.ref(p).set(d));
+const fbUpd=(p,d)=>withTimeout(db.ref(p).update(d));
+const fbPush=(p,d)=>withTimeout((()=>{const r=db.ref(p);return r.set({...d,id:r.key}).then(()=>r.key);})());
+const fbDel=p=>withTimeout(db.ref(p).remove());
 
 // ────────────────────────────────────────────────
 // DEFAULTS
@@ -1236,7 +1306,7 @@ const DEF={
   siteName:'EarnifyBD', siteLogo:'💰', siteTagline:'Task করো · Refer করো · টাকা কামাও',
   siteDesc:'EarnifyBD — Task করো, Refer করো, টাকা কামাও',
   bkash:'01712-345678', nagad:'01812-345678',
-  activationAmount:1000, minWithdraw:100, maxWithdraw:25000,
+  activationAmount:100, minWithdraw:100, maxWithdraw:25000,
   minDeposit:100, maxDeposit:10000,
   adminPassword:'admin123', appsLink:'',
   themePrimary:'#14693f',themeSecondary:'#1e8f57',themeMode:'green',animationEnabled:true,vipAnimationEnabled:true,maintenanceMode:false,maintenanceText:'সার্ভার আপডেট চলছে, কিছুক্ষণ পর চেষ্টা করুন',
@@ -1270,8 +1340,12 @@ const HICLS={task_earning:'hi-task',refer_bonus:'hi-ref',vip_bonus:'hi-vip',chec
 
 let _cfg=null;
 async function getCfg(){
-  if(!_cfg){_cfg=await fbGet('config/settings');if(!_cfg){await fbSet('config/settings',DEF);_cfg=DEF;}}
+  if(!_cfg){
+    try{_cfg=await fbGet('config/settings');}catch(e){console.warn('Firebase config read skipped:',e.message);_cfg=null;}
+    if(!_cfg){_cfg=DEF;}
+  }
   const merged={...DEF,..._cfg};
+  if(Number(merged.activationAmount)===1000) merged.activationAmount=100;
   // Force VIP 0-12 even if old Firebase settings still have only VIP 0-4
   merged.referGens=Array.from({length:8},(_,i)=>((_cfg.referGens&&_cfg.referGens[i]!=null)?_cfg.referGens[i]:DEF.referGens[i]));
   merged.vipLevels=Array.from({length:13},(_,i)=>{
@@ -1377,10 +1451,19 @@ function go(name){
   document.getElementById('s-login').style.display='none';
   const el=document.getElementById('s-'+name);
   if(el){el.classList.add('active');window.scrollTo(0,0);}
+  // Keep the bottom navigation state tied to the actual screen. This prevents
+  // the Refer tab from visually/accidentally taking over when Me is opened.
+  const navKey=(name==='profile')?'profile':(['games','wingo','live-market'].includes(name)?'games':name);
+  document.querySelectorAll('.bnav .navi').forEach(n=>{
+    const m=n.getAttribute('onclick')||'';
+    const match=m.match(/go\('([^']+)'\)/);
+    n.classList.toggle('active',!!match && match[1]===navKey);
+  });
   const fn={home:renderHome,tasks:renderTasks,wallet:renderWallet,refer:renderRefer,profile:renderProfile,
     deposit:renderDeposit,withdraw:renderWithdraw,'edit-profile':renderEditProfile,
     notifications:renderNotifications,'account-close':renderAccountClose,'task-detail':()=>{},
-    wingo:renderWingo,'live-chat':renderLiveChat,plans:renderPlans};
+    games:renderGames,
+    wingo:renderWingo,'live-market':renderLiveMarket,'live-chat':renderLiveChat,plans:renderPlans};
   if(fn[name]) fn[name]();
   // Re-apply wingo nav visibility based on stored state
   if(window._applyWingoNav) window._applyWingoNav();
@@ -1483,6 +1566,7 @@ async function renderHome(){
   applySiteBranding(cfg);
   startNotifBadge(uid);
   renderSocialBar(cfg);
+  startHomeOneMinuteTicker();
   // Apps button in header
   const appsBtn=document.getElementById('apps-btn');
   if(appsBtn){
@@ -1768,7 +1852,7 @@ async function renderWithdraw(){
   // Show activation balance info
   const actInfo=document.getElementById('wd-act-bal-info');
   if(actInfo&&user.isActive){
-    const actAmt=cfg.activationAmount||1000;
+    const actAmt=cfg.activationAmount||100;
     const earnings=Math.max(0,(user.balance||0)-actAmt);
     actInfo.textContent=`💡 Activation: ${fmtN(actAmt)} (ফেরতযোগ্য) | Withdrawable Earnings: ${fmtN(earnings)}`;
     actInfo.style.display='block';
@@ -1950,276 +2034,315 @@ async function renderNotifications(){
 }
 
 // ────────────────────────────────────────────────
-// WINGO GAME
-// ────────────────────────────────────────────────
-let _wgTimer=null,_wgSide=null,_wgAmt=1,_wgCurrentPeriod=null,_wgPhase='betting';
-
-function wingoSec(){return Math.floor(Date.now()/1000);}
-
-// Period lasts 30s total: 0-22s = betting (23s), 23-27s = countdown (5s), 28-29s = result (2s)
-function wgPeriodInfo(){
-  const now=wingoSec();
-  const period=Math.floor(now/30)+1;
-  const sec=now%30;
-  let phase,remaining;
-  if(sec<23){phase='betting';remaining=22-sec;}
-  else if(sec<28){phase='countdown';remaining=27-sec;}
-  else{phase='result';remaining=29-sec;}
-  return{period,sec,phase,remaining};
+// LIVE MARKET DATA ADAPTER
+// For a real provider, set config/settings.marketApiProxyUrl to a server-side
+// endpoint that returns {price} or {close}. Do NOT put a private provider key
+// in this browser file; the proxy should keep the key server-side.
+window._lmApiLive=false;window._lmApiLast=0;window._lmApiBusy=false;
+async function refreshLiveMarketQuote(){
+  if(window._lmApiBusy||Date.now()-window._lmApiLast<5000)return null;
+  window._lmApiBusy=true;
+  try{
+    const cfg=await getCfg();const url=cfg.marketApiProxyUrl||'';
+    if(!url)return null;
+    const sep=url.includes('?')?'&':'?';
+    const r=await fetch(url+sep+'symbol=GBPNZD',{cache:'no-store'});if(!r.ok)throw new Error('market api '+r.status);
+    const d=await r.json();const price=Number(d.price??d.close??d.last??d.quote?.close??d.data?.price);
+    if(!Number.isFinite(price))throw new Error('invalid market price');
+    _lmPrice=price;window._lmApiLive=true;window._lmApiLast=Date.now();return price;
+  }catch(e){window._lmApiLive=false;return null}finally{window._lmApiBusy=false}
 }
 
+
+// Realtime Firebase market feed: apply immediately on open, no manual refresh.
+window._lmFeedOff=null;window._lastMarketFeed=null;
+function applyLiveFeedPayload(d){
+  const p=Number(d?.price??d?.close??d?.last);
+  if(Number.isFinite(p)){_lmPrice=p;window._lmApiLive=true;window._lmApiLast=Number(d?.ts)||Date.now();}
+  if(Array.isArray(d?.candles)&&d.candles.length){
+    const cs=d.candles.map(c=>({_period:Number(c._period??Math.floor(Number(c.t??c.time??c.timestamp??Date.now())/60000)),o:Number(c.o),h:Number(c.h),l:Number(c.l),c:Number(c.c)})).filter(c=>[c.o,c.h,c.l,c.c].every(Number.isFinite));
+    if(cs.length)_lmCandles=cs.slice(-40);
+  }
+}
+function subscribeMarketFeed(){
+  try{if(window._lmFeedOff)window._lmFeedOff();const ref=db.ref('marketFeed/live');const h=snap=>{const d=snap.val();window._lastMarketFeed=d||null;if(d){applyLiveFeedPayload(d);drawLiveMarketChart();updateLiveMarketUI(true);}};ref.on('value',h);window._lmFeedOff=()=>ref.off('value',h);_offs.push(()=>{if(window._lmFeedOff){window._lmFeedOff();window._lmFeedOff=null;}});}catch(e){console.warn('market feed',e)}
+}
+
+// ────────────────────────────────────────────────
+// ─── LIVE MARKET — 1 MINUTE CANDLE GAME ─────────────────
+async function renderLiveMarket(){
+  const uid=myUID();if(!uid)return;
+  const user=await fbGet(`users/${uid}`);if(!user)return;
+  const bal=document.getElementById('lm-bal');if(bal)bal.textContent=fmtN(user.balance||0);
+  _lmSide=null;_lmAmt=1;_lmEntry=_lmPrice;_lmActiveTradeCount=0;
+  document.querySelectorAll('.lm-amt').forEach((b,i)=>b.classList.toggle('active',i===0));
+  const custom=document.getElementById('lm-custom-amt');if(custom)custom.value='';
+  document.getElementById('lm-up')?.classList.remove('selected','disabled');document.getElementById('lm-down')?.classList.remove('selected','disabled');
+  _lmTradeMarker=null;_lmTradeMarkers=[];lmResetView();lmSeed();subscribeMarketFeed();applyLiveFeedPayload(window._lastMarketFeed||{});lmTickPrice();updateLiveMarketUI();loadLiveMarketHistory(uid);startLiveMarketTimer(uid);
+}
+function startLiveMarketTimer(uid){if(_lmTimer)clearInterval(_lmTimer);updateLiveMarketUI();_lmTimer=setInterval(async()=>{const prev=_lmRound;updateLiveMarketUI();const info=liveMarketPeriodInfo();if(prev!==null&&info.period!==prev)await settleLiveMarketTrades(prev,uid);},1000);_offs.push(()=>{clearInterval(_lmTimer);_lmTimer=null;});}
+function setLiveAmt(amt,el){_lmAmt=Number(amt)||1;document.querySelectorAll('.lm-amt').forEach(b=>b.classList.remove('active'));el.classList.add('active');const i=document.getElementById('lm-custom-amt');if(i)i.value='';updateLivePayout();}
+function customLiveAmt(el){_lmAmt=Math.max(1,parseInt(el.value)||1);document.querySelectorAll('.lm-amt').forEach(b=>b.classList.remove('active'));updateLivePayout();}
+function updateLivePayout(){const v=Math.round(_lmAmt*1.90*100)/100;const e=document.getElementById('lm-payout');if(e)e.textContent='৳'+v.toFixed(2);}
+async function placeLiveTrade(side){
+  if(side!=='up'&&side!=='down')return;
+  const uid=myUID();if(!uid)return;const info=liveMarketPeriodInfo();
+  // New trades are accepted until the last 30 seconds of the current 1-minute candle.
+  if(info.remaining<=30){snack('শেষ 30 সেকেন্ডে নতুন trade বন্ধ — পরের candle এ trade করুন');return;}
+  const user=await fbGet(`users/${uid}`);if(!user||!user.isActive){snack('একাউন্ট Activate করুন');return;}if(_lmAmt<1){snack('সর্বনিম্ন ১ টাকা');return;}if(Number(user.balance||0)<_lmAmt){snack('Balance কম! Deposit করুন');return;}
+  // Multiple trades are allowed in the same candle. Every trade gets its own key/marker.
+  const tradeId=`${uid}_${info.period}_${Date.now()}_${Math.random().toString(36).slice(2,7)}`;
+  _lmSide=side;_lmEntry=_lmPrice;
+  const marker={id:tradeId,period:info.period,side,entry:Number(_lmEntry.toFixed(5)),amount:_lmAmt,createdAt:Date.now()};
+  _lmTradeMarkers.push(marker);_lmTradeMarkers=_lmTradeMarkers.slice(-30);
+  await fbSet(`liveMarketBets/${tradeId}`,{uid,period:info.period,side,amount:_lmAmt,entry:marker.entry,settled:false,won:null,payout:0,createdAt:marker.createdAt});
+  await fbUpd(`users/${uid}`,{balance:Number(user.balance||0)-_lmAmt});
+  const newBal=Number(user.balance||0)-_lmAmt;const bal=document.getElementById('lm-bal');if(bal)bal.textContent=fmtN(newBal);
+  _lmActiveTradeCount++;
+  const active=document.getElementById('lm-active-trade');if(active){active.style.display='block';active.innerHTML=`✅ ${_lmActiveTradeCount} active trade(s) • Latest ${side.toUpperCase()} • ৳${_lmAmt.toFixed(2)} • Entry ${marker.entry.toFixed(5)} • ${liveMarketPeriodLabel(info.period)} • <b id="lm-trade-left">${info.remaining}s</b>`;}
+  liveMarketTone('bet');drawLiveMarketChart();snack(`✅ ${side.toUpperCase()} trade placed at ${marker.entry.toFixed(5)}`);
+}
+let _lmPopupPeriod=null;
+async function settleLiveMarketTrades(period,uid){
+  const all=await fbGet('liveMarketBets')||{};
+  const bets=Object.entries(all).filter(([id,b])=>b&&b.uid===uid&&Number(b.period)===Number(period)&&!b.settled);
+  if(!bets.length)return;
+  const close=Number(_lmPrevClose.toFixed(5));
+  let user=await fbGet(`users/${uid}`);if(!user)return;
+  let newBal=Number(user.balance)||0;
+  for(const [pathId,bet] of bets){
+    const entry=Number(bet.entry);const won=bet.side==='up'?close>entry:close<entry;const payout=won?Math.round(Number(bet.amount)*1.90*100)/100:0;
+    newBal+=payout;
+    await fbUpd(`liveMarketBets/${pathId}`,{settled:true,won,payout,close,settledAt:Date.now()});
+    await fbPush('txns',{userId:uid,amount:won?payout:bet.amount,type:won?'live_market_win':'live_market_loss',status:'approved',note:`Live Market 1m — ${bet.side.toUpperCase()} — Entry ${entry.toFixed(5)} — Close ${close.toFixed(5)} — ${won?'জিতেছেন ✅':'হেরেছেন ❌'}`,createdAt:Date.now()}).catch(()=>{});
+    if(won)showLiveWinPopup(payout,bet.amount,entry,close);else showLiveLossPopup(bet.amount,entry,close);
+  }
+  await fbUpd(`users/${uid}`,{balance:newBal});
+  const bal=document.getElementById('lm-bal');if(bal){bal.textContent=fmtN(newBal);bal.classList.remove('lm-flash-win','lm-flash-loss');void bal.offsetWidth;bal.classList.add('lm-flash-win');}
+  _lmActiveTradeCount=0;_lmSide=null;_lmTradeMarker=null;
+  const active=document.getElementById('lm-active-trade');if(active){active.style.display='none';}
+  document.getElementById('lm-up')?.classList.remove('selected','disabled');document.getElementById('lm-down')?.classList.remove('selected','disabled');
+  loadLiveMarketHistory(uid);
+}
+async function loadLiveMarketHistory(uid){
+  const el=document.getElementById('lm-history');if(!el)return;const all=await fbGet('liveMarketBets')||{};const rows=Object.values(all).filter(b=>b.uid===uid).sort((a,b)=>b.createdAt-a.createdAt).slice(0,20);
+  if(!rows.length){el.innerHTML='<div style="text-align:center;color:#697485;padding:14px;font-size:10px">No trades yet</div>';return;}
+  el.innerHTML=rows.map(b=>{const state=!b.settled?'Pending':(b.won?'Win':'Loss'),pnl=!b.settled?'—':(b.won?'+'+fmtN(b.payout):'-'+fmtN(b.amount));return`<div class="lm-history-row"><div class="lm-history-main"><div class="lm-history-period">${liveMarketPeriodLabel(b.period)} • ${bdTimeLabel(b.createdAt)}</div><div class="lm-history-meta">Entry ${Number(b.entry).toFixed(5)} ${b.settled?'• Close '+Number(b.close).toFixed(5):''}</div></div><span class="lm-history-side ${b.side}">${b.side.toUpperCase()}</span><div class="lm-history-pnl ${b.settled?(b.won?'win':'loss'):''}">${pnl}</div></div>`;}).join('');
+}
+function showLiveWinPopup(amount,betAmount,entry,close){
+  if(window._lmPopupShownPeriod===String(_lmRound))return;window._lmPopupShownPeriod=String(_lmRound);
+  const popup=document.getElementById('wingo-popup'),inner=document.getElementById('wingo-popup-inner');if(!popup||!inner)return;document.getElementById('popup-ico').textContent='📈';document.getElementById('popup-title').textContent='Trade Won!';document.getElementById('popup-sub').innerHTML=`UP/DOWN direction correct<br><b>৳${Number(amount).toFixed(2)}</b> payout • Entry ${entry.toFixed(5)} → Close ${close.toFixed(5)}`;inner.style.background='linear-gradient(145deg,#047857,#10b981)';inner.style.color='#fff';inner.classList.remove('wingo-loss-anim');inner.classList.add('wingo-win-glow','wingo-win-anim','wingo-popup-celebrate');popup.style.display='flex';liveMarketTone('win');clearTimeout(window._wgPopTimer);
+}
+function showLiveLossPopup(amount,entry,close){
+  if(window._lmPopupShownPeriod===String(_lmRound))return;window._lmPopupShownPeriod=String(_lmRound);
+  const popup=document.getElementById('wingo-popup'),inner=document.getElementById('wingo-popup-inner');if(!popup||!inner)return;document.getElementById('popup-ico').textContent='📉';document.getElementById('popup-title').textContent='Trade Lost';document.getElementById('popup-sub').innerHTML=`Direction was not correct<br><b>৳${Number(amount).toFixed(2)}</b> loss • Entry ${entry.toFixed(5)} → Close ${close.toFixed(5)}`;inner.style.background='linear-gradient(145deg,#991b1b,#ef4444)';inner.style.color='#fff';inner.classList.remove('wingo-win-glow','wingo-win-anim','wingo-popup-celebrate');inner.classList.add('wingo-loss-anim');popup.style.display='flex';liveMarketTone('loss');clearTimeout(window._wgPopTimer);
+}
+
+// WINGO GAME — ORIGINAL SYSTEM + MULTI TIME MODES
+// ────────────────────────────────────────────────
+const WINGO_MODES={
+  '30s':{label:'30 Seconds',seconds:30},
+  '1m':{label:'1 Minute',seconds:60},
+  '3m':{label:'3 Minutes',seconds:180},
+  '5m':{label:'5 Minutes',seconds:300}
+};
+const WINGO_PAYOUT=1.90;
+function wgPeriodLabel(mode,period){
+  const d=new Date(); const date=d.getFullYear().toString()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');
+  const code=mode==='30s'?'30':mode==='1m'?'01':mode==='3m'?'03':'05';
+  return `${date}${code}${String(period).padStart(7,'0')}`;
+}
+function wgDisplayLabel(mode,period){
+  const d=new Date();
+  const date=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  const code=mode==='30s'?'30s':mode==='1m'?'1m':mode==='3m'?'3m':'5m';
+  return `WG • ${code} • ${date} • #${String(Number(period)).padStart(4,'0')}`;
+}
+
+let _wgTimer=null,_wgSide=null,_wgAmt=1,_wgCurrentPeriod=null,_wgPhase='betting',_wgMode='30s',_wgLastResult=null;
+function wingoSec(){return Math.floor(Date.now()/1000);}
+function wgKey(mode=_wgMode){return mode==='30s'?'':String(mode).replace(/[^a-z0-9]/gi,'_');}
+function wgRoot(mode=_wgMode){return mode==='30s'?'wingoBets':`wingoBets_${wgKey(mode)}`;}
+function wgPeriodsRoot(mode=_wgMode){return mode==='30s'?'wingoPeriods':`wingoPeriods_${wgKey(mode)}`;}
+function wgPredictRoot(mode=_wgMode){return mode==='30s'?'wingoPredict':`wingoPredict_${wgKey(mode)}`;}
+function wgPeriodInfo(mode=_wgMode){
+  const d=WINGO_MODES[mode]?.seconds||30,now=wingoSec(),period=Math.floor(now/d)+1,sec=now%d;
+  // All modes accept bets until the final 15 seconds of the period.
+  const betting=Math.max(1,d-15),resultAt=d-3;
+  let phase,remaining;
+  if(sec<betting){phase='betting';remaining=betting-1-sec}else if(sec<resultAt){phase='countdown';remaining=resultAt-1-sec}else{phase='result';remaining=d-1-sec}
+  return{period,sec,phase,remaining,duration:d,betting,resultAt};
+}
+function openOneMinute(){openLiveMarket();}
+function liveMarketPeriodInfo(){
+  const d=60,now=Math.floor(Date.now()/1000),period=Math.floor(now/d)+1,sec=now%d;
+  return {period,sec,remaining:d-sec,duration:d};
+}
+function bdTimeLabel(ts){
+  return new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Dhaka',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(ts));
+}
+function liveMarketPeriodLabel(period){
+  const start=(Number(period)-1)*60000;
+  return bdTimeLabel(start)+' BD';
+}
+let _lmTimer=null,_lmSide=null,_lmAmt=1,_lmRound=null,_lmPrevClose=1.91211,_lmPrice=1.91211,_lmEntry=1.91211,_lmCandles=[],_lmLastSettled=null,_lmZoom=1,_lmPan=0,_lmTradeMarker=null,_lmTradeMarkers=[],_lmChartBound=false,_lmDrag=null,_lmActiveTradeCount=0;
+function lmSeed(){
+  if(_lmCandles.length)return;
+  let price=1.9074;
+  const basePeriod=Math.floor(Date.now()/60000)-31;for(let i=0;i<32;i++){const o=price,delta=(Math.random()-.48)*.00055,c=Math.max(1.904,Math.min(1.916,o+delta)),h=Math.max(o,c)+Math.random()*.00028,l=Math.min(o,c)-Math.random()*.00028;_lmCandles.push({o,h,l,c,_period:basePeriod+i});price=c;}
+  _lmPrice=price;
+}
+function lmTickPrice(){
+  lmSeed();
+  const info=liveMarketPeriodInfo();
+  if(_lmRound!==info.period){_lmPrevClose=_lmPrice;_lmRound=info.period;_lmEntry=_lmPrice;_lmLastSettled=null;window._lmPopupShownPeriod=null;if(_lmCandles.length){const last0=_lmCandles[_lmCandles.length-1];if(last0._period!==info.period-1)last0._period=info.period-1;_lmCandles.push({o:_lmPrice,h:_lmPrice,l:_lmPrice,c:_lmPrice,_period:info.period});if(_lmCandles.length>40)_lmCandles.shift();}}
+  const last=_lmCandles[_lmCandles.length-1]||{o:_lmPrice,h:_lmPrice,l:_lmPrice,c:_lmPrice,_period:info.period};
+  const apiFresh=window._lmApiLive && (Date.now()-Number(window._lmApiLast||0)<12000);
+  if(!apiFresh){const drift=(Math.random()-.49)*.00008;_lmPrice=Math.max(1.900,Math.min(1.920,_lmPrice+drift));}
+  last.c=_lmPrice;last.h=Math.max(Number(last.h),_lmPrice);last.l=Math.min(Number(last.l),_lmPrice);
+  return info;
+}
+function drawLiveMarketChart(){
+  const canvas=document.getElementById('lm-chart');if(!canvas)return;const ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height;ctx.clearRect(0,0,w,h);ctx.fillStyle='#0d1219';ctx.fillRect(0,0,w,h);
+  const all=_lmCandles.slice();if(!all.length)return;
+  const visible=Math.max(8,Math.min(30,Math.round(30/_lmZoom)));
+  const maxStart=Math.max(0,all.length-visible);const start=Math.max(0,Math.min(maxStart,maxStart-_lmPan));const candles=all.slice(start,start+visible);
+  let min=Math.min(...candles.map(x=>x.l)),max=Math.max(...candles.map(x=>x.h));const pad=(max-min)*.16||.001;min-=pad;max+=pad;
+  const y=v=>h-22-((v-min)/(max-min))*(h-44),step=w/(candles.length+2),body=Math.max(7,step*.48);
+  ctx.strokeStyle='rgba(148,163,184,.08)';ctx.lineWidth=1;for(let i=1;i<5;i++){const gy=22+(h-44)*i/5;ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(w,gy);ctx.stroke();}
+  candles.forEach((c,i)=>{const x=step*(i+1),up=c.c>=c.o;ctx.strokeStyle=up?'#22c55e':'#ef5350';ctx.fillStyle=up?'#22c55e':'#ef5350';ctx.beginPath();ctx.moveTo(x,y(c.h));ctx.lineTo(x,y(c.l));ctx.stroke();const top=y(Math.max(c.o,c.c)),bot=y(Math.min(c.o,c.c));ctx.fillRect(x-body/2,top,body,Math.max(2,bot-top));});
+  const markers=_lmTradeMarkers.slice();markers.forEach(m=>{const mi=candles.findIndex(c=>Number(c._period)===Number(m.period));if(mi>=0){const c=candles[mi],x=step*(mi+1),yy=y(m.entry);ctx.save();ctx.strokeStyle=m.side==='up'?'#22c55e':'#ef5350';ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='#f59e0b';ctx.beginPath();ctx.arc(x,yy,6,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.font='900 10px Arial';ctx.textAlign='center';ctx.fillText(m.side==='up'?'UP':'DOWN',x,Math.max(14,yy-10));if(m.settled&&Number.isFinite(Number(m.pnl))){ctx.font='800 8px Arial';ctx.fillStyle=m.won?'#4ade80':'#fb7185';ctx.fillText((m.won?'+':'')+Number(m.pnl).toFixed(2),x,Math.min(h-8,yy+18));}ctx.restore();}});
+  const py=y(_lmPrice);ctx.strokeStyle='rgba(245,158,11,.7)';ctx.setLineDash([7,6]);ctx.beginPath();ctx.moveTo(0,py);ctx.lineTo(w,py);ctx.stroke();ctx.setLineDash([]);
+  const line=document.getElementById('lm-price-line');if(line){line.style.top=(py/h*100)+'%';const lab=document.getElementById('lm-price-line-label');if(lab)lab.textContent=_lmPrice.toFixed(5);}
+  const zl=document.getElementById('lm-zoom-label');if(zl)zl.textContent=visible+' candles';
+  lmBindChart();
+}
+function lmBindChart(){
+  if(_lmChartBound)return;const c=document.getElementById('lm-chart');if(!c)return;_lmChartBound=true;
+  c.addEventListener('wheel',e=>{e.preventDefault();e.deltaY<0?lmZoomIn():lmZoomOut();},{passive:false});
+  c.addEventListener('pointerdown',e=>{_lmDrag={x:e.clientX,pan:_lmPan};c.setPointerCapture(e.pointerId);});
+  c.addEventListener('pointermove',e=>{if(!_lmDrag)return;const visible=Math.max(8,Math.min(30,Math.round(30/_lmZoom)));const maxStart=Math.max(0,_lmCandles.length-visible);_lmPan=Math.max(0,Math.min(maxStart,_lmDrag.pan-(e.clientX-_lmDrag.x)/18));drawLiveMarketChart();});
+  c.addEventListener('pointerup',()=>{_lmDrag=null;});c.addEventListener('pointercancel',()=>{_lmDrag=null;});
+}
+function lmZoomIn(){_lmZoom=Math.min(3,_lmZoom+.25);drawLiveMarketChart();}
+function lmZoomOut(){_lmZoom=Math.max(1,_lmZoom-.25);drawLiveMarketChart();}
+function lmResetView(){_lmZoom=1;_lmPan=0;drawLiveMarketChart();}
+function updateLiveMarketUI(){
+  refreshLiveMarketQuote();
+  const info=lmTickPrice(),mm=String(Math.floor(info.remaining/60)).padStart(2,'0'),ss=String(info.remaining%60).padStart(2,'0');
+  const p=document.getElementById('lm-price'),e=document.getElementById('lm-entry'),c=document.getElementById('lm-countdown'),cp=document.getElementById('lm-candle-time'),per= document.getElementById('home-1m-period'), curC=document.getElementById('lm-current-candle-period'), runC=document.getElementById('lm-running-candle-time'), nextC=document.getElementById('lm-next-candle-period');
+  if(p)p.textContent=_lmPrice.toFixed(5);if(e&&!document.getElementById('lm-active-trade')?.style.display.includes('block'))e.textContent=_lmEntry.toFixed(5);if(c)c.textContent=mm+':'+ss;if(cp)cp.textContent=mm+':'+ss;if(per)per.textContent=liveMarketPeriodLabel(info.period);if(curC)curC.textContent=String(info.period);if(runC)runC.textContent=String(info.sec).padStart(2,'0')+'s';if(nextC)nextC.textContent=String(info.period+1);const bc=document.getElementById('lm-bd-clock');if(bc)bc.textContent=bdTimeLabel(Date.now());const tl=document.getElementById('lm-trade-left');if(tl)tl.textContent=info.remaining+'s';
+  const state=document.getElementById('lm-market-state');if(state)state.textContent=info.remaining<=30?'TRADING PAUSED':'MARKET OPEN';const src=document.getElementById('lm-data-source');if(src)src.textContent=window._lmApiLive?'LIVE API':'SIMULATED';
+  drawLiveMarketChart();
+}
+function startHomeOneMinuteTicker(){
+  const timeEl=document.getElementById('home-1m-time'),periodEl=document.getElementById('home-1m-period'),statusEl=document.getElementById('home-1m-status');if(!timeEl||!periodEl||!statusEl)return;
+  if(window._home1mTimer)clearInterval(window._home1mTimer);const tick=()=>{const x=liveMarketPeriodInfo(),mm=String(Math.floor(x.remaining/60)).padStart(2,'0'),ss=String(x.remaining%60).padStart(2,'0');timeEl.textContent=mm+':'+ss;periodEl.textContent=liveMarketPeriodLabel(x.period);statusEl.textContent=x.remaining<=5?'CLOSING':'MARKET OPEN';};tick();window._home1mTimer=setInterval(tick,1000);_offs.push(()=>{clearInterval(window._home1mTimer);window._home1mTimer=null;});
+}
+function renderGames(){
+  const list=document.getElementById('home-games-list');if(list&&document.getElementById('s-games')?.classList.contains('active')) list.style.display='block';
+}
+function toggleHomeGames(){
+  const list=document.getElementById('home-games-list'),box=document.getElementById('games-launcher');if(!list||!box)return;
+  const open=list.style.display!=='block';list.style.display=open?'block':'none';box.classList.toggle('open',open);
+  const h=box.querySelector('.games-launcher-head');if(h)h.setAttribute('aria-expanded',String(open));
+}
+function openLiveMarket(){go('live-market');setTimeout(()=>{try{subscribeMarketFeed();applyLiveFeedPayload(window._lastMarketFeed||{});drawLiveMarketChart();updateLiveMarketUI(true);}catch(e){}},0);}
+function changeWingoMode(mode){
+  if(!WINGO_MODES[mode])mode='30s';_wgMode=mode;_wgSide=null;_wgAmt=1;_wgCurrentPeriod=null;_wgLastResult=null;
+  const sel=document.getElementById('wg-mode');if(sel)sel.value=mode;
+  document.querySelectorAll('.wingo-amt-chip').forEach((c,i)=>c.classList.toggle('active',i===0));
+  const custom=document.getElementById('wg-custom-amt');if(custom)custom.value='';
+  document.getElementById('wg-btn-big')?.classList.remove('selected');document.getElementById('wg-btn-small')?.classList.remove('selected');
+  const b=document.getElementById('wg-place-btn');if(b)b.disabled=true;
+  loadWingoBetHistory(myUID());loadWingoPeriodHistory();updateWingoTimer(myUID());
+}
 async function renderWingo(){
   const uid=myUID();if(!uid)return;
-  const [user,cfg]=await Promise.all([fbGet(`users/${uid}`),getCfg()]);
-  // Check wingo enabled
-  if(cfg.wingoEnabled===false){
-    document.getElementById('wg-bet-section').style.display='none';
-    document.getElementById('wg-locked').style.display='block';
-    document.getElementById('wg-locked').innerHTML='<div style="font-size:40px;margin-bottom:10px">🔧</div><div style="font-size:16px;font-weight:800;margin-bottom:6px">Wingo সাময়িক বন্ধ</div><div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.6">Admin সাময়িকভাবে Wingo Game বন্ধ রেখেছেন।</div>';
-    document.getElementById('wg-hist-list').innerHTML='';
-    document.getElementById('wg-period-hist').innerHTML='';
-    return;
-  }
-  document.getElementById('wg-bal').textContent=fmtN(user.balance||0);
-  const isActive=user.isActive;
-  document.getElementById('wg-bet-section').style.display=isActive?'block':'none';
-  document.getElementById('wg-locked').style.display=isActive?'none':'block';
-  _wgSide=null;_wgAmt=1;
-  document.getElementById('wg-place-btn').disabled=true;
-  document.getElementById('wg-my-bet').style.display='none';
-  loadWingoBetHistory(uid);
-  loadWingoPeriodHistory();
-  startWingoTimer(uid);
+  const[user,cfg]=await Promise.all([fbGet(`users/${uid}`),getCfg()]);
+  if(cfg.wingoEnabled===false){document.getElementById('wg-bet-section').style.display='none';document.getElementById('wg-locked').style.display='block';document.getElementById('wg-locked').innerHTML='<div style="font-size:40px;margin-bottom:10px">🔧</div><div style="font-size:16px;font-weight:800;margin-bottom:6px">Wingo সাময়িক বন্ধ</div><div style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.6">Admin সাময়িকভাবে Wingo Game বন্ধ রেখেছেন।</div>';document.getElementById('wg-hist-list').innerHTML='';document.getElementById('wg-period-hist').innerHTML='';return;}
+  document.getElementById('wg-bal').textContent=fmtN(user.balance||0);const active=user.isActive;
+  document.getElementById('wg-bet-section').style.display=active?'block':'none';document.getElementById('wg-locked').style.display=active?'none':'block';
+  const sel=document.getElementById('wg-mode');if(sel)sel.value=_wgMode;
+  _wgSide=null;_wgAmt=1;document.getElementById('wg-place-btn').disabled=true;document.getElementById('wg-my-bet').style.display='none';
+  loadWingoBetHistory(uid);loadWingoPeriodHistory();startWingoTimer(uid);
 }
-
-function startWingoTimer(uid){
-  if(_wgTimer)clearInterval(_wgTimer);
-  updateWingoTimer(uid);
-  _wgTimer=setInterval(()=>updateWingoTimer(uid),1000);
-  _offs.push(()=>{clearInterval(_wgTimer);_wgTimer=null;});
+function startWingoTimer(uid){if(_wgTimer)clearInterval(_wgTimer);updateWingoTimer(uid);_wgTimer=setInterval(()=>updateWingoTimer(uid),1000);_offs.push(()=>{clearInterval(_wgTimer);_wgTimer=null;});}
+async function ensureWingoResult(mode,period){
+  const path=`${wgPeriodsRoot(mode)}/${period}`,old=await fbGet(path);if(old?.result)return old;
+  // Fair result generation: no user-count targeting and no pre-selected winner.
+  const result=Math.random()<.5?'big':'small';
+  try{const tx=await db.ref(path).transaction(cur=>cur?.result?cur:{result,type:'auto-fair',settled:false,settledAt:Date.now()});return tx?.snapshot?.val()||await fbGet(path);}catch(e){return await fbGet(path);}
 }
-
 async function updateWingoTimer(uid){
-  const{period,sec,phase,remaining}=wgPeriodInfo();
-  const el_period=document.getElementById('wg-period');
-  const el_countdown=document.getElementById('wg-countdown');
-  const el_phase=document.getElementById('wg-phase');
-  const el_ring=document.getElementById('wg-ring');
-  const el_result=document.getElementById('wg-result-card');
-
-  if(el_period) el_period.textContent=period;
-
-  // Ring animation: full circle=188 dashoffset
-  const FULL=188;
-  let pct,ringColor;
-  if(phase==='betting'){pct=(22-remaining)/22;ringColor='#4caf50';}
-  else if(phase==='countdown'){pct=1;ringColor='#ff9800';}
-  else{pct=1;ringColor='#f44336';}
-  if(el_ring){el_ring.style.strokeDashoffset=FULL-(FULL*pct);el_ring.style.stroke=ringColor;}
-
+  const x=wgPeriodInfo(_wgMode),p=x.period,phase=x.phase,remaining=x.remaining;
+  const ep=document.getElementById('wg-period'),ec=document.getElementById('wg-countdown'),eph=document.getElementById('wg-phase'),ring=document.getElementById('wg-ring'),resEl=document.getElementById('wg-result-card');
+  if(ep)ep.textContent=wgPeriodLabel(_wgMode,p);
+  if(ring){const full=188,pct=phase==='betting'?Math.min(1,x.sec/Math.max(1,x.betting)):1;ring.style.strokeDashoffset=full-(full*pct);ring.style.stroke=phase==='betting'?'#22c55e':phase==='countdown'?'#f59e0b':'#ef4444';}
   if(phase==='betting'){
-    if(el_countdown)el_countdown.textContent=remaining;
-    if(el_phase)el_phase.textContent=`🟢 Bet করার সময় — ${remaining}s বাকি`;
-    if(el_result)el_result.style.display='none';
-    // Last 5 seconds: beep + enlarge bet buttons
-    if(remaining<=5&&remaining>0){
-      playBeep();
-      document.getElementById('wg-btn-big')?.classList.add('last5');
-      document.getElementById('wg-btn-small')?.classList.add('last5');
-    } else {
-      document.getElementById('wg-btn-big')?.classList.remove('last5');
-      document.getElementById('wg-btn-small')?.classList.remove('last5');
+    if(ec)ec.textContent=remaining;if(eph)eph.textContent=`🟢 Bet করার সময় — ${remaining}s বাকি`;if(resEl)resEl.style.display='none';
+    const user=await fbGet(`users/${uid}`);if(user?.isActive){const old=await fbGet(`${wgRoot()}/${uid}_${p}`);const pb=document.getElementById('wg-place-btn');
+      if(old){pb.disabled=true;document.getElementById('wg-btn-big').classList.add('disabled-bet');document.getElementById('wg-btn-small').classList.add('disabled-bet');const mb=document.getElementById('wg-my-bet');mb.style.display='block';mb.textContent=`✅ এই পিরিয়ডে bet করা হয়েছে — ${old.side==='big'?'BIG 🔴':'SMALL 🔵'} — ${fmtN(old.amount)}`;}
+      else{pb.disabled=_wgSide===null;document.getElementById('wg-btn-big').classList.remove('disabled-bet');document.getElementById('wg-btn-small').classList.remove('disabled-bet');document.getElementById('wg-my-bet').style.display='none';}
     }
-    // Enable betting
-    const betSec=document.getElementById('wg-bet-section');
-    const user=await fbGet(`users/${uid}`);
-    if(betSec&&user&&user.isActive){
-      // Check if already bet this period
-      const myBet=await fbGet(`wingoBets/${uid}_${period}`);
-      if(myBet){
-        document.getElementById('wg-place-btn').disabled=true;
-        document.getElementById('wg-btn-big').classList.add('disabled-bet');
-        document.getElementById('wg-btn-small').classList.add('disabled-bet');
-        const mb=document.getElementById('wg-my-bet');
-        mb.style.display='block';
-        mb.textContent=`✅ এই পিরিয়ডে bet করা হয়েছে — ${myBet.side==='big'?'BIG 🔴':'SMALL 🔵'} — ${fmtN(myBet.amount)}`;
-      }else{
-        document.getElementById('wg-place-btn').disabled=(_wgSide===null);
-        document.getElementById('wg-btn-big').classList.remove('disabled-bet');
-        document.getElementById('wg-btn-small').classList.remove('disabled-bet');
-        document.getElementById('wg-my-bet').style.display='none';
-      }
-    }
+    if(remaining<=5&&remaining>0){playBeep();document.getElementById('wg-btn-big')?.classList.add('last5');document.getElementById('wg-btn-small')?.classList.add('last5');}
+    else{document.getElementById('wg-btn-big')?.classList.remove('last5');document.getElementById('wg-btn-small')?.classList.remove('last5');}
   }else if(phase==='countdown'){
-    if(el_countdown){el_countdown.textContent=remaining;el_countdown.classList.add('countdown-flash');}
-    if(el_phase)el_phase.innerHTML=`<span style="color:#ff9800;animation:flash .5s infinite">⏳ ${remaining}s — ফলাফল আসছে!</span>`;
-    // Disable betting
-    document.getElementById('wg-place-btn').disabled=true;
-    document.getElementById('wg-btn-big').classList.add('disabled-bet');
-    document.getElementById('wg-btn-small').classList.add('disabled-bet');
+    if(ec)ec.textContent=remaining;if(eph)eph.innerHTML=`<span style="color:#ff9800;animation:flash .5s infinite">⏳ ${remaining}s — ফলাফল আসছে!</span>`;document.getElementById('wg-place-btn').disabled=true;document.getElementById('wg-btn-big').classList.add('disabled-bet');document.getElementById('wg-btn-small').classList.add('disabled-bet');
   }else{
-    // Result phase - show result
-    if(el_countdown)el_countdown.textContent='!';
-    const prevPeriod=period-1;
-    const res=await fbGet(`wingoPeriods/${prevPeriod}`);
-    if(res&&el_result){
-      el_result.style.display='block';
-      const isBig=res.result==='big';
-      el_result.innerHTML=`<div class="wingo-result-card ${isBig?'wingo-result-big':'wingo-result-small'}" style="margin:14px 16px">
-        <div class="wingo-result-ico">${isBig?'🔴':'🔵'}</div>
-        <div class="wingo-result-lbl">${isBig?'BIG':'SMALL'}</div>
-        <div class="wingo-result-sub">পিরিয়ড #${prevPeriod} এর ফলাফল</div>
-      </div>`;
-      // Settle bets
-      await settleWingoBets(prevPeriod,res.result,uid);
-    }
-    if(el_phase)el_phase.textContent=`ফলাফল দেখুন...`;
-    loadWingoBetHistory(uid);
-    loadWingoPeriodHistory();
+    if(ec)ec.textContent='!';const resultPeriod=p,res=await ensureWingoResult(_wgMode,resultPeriod);
+    if(res?.result&&resEl){resEl.style.display='block';const big=res.result==='big';resEl.innerHTML=`<div class="wingo-result-card ${big?'wingo-result-big':'wingo-result-small'}" style="margin:14px 16px"><div class="wingo-result-ico">${big?'🔴':'🔵'}</div><div class="wingo-result-lbl">${big?'BIG':'SMALL'}</div><div class="wingo-result-sub">${WINGO_MODES[_wgMode].label} • পিরিয়ড #${wgPeriodLabel(_wgMode,resultPeriod)}</div></div>`;const k=_wgMode+'_'+resultPeriod;if(_wgLastResult!==k){_wgLastResult=k;await settleWingoBets(resultPeriod,res.result,uid);}}
+    if(eph)eph.textContent='ফলাফল দেখুন...';loadWingoBetHistory(uid);loadWingoPeriodHistory();
   }
-  if(_wgCurrentPeriod!==period){
-    _wgCurrentPeriod=period;
-    // Refresh balance
-    const u=await fbGet(`users/${uid}`);
-    if(u)document.getElementById('wg-bal').textContent=fmtN(u.balance||0);
-  }
+  if(_wgCurrentPeriod!==_wgMode+'_'+p){_wgCurrentPeriod=_wgMode+'_'+p;const u=await fbGet(`users/${uid}`);if(u)document.getElementById('wg-bal').textContent=fmtN(u.balance||0);}
 }
-
 async function settleWingoBets(period,result,myUid){
-  // Only settle once - check flag
-  const settled=await fbGet(`wingoPeriods/${period}/settled`);
-  if(settled)return;
-  // Get all bets for this period
-  const allBets=await fbGet('wingoBets');
-  if(!allBets)return;
-  const periodBets=Object.entries(allBets).filter(([k,v])=>v.period===period&&!v.settled);
-  if(periodBets.length===0)return;
-  await fbSet(`wingoPeriods/${period}/settled`,true);
-  for(const[key,bet]of periodBets){
+  const mode=_wgMode,root=wgRoot(mode),periodRoot=wgPeriodsRoot(mode);
+  const settled=await fbGet(`${periodRoot}/${period}/settled`);if(settled)return;
+  const all=await fbGet(root);if(!all)return;
+  const rows=Object.entries(all).filter(([,b])=>b.period===period&&!b.settled);if(!rows.length)return;
+  await fbSet(`${periodRoot}/${period}/settled`,true);
+  for(const[key,bet]of rows){
     const won=bet.side===result;
-    const payout=won?Math.floor(bet.amount*1.9):0;
-    const user=await fbGet(`users/${bet.uid}`);
-    if(!user)continue;
-    const newBal=won?(user.balance||0)+payout:(user.balance||0);
+    const payout=won?Math.round(Number(bet.amount)*WINGO_PAYOUT*100)/100:0;
+    const user=await fbGet(`users/${bet.uid}`);if(!user)continue;
+    const newBal=won?(Number(user.balance)||0)+payout:(Number(user.balance)||0);
     await fbUpd(`users/${bet.uid}`,{balance:newBal});
-    await fbUpd(`wingoBets/${key}`,{settled:true,won,payout});
-    await fbPush('txns',{userId:bet.uid,amount:won?payout:bet.amount,type:won?'wingo_win':'wingo_loss',status:'approved',note:`Wingo Period #${period} — ${bet.side.toUpperCase()} — ${won?'জিতেছেন ✅':'হেরেছেন ❌'}`,createdAt:Date.now()});
-    // Show popup for current user
-    if(bet.uid===myUID()){
-      if(won)showWinPopup(payout);
-      else showLossPopup(bet.amount);
-      // Update balance display immediately
-      const freshU=await fbGet(`users/${bet.uid}`);
-      if(freshU){document.getElementById('wg-bal').textContent=fmtN(freshU.balance||0);}
+    await fbUpd(`${root}/${key}`,{settled:true,won,payout,settledAt:Date.now()});
+    if(bet.uid===myUid){
+      const bal=document.getElementById('wg-bal');
+      if(bal){bal.classList.add('wingo-balance-flash');bal.textContent=fmtN(newBal);setTimeout(()=>bal.classList.remove('wingo-balance-flash'),900)}
+      if(won)showWinPopup(payout,bet.amount);else showLossPopup(bet.amount);
     }
+    fbPush('txns',{userId:bet.uid,amount:won?payout:bet.amount,type:won?'wingo_win':'wingo_loss',status:'approved',note:`Wingo ${WINGO_MODES[bet.mode||mode].label} — Period #${period} — ${bet.side.toUpperCase()} — ${won?'জিতেছেন ✅':'হেরেছেন ❌'}`,createdAt:Date.now()}).catch(()=>{});
   }
 }
-
-function selectSide(side){
-  _wgSide=side;
-  document.getElementById('wg-btn-big').classList.toggle('selected',side==='big');
-  document.getElementById('wg-btn-small').classList.toggle('selected',side==='small');
-  document.getElementById('wg-place-btn').disabled=false;
-  updateWinPreview();
-}
-function setAmt(amt,el){
-  _wgAmt=amt;
-  document.querySelectorAll('.wingo-amt-chip').forEach(c=>c.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('wg-custom-amt').value='';
-  updateWinPreview();
-}
-function customAmt(el){
-  _wgAmt=parseInt(el.value)||1;
-  document.querySelectorAll('.wingo-amt-chip').forEach(c=>c.classList.remove('active'));
-  updateWinPreview();
-}
-function updateWinPreview(){
-  const win=(Math.floor(_wgAmt*190)/100).toFixed(2);
-  const el=document.getElementById('wg-win-preview');
-  if(el)el.textContent='৳ '+win;
-}
-
+function selectSide(side){_wgSide=side;document.getElementById('wg-btn-big').classList.toggle('selected',side==='big');document.getElementById('wg-btn-small').classList.toggle('selected',side==='small');document.getElementById('wg-place-btn').disabled=false;updateWinPreview();}
+function setAmt(amt,el){_wgAmt=amt;document.querySelectorAll('.wingo-amt-chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');document.getElementById('wg-custom-amt').value='';updateWinPreview();}
+function customAmt(el){_wgAmt=parseInt(el.value)||1;document.querySelectorAll('.wingo-amt-chip').forEach(c=>c.classList.remove('active'));updateWinPreview();}
+function updateWinPreview(){const win=(Math.floor(Number(_wgAmt)*WINGO_PAYOUT*100)/100).toFixed(2);const el=document.getElementById('wg-win-preview');if(el)el.textContent='৳ '+win;}
 async function placeBet(){
-  if(!_wgSide){snack('Big বা Small বেছে নিন');return;}
-  const uid=myUID();if(!uid)return;
-  const{period,phase}=wgPeriodInfo();
-  if(phase!=='betting'){snack('Bet করার সময় শেষ! পরের পিরিয়ড wait করুন');return;}
-  const user=await fbGet(`users/${uid}`);
-  if(!user||!user.isActive){snack('একাউন্ট Activate করুন');return;}
-  if((user.balance||0)<_wgAmt){snack('Balance কম! Deposit করুন');return;}
-  if(_wgAmt<1){snack('সর্বনিম্ন ১ টাকা bet করুন');return;}
-  // Check already bet
-  const existing=await fbGet(`wingoBets/${uid}_${period}`);
-  if(existing){snack('এই পিরিয়ডে আগেই bet করেছেন');return;}
-  ldr(true);
-  try{
-    await fbSet(`wingoBets/${uid}_${period}`,{uid,period,side:_wgSide,amount:_wgAmt,settled:false,won:null,payout:0,createdAt:Date.now()});
-    await fbUpd(`users/${uid}`,{balance:(user.balance||0)-_wgAmt});
-    document.getElementById('wg-bal').textContent=fmtN((user.balance||0)-_wgAmt);
-    document.getElementById('wg-place-btn').disabled=true;
-    document.getElementById('wg-btn-big').classList.add('disabled-bet');
-    document.getElementById('wg-btn-small').classList.add('disabled-bet');
-    const mb=document.getElementById('wg-my-bet');
-    mb.style.display='block';
-    mb.textContent=`✅ Bet করা হয়েছে — ${_wgSide==='big'?'BIG 🔴':'SMALL 🔵'} — ${fmtN(_wgAmt)} — পিরিয়ড #${period}`;
-    snack(`✅ ${_wgSide.toUpperCase()} তে ${fmtN(_wgAmt)} Bet করা হয়েছে!`);
-  }catch(e){snack('Error: '+e.message);}
-  finally{ldr(false);}
+  if(!_wgSide){snack('Big বা Small বেছে নিন');return;}const uid=myUID();if(!uid)return;const x=wgPeriodInfo(_wgMode);const{period,phase}=x;if(phase!=='betting'){snack('Bet করার সময় শেষ! পরের পিরিয়ড wait করুন');return;}const user=await fbGet(`users/${uid}`);if(!user||!user.isActive){snack('একাউন্ট Activate করুন');return;}if((user.balance||0)<_wgAmt){snack('Balance কম! Deposit করুন');return;}if(_wgAmt<1){snack('সর্বনিম্ন ১ টাকা bet করুন');return;}
+  const root=wgRoot(),key=`${uid}_${period}`,path=`${root}/${key}`;if(await fbGet(path)){snack('এই পিরিয়ডে আগেই bet করেছেন');return;}ldr(true);try{await fbSet(path,{uid,period,mode:_wgMode,side:_wgSide,amount:_wgAmt,settled:false,won:null,payout:0,createdAt:Date.now()});await fbUpd(`users/${uid}`,{balance:(user.balance||0)-_wgAmt});document.getElementById('wg-bal').textContent=fmtN((user.balance||0)-_wgAmt);document.getElementById('wg-place-btn').disabled=true;document.getElementById('wg-btn-big').classList.add('disabled-bet');document.getElementById('wg-btn-small').classList.add('disabled-bet');const mb=document.getElementById('wg-my-bet');mb.style.display='block';mb.textContent=`✅ Bet করা হয়েছে — ${_wgSide==='big'?'BIG 🔴':'SMALL 🔵'} — ${fmtN(_wgAmt)} — ${WINGO_MODES[_wgMode].label} — পিরিয়ড #${period}`;snack(`✅ ${_wgSide.toUpperCase()} তে ${fmtN(_wgAmt)} Bet করা হয়েছে!`);}catch(e){snack('Error: '+e.message);}finally{ldr(false);}
 }
-
 async function loadWingoBetHistory(uid){
-  const bets=await fbGet('wingoBets');
-  const el=document.getElementById('wg-hist-list');
-  if(!el)return;
-  const myBets=Object.values(bets||{}).filter(b=>b.uid===uid).sort((a,b)=>b.createdAt-a.createdAt).slice(0,15);
-  if(!myBets.length){el.innerHTML='<div style="text-align:center;color:rgba(255,255,255,.3);padding:20px;font-size:13px">কোনো bet নেই</div>';return;}
-  el.innerHTML=myBets.map(b=>{
-    const statusCls=b.settled?(b.won?'win':'loss'):'pending';
-    const statusTxt=b.settled?(b.won?`+${fmtN(b.payout)}`:`-${fmtN(b.amount)}`):'Pending...';
-    return`<div class="wingo-hist-item">
-      <div style="flex:1">
-        <div class="wingo-hist-period">পিরিয়ড #${b.period}</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.35)">${fmtD(b.createdAt)}</div>
-      </div>
-      <span class="wingo-hist-res ${b.side}">${b.side==='big'?'BIG 🔴':'SMALL 🔵'}</span>
-      <div class="wingo-hist-bet ${statusCls}" style="min-width:70px;text-align:right">
-        <div>${statusTxt}</div>
-        <div style="font-size:10px;color:rgba(255,255,255,.35)">${fmtN(b.amount)}</div>
-      </div>
-    </div>`;
+  const bets=await fbGet(wgRoot(_wgMode)),el=document.getElementById('wg-hist-list');if(!el)return;
+  const rows=Object.values(bets||{}).filter(b=>b.uid===uid).sort((a,b)=>b.createdAt-a.createdAt).slice(0,15);
+  if(!rows.length){el.innerHTML='<div style="text-align:center;color:rgba(255,255,255,.3);padding:20px;font-size:13px">কোনো bet নেই</div>';return;}
+  el.innerHTML=rows.map(b=>{
+    const side=b.side==='big'?'BIG 🔴':'SMALL 🔵';
+    let ledger='Pending...',cls='pending',extra='';
+    if(b.settled){if(b.won){ledger='+'+fmtN(b.amount);cls='win';extra=`<div class="wingo-payout-mini">Payout ${fmtN(b.payout||Number(b.amount)*WINGO_PAYOUT)}</div>`;}else{ledger='-'+fmtN(b.amount);cls='loss';}}
+    return`<div class="wingo-hist-item"><div style="flex:1"><div class="wingo-hist-period">${wgDisplayLabel(b.mode||_wgMode,b.period)}</div><div style="font-size:11px;color:rgba(255,255,255,.35)">${fmtD(b.createdAt)}</div></div><span class="wingo-hist-res ${b.side}">${side}</span><div class="wingo-hist-bet"><div class="wingo-pnl ${cls}">${ledger}</div><div class="wingo-bet-amount-mini">Bet ${fmtN(b.amount)}</div>${extra}</div></div>`;
   }).join('');
 }
-
 async function loadWingoPeriodHistory(){
-  const el=document.getElementById('wg-period-hist');
-  if(!el)return;
-  const periods=await fbGet('wingoPeriods');
+  const uid=myUID(),el=document.getElementById('wg-period-hist');if(!el)return;
+  const[periods,bets]=await Promise.all([fbGet(wgPeriodsRoot(_wgMode)),fbGet(wgRoot(_wgMode))]);
   if(!periods){el.innerHTML='<div style="text-align:center;color:rgba(255,255,255,.3);padding:16px;font-size:13px">কোনো ফলাফল নেই</div>';return;}
-  const list=Object.entries(periods).filter(([k,v])=>v.result).sort((a,b)=>b[0]-a[0]).slice(0,15);
+  const list=Object.entries(periods).filter(([,v])=>v.result).sort((a,b)=>Number(b[0])-Number(a[0])).slice(0,15);
   if(!list.length){el.innerHTML='<div style="text-align:center;color:rgba(255,255,255,.3);padding:16px;font-size:13px">কোনো ফলাফল নেই</div>';return;}
-  el.innerHTML=list.map(([period,data])=>`<div class="wingo-hist-item">
-    <div style="flex:1"><div class="wingo-hist-period">পিরিয়ড #${period}</div></div>
-    <span class="wingo-hist-res ${data.result}">${data.result==='big'?'BIG 🔴':'SMALL 🔵'}</span>
-  </div>`).join('');
-}
-
-// ────────────────────────────────────────────────
-// BOOT
-// ────────────────────────────────────────────────
-
-// ─── SOCIAL BAR ─────────────────────────────────────────
-function renderSocialBar(cfg){
-  const bar=document.getElementById('social-bar');
-  if(!bar)return;
-  const fb=cfg.fbLink,tg=cfg.tgLink;
-  const fbShow=cfg.fbVisible!==false,tgShow=cfg.tgVisible!==false;
-  if((!fb&&!tg)||(!fbShow&&!tgShow)){bar.style.display='none';return;}
-  bar.style.display='block';
-  bar.innerHTML=`<div class="social-bar-wrap">
-    ${fb&&fbShow?`<a href="${fb}" target="_blank" class="social-link-btn social-link-fb"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/600px-Facebook_Logo_%282019%29.png" style="width:20px;height:20px;object-fit:contain" onerror="this.outerHTML='🔵'"> Facebook</a>`:''}
-    ${tg&&tgShow?`<a href="${tg}" target="_blank" class="social-link-btn social-link-tg"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png" style="width:20px;height:20px;object-fit:contain" onerror="this.outerHTML='✈️'"> Telegram</a>`:''}
-  </div>`;
+  el.innerHTML=list.map(([period,data])=>{const mb=Object.values(bets||{}).find(b=>b.uid===uid&&String(b.period)===String(period));let bh='';if(mb){if(mb.settled){bh=`<div class="wingo-hist-bet"><div class="wingo-pnl ${mb.won?'win':'loss'}">${mb.won?'+'+fmtN(mb.amount):'-'+fmtN(mb.amount)}</div>${mb.won?`<div class="wingo-payout-mini">Payout ${fmtN(mb.payout||Number(mb.amount)*WINGO_PAYOUT)}</div>`:''}</div>`}else bh='<div class="wingo-hist-bet"><div class="wingo-pnl pending">Pending...</div></div>';}return`<div class="wingo-hist-item"><div style="flex:1"><div class="wingo-hist-period">${wgDisplayLabel(_wgMode,period)}</div></div><span class="wingo-hist-res ${data.result}">${data.result==='big'?'BIG 🔴':'SMALL 🔵'}</span>${bh}</div>`;}).join('');
 }
 
 // ─── LIVE CHAT ─────────────────────────────────────────
@@ -2327,69 +2450,42 @@ function playBeep(){
   }catch(e){}
 }
 
-// ─── WIN/LOSS POPUP ────────────────────────────────────
-function showWinPopup(amount){
-  const popup=document.getElementById('wingo-popup');
-  const inner=document.getElementById('wingo-popup-inner');
-  document.getElementById('popup-ico').textContent='🎉';
-  document.getElementById('popup-title').textContent='জিতেছেন!';
-  document.getElementById('popup-sub').textContent=`+${fmtN(amount)} আপনার Balance এ যোগ হয়েছে`;
-  inner.style.background='linear-gradient(135deg,#1a7a4a,#2d9e63)';
-  inner.style.color='#fff';
-  inner.classList.add('wingo-win-glow');
-  popup.style.display='flex';
-  try{
-    const ctx=new(window.AudioContext||window.webkitAudioContext)();
-    [523,659,784,1047].forEach((f,i)=>{
-      const osc=ctx.createOscillator();const g=ctx.createGain();
-      osc.connect(g);g.connect(ctx.destination);osc.frequency.value=f;
-      g.gain.setValueAtTime(.2,ctx.currentTime+i*.15);
-      g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+i*.15+.2);
-      osc.start(ctx.currentTime+i*.15);osc.stop(ctx.currentTime+i*.15+.3);
-    });
-  }catch(e){}
-  setTimeout(()=>popup.style.display='none',4000);
+function liveMarketTone(kind){
+  try{const ctx=new(window.AudioContext||window.webkitAudioContext)();const seq=kind==='bet'?[880,1175]:kind==='win'?[523,659,784,1047]:[330,262,196];seq.forEach((f,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.type=kind==='loss'?'triangle':'sine';o.frequency.value=f;const t=ctx.currentTime+i*.10;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.16);o.start(t);o.stop(t+.18);});}catch(e){}
 }
 
+// ─── WIN/LOSS POPUP ────────────────────────────────────
+function wingoTone(kind){
+  try{
+    const ctx=new(window.AudioContext||window.webkitAudioContext)();
+    const seq=kind==='win'?[523,659,784,1047]:[392,330,262];
+    seq.forEach((f,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.type=kind==='win'?'sine':'triangle';o.frequency.value=f;const t=ctx.currentTime+i*.12;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.22,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.22);o.start(t);o.stop(t+.25);});
+  }catch(e){}
+}
+function showWinPopup(amount,betAmount=amount/WINGO_PAYOUT){
+  const popup=document.getElementById('wingo-popup'),inner=document.getElementById('wingo-popup-inner');if(!popup||!inner)return;
+  document.getElementById('popup-ico').textContent='🎉';document.getElementById('popup-title').textContent='জিতেছেন!';
+  document.getElementById('popup-sub').innerHTML=`Bet <b>৳${Number(betAmount).toFixed(2)}</b> → <b>৳${Number(amount).toFixed(2)}</b> Balance এ যোগ হয়েছে`;
+  inner.style.background='linear-gradient(145deg,#047857,#10b981)';inner.style.color='#fff';inner.classList.remove('wingo-loss-anim');inner.classList.add('wingo-win-glow','wingo-win-anim','wingo-popup-celebrate');
+  let cr=inner.querySelector('.wingo-credit');if(!cr){cr=document.createElement('div');cr.className='wingo-credit';inner.appendChild(cr)}cr.textContent='💰 Balance updated instantly';
+  popup.style.display='flex';wingoTone('win');clearTimeout(window._wgPopTimer);window._wgPopTimer=setTimeout(()=>popup.style.display='none',4200);
+}
 function showLossPopup(amount){
-  const popup=document.getElementById('wingo-popup');
-  const inner=document.getElementById('wingo-popup-inner');
-  document.getElementById('popup-ico').textContent='😢';
-  document.getElementById('popup-title').textContent='হেরেছেন';
-  document.getElementById('popup-sub').textContent=`-${fmtN(amount)} হারিয়েছেন। আবার চেষ্টা করুন!`;
-  inner.style.background='linear-gradient(135deg,#2a2a2a,#4a4a4a)';
-  inner.style.color='#fff';
-  inner.classList.remove('wingo-win-glow');
-  popup.style.display='flex';
-  setTimeout(()=>popup.style.display='none',3000);
+  const popup=document.getElementById('wingo-popup'),inner=document.getElementById('wingo-popup-inner');if(!popup||!inner)return;
+  document.getElementById('popup-ico').textContent='😔';document.getElementById('popup-title').textContent='এইবার হয়নি';
+  document.getElementById('popup-sub').innerHTML=`Bet <b>৳${Number(amount).toFixed(2)}</b> — এই পিরিয়ডে loss হয়েছে`;
+  inner.style.background='linear-gradient(145deg,#991b1b,#ef4444)';inner.style.color='#fff';inner.classList.remove('wingo-win-glow','wingo-win-anim','wingo-popup-celebrate');inner.classList.add('wingo-loss-anim');
+  const cr=inner.querySelector('.wingo-credit');if(cr)cr.remove();popup.style.display='flex';wingoTone('loss');clearTimeout(window._wgPopTimer);window._wgPopTimer=setTimeout(()=>popup.style.display='none',3500);
 }
 
 // ─── UPDATED WINGO PERIOD HISTORY WITH PROFIT/LOSS ──────
 async function loadWingoPeriodHistory(){
-  const uid=myUID();
-  const el=document.getElementById('wg-period-hist');
-  if(!el)return;
-  const[periods,bets]=await Promise.all([fbGet('wingoPeriods'),fbGet('wingoBets')]);
+  const uid=myUID(),el=document.getElementById('wg-period-hist');if(!el)return;
+  const[periods,bets]=await Promise.all([fbGet(wgPeriodsRoot(_wgMode)),fbGet(wgRoot(_wgMode))]);
   if(!periods){el.innerHTML='<div style="text-align:center;color:rgba(255,255,255,.3);padding:16px;font-size:13px">কোনো ফলাফল নেই</div>';return;}
-  const list=Object.entries(periods).filter(([k,v])=>v.result).sort((a,b)=>b[0]-a[0]).slice(0,15);
+  const list=Object.entries(periods).filter(([,v])=>v.result).sort((a,b)=>Number(b[0])-Number(a[0])).slice(0,15);
   if(!list.length){el.innerHTML='<div style="text-align:center;color:rgba(255,255,255,.3);padding:16px;font-size:13px">কোনো ফলাফল নেই</div>';return;}
-  el.innerHTML=list.map(([period,data])=>{
-    const myBet=bets?Object.values(bets).find(b=>b.uid===uid&&String(b.period)===String(period)):null;
-    let betHtml='';
-    if(myBet){
-      if(myBet.settled){
-        const won=myBet.won;
-        betHtml=`<div style="font-size:12px;font-weight:800;color:${won?'#4caf50':'#ef5350'}">${won?'+'+fmtN(myBet.payout):'-'+fmtN(myBet.amount)}</div>`;
-      } else {
-        betHtml=`<div style="font-size:11px;color:rgba(255,255,255,.4)">Pending...</div>`;
-      }
-    }
-    return`<div class="wingo-hist-item">
-      <div style="flex:1"><div class="wingo-hist-period">পিরিয়ড #${period}</div></div>
-      <span class="wingo-hist-res ${data.result}">${data.result==='big'?'BIG 🔴':'SMALL 🔵'}</span>
-      ${betHtml}
-    </div>`;
-  }).join('');
+  el.innerHTML=list.map(([period,data])=>{const mb=Object.values(bets||{}).find(b=>b.uid===uid&&String(b.period)===String(period));let bh='';if(mb){if(mb.settled){bh=`<div class="wingo-hist-bet"><div class="wingo-pnl ${mb.won?'win':'loss'}">${mb.won?'+'+fmtN(mb.amount):'-'+fmtN(mb.amount)}</div>${mb.won?`<div class="wingo-payout-mini">Payout ${fmtN(mb.payout||Number(mb.amount)*WINGO_PAYOUT)}</div>`:''}</div>`}else bh='<div class="wingo-hist-bet"><div class="wingo-pnl pending">Pending...</div></div>';}return`<div class="wingo-hist-item"><div style="flex:1"><div class="wingo-hist-period">${wgDisplayLabel(_wgMode,period)}</div></div><span class="wingo-hist-res ${data.result}">${data.result==='big'?'BIG 🔴':'SMALL 🔵'}</span>${bh}</div>`;}).join('');
 }
 
 // ────────────────────────────────────────────────
@@ -2575,8 +2671,6 @@ async function boot(){
 firebase.database().ref('.info/connected').on('value',s=>{if(s.val()===false)snack('⚠️ Internet connection নেই...');});
 boot();
 </script>
-
-
 <!-- FINAL FULL ADD-ON: popup, maintenance, referral tree, VIP12 progress -->
 <style>
 #global-popup{display:none;position:fixed;inset:0;z-index:99999;align-items:center;justify-content:center;background:rgba(0,0,0,.45);padding:18px}
@@ -2650,6 +2744,8 @@ window.drawVIP12ProgressHome=function(){
 };
 })();
 </script>
-
+<script>
+setTimeout(()=>{try{ldr(false);if(!getSess())showLogin();}catch(e){const x=document.getElementById('loader');if(x)x.classList.add('h');}},9000);
+</script>
 </body>
 </html>
