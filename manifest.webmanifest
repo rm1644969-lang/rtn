@@ -1,0 +1,19 @@
+{
+  "name": "Max Win",
+  "short_name": "Max Win",
+  "description": "Max Win",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#14693f",
+  "icons": [
+    {
+      "src": "./maxwin-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
