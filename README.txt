@@ -1,16 +1,6 @@
-EarnifyBD Final v18 — Wingo White + Full Feature Restore
+EarnifyBD Final v22
 
-Files:
-- index.html
-- admin.html
-- assets/wingo.svg
-- assets/live-market.svg
-- assets/aviator.png
-
-Changes only:
-- Restored game logos and bundled assets.
-- Game logos are also embedded into index.html so the games remain visible even when only index.html is uploaded.
-- BIG / SMALL selected state now has a clear white outline + green ring + selected badge on desktop and mobile.
-- Referral/VIP admin flow made more resilient so a VIP sync error does not stop Generation 2–8 traversal.
-- Added a safe admin Referral/VIP State Sync that recalculates counts/levels without creating new bonus payouts.
-- Existing tasks, plans, VIP, 8 generations, refer, wallet, Wingo, Live Market, Aviator and other screens/code preserved.
+This package preserves the previous EarnifyBD features and adds two dedicated admin sections:
+- Refer Management: G1-G8 separate payout controls with right-side amount inputs.
+- VIP Management: VIP 0-12 separate controls for required direct refers, level-up bonus, and monthly reward.
+Both sections save to Firebase config/settings and legacy settings paths so the client index Refer/VIP screens use the same values.
