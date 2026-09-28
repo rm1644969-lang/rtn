@@ -1203,8 +1203,8 @@ if ('serviceWorker' in navigator) {
 <div class="content">
 <!-- Activation Banner -->
 <div class="act-banner" id="act-banner" style="display:none">
-<div class="act-banner-ttl">🚨 একাউন্ট Activate করুন</div>
-<div class="act-banner-sub">নিচের নম্বরে <b id="abn-amt">৳১০০</b> Send Money করুন, তারপর Deposit করুন।<br/><small style="opacity:.7">💡 এই ৳১০০ আপনার account-এ জমা থাকবে — close করলে ফেরত পাবেন।</small></div>
+<div class="act-banner-ttl">🔒 নতুন একাউন্ট — Activation প্রয়োজন</div>
+<div class="act-banner-sub">আপনাকে <b id="abn-amt">৳১০০</b> দিয়ে একাউন্ট Activate করতে হবে। Activation approve না হওয়া পর্যন্ত অন্য কোনো ফিচার ব্যবহার করা যাবে না।<br/><small style="opacity:.7">💡 Activation-এর টাকা account activation-এর জন্য জমা থাকবে — account close করলে নিয়ম অনুযায়ী ফেরতের জন্য request করতে পারবেন।</small></div>
 <div class="act-pay-row">
 <div class="act-pay-item">
 <div class="act-pay-item-name">📱 bKash</div>
@@ -2156,7 +2156,21 @@ let _offs=[];
 function offAll(){_offs.forEach(f=>f());_offs=[];}
 function onDB(path,cb){const ref=db.ref(path);ref.on('value',s=>cb(s.val()));_offs.push(()=>ref.off('value'));}
 
-function go(name){
+async function go(name){
+  // NEW MEMBER ACTIVATION LOCK: until Admin approves the ৳100 activation,
+  // only Home and the Activation Deposit screen are accessible.
+  const uid=myUID();
+  const activationAllowed=['home','deposit'];
+  if(uid && !activationAllowed.includes(name)){
+    try{
+      const u=await fbGet(`users/${uid}`);
+      if(u && !u.isActive){
+        snack('🔒 আগে ৳100 দিয়ে একাউন্ট Activate করুন');
+        if(name!=='home') return go('home');
+        return;
+      }
+    }catch(e){}
+  }
   if(window.aviatorCleanup) window.aviatorCleanup();
   offAll();
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -2321,6 +2335,16 @@ async function renderHome(){
   };
   const onHomeUserMeta=(u)=>{
     if(!u)return;
+    window._userActive=!!u.isActive;
+    // Hide the normal navigation for inactive/new members. The activation
+    // banner on Home is the only route they need until approval.
+    document.querySelectorAll('.bnav').forEach(n=>n.style.display=u.isActive?'flex':'none');
+    const notifBtn=document.querySelector('.hdr .hdr-btn[onclick*="notifications"]');
+    if(notifBtn) notifBtn.style.display=u.isActive?'flex':'none';
+    const games=document.getElementById('games-launcher');
+    if(games) games.style.display=u.isActive?'block':'none';
+    const ci=document.getElementById('ci-btn');
+    if(ci) ci.style.display=u.isActive?'flex':'none';
     const actBal=Number(u.isActive?cfg.activationAmount:0)||0;
     const totalBal=Number(u.balance)||0;
     const balSub=document.getElementById('h-bal-sub');
@@ -2342,9 +2366,9 @@ async function renderHome(){
     // Activation banner
     const ab=document.getElementById('act-banner');
     ab.style.display=u.isActive?'none':'block';
-    document.getElementById('abn-amt').textContent=fmtN(cfg.activationAmount);
-    document.getElementById('abn-bkash').textContent=cfg.bkash;
-    document.getElementById('abn-nagad').textContent=cfg.nagad;
+    document.getElementById('abn-amt').textContent=fmtN(cfg.activationAmount||100);
+    document.getElementById('abn-bkash').textContent=cfg.bkash||'-';
+    document.getElementById('abn-nagad').textContent=cfg.nagad||'-';
     // VIP
     const dr=u.directRefers||0,vls=cfg.vipLevels;
     const cv=vls.filter(v=>dr>=v.minRefers).pop()||vls[0];
@@ -2563,8 +2587,16 @@ async function submitDeposit(){
   const mth=document.getElementById('d-mth').value;
   const trx=document.getElementById('d-trx').value.trim();
   const cfg=await getCfg();const user=await fbGet(`users/${uid}`);
-  const minA=user.isActive?(cfg.minDeposit||100):cfg.activationAmount;
+  if(!user){snack('User পাওয়া যায়নি');return;}
+  if(!user.isActive){
+    const allTx=await fbGet('txns')||{};
+    const pending=Object.values(allTx).some(t=>t&&t.userId===uid&&t.type==='activation'&&t.status==='pending');
+    if(pending){snack('⏳ Activation request আগে থেকেই pending আছে। Admin approval-এর জন্য অপেক্ষা করুন।');return;}
+  }
+  const activationAmt=Number(cfg.activationAmount||100);
+  const minA=user.isActive?(cfg.minDeposit||100):activationAmt;
   const maxA=cfg.maxDeposit||10000;
+  if(!user.isActive && amt!==activationAmt){snack(`Account Activate করতে ঠিক ${fmtN(activationAmt)} টাকা দিতে হবে`);return;}
   if(amt<minA){snack(`কমপক্ষে ${fmtN(minA)} Deposit করুন`);return;}
   if(amt>maxA){snack(`সর্বোচ্চ ${fmtN(maxA)} Deposit করা যাবে`);return;}
   if(!trx){snack('Transaction ID দিন');return;}
